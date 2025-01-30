@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#121212</color>  <!-- Background dark color -->
+    <color name="gray">#555555</color>  <!-- Dark gray -->
+    <color name="black">#FFFFFF</color>  <!-- Text color for dark mode -->
+    <color name="teal_700">#1F877E</color> <!-- Dark mode teal -->
+    <color name="background">#121212</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#AAAAAA</color>
+    <color name="text_hint">#555555</color>
+    <color name="text_error">#FF4444</color>
+    <color name="button_primary">#1F877E</color>
+    <color name="button_text">#FFFFFF</color>
+</resources>

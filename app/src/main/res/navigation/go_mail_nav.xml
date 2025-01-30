@@ -22,5 +22,16 @@
         android:name="com.abhishek.gomailai.layout.EmailGenerateFragment"
         android:label="fragment_email_generate"
         tools:layout="@layout/fragment_email_generate" />
+    <fragment
+        android:id="@+id/fillFormFragment"
+        android:name="com.abhishek.gomailai.layout.FillFormFragment"
+        android:label="fragment_fill_form"
+        tools:layout="@layout/fragment_fill_form" />
+    <fragment
+        android:id="@+id/sendEmailFragment"
+        android:name="com.abhishek.gomailai.layout.SendEmailFragment"
+        android:label="fragment_send_email"
+        tools:layout="@layout/fragment_send_email" />
+
 
 </navigation>
