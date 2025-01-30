@@ -40,6 +40,7 @@ class FragmentLoadEmail : Fragment() {
 
                     val extractedData = getDataByHeaders(csvData, emailHeaderDM)
                     Log.d("extractedData", extractedData.toString())
+                    emailViewModel.setMasterList(extractedData)
 
                     binding.textView.text = ""
                     extractedData.forEachIndexed { index, crop ->
@@ -120,9 +121,9 @@ class FragmentLoadEmail : Fragment() {
         csvLines: List<String>,
         headersToFetch: EmailHeaderDM
     ): List<EmailDM> {
-        if (csvLines.isEmpty() || headersToFetch.name.isEmpty() || headersToFetch.email.isEmpty()) return emptyList()
+        if (csvLines.isEmpty() || headersToFetch.name.isNullOrEmpty() || headersToFetch.email.isNullOrEmpty()) return emptyList()
 
-        val headers = csvLines.first().split(",") // Assume the first row is the header
+        val headers = csvLines.first().split(",")
         val emailIndex = headers.indexOf(headersToFetch.email)
         val nameIndex = headers.indexOf(headersToFetch.name)
 

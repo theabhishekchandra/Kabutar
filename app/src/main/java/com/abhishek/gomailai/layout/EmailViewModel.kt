@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.abhishek.gomailai.core.model.EmailDM
+import com.abhishek.gomailai.core.model.UserInfo
 import javax.mail.Session
 import javax.mail.Message
 import javax.mail.Transport
@@ -22,6 +24,19 @@ class EmailViewModel : ViewModel() {
 
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage
+
+    private val _saveUserInfo = MutableLiveData<UserInfo?>()
+    val saveUserInfo: LiveData<UserInfo?> get() = _saveUserInfo
+
+    private val _loadMailData = MutableLiveData<List<EmailDM>>()
+    val loadMailData: LiveData<List<EmailDM>> get() = _loadMailData
+
+    fun setMasterList(extractedData: List<EmailDM>) {
+        _loadMailData.value = extractedData
+    }
+    fun setUserInformation(userInfo: UserInfo) {
+        _saveUserInfo.value = userInfo
+    }
 
     /*fun sendEmail(
         senderEmail: String,

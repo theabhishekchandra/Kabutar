@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">GoMailAI</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Kabutar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
