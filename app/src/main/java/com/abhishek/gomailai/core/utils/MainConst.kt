@@ -1,4 +1,4 @@
-package com.abhishek.gomailai.core
+package com.abhishek.gomailai.core.utils
 
 object MainConst {
     const val SHARED_PREFERENCE_DB: String = "go_mail_ai_shared_pref"
