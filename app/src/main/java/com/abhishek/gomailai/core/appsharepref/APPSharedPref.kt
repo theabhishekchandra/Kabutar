@@ -2,12 +2,15 @@ package com.abhishek.gomailai.core.appsharepref
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.abhishek.gomailai.core.MainConst
+import com.abhishek.gomailai.core.utils.MainConst
 import com.abhishek.gomailai.core.model.UserInfo
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
-class APPSharedPref @Inject constructor(@ActivityContext val context: Context) : IAPPSharedPref {
+class APPSharedPref @Inject constructor(
+    @ActivityContext val context: Context) :
+    IAPPSharedPref {
+
     private var SP: SharedPreferences? = null
     private var editor: SharedPreferences.Editor? = null
 
