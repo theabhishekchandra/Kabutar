@@ -5,10 +5,16 @@
     <color name="black">#FFFFFF</color>  <!-- Text color for dark mode -->
     <color name="teal_700">#1F877E</color> <!-- Dark mode teal -->
     <color name="background">#121212</color>
+    <color name="tool_background">#8BC34A</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#AAAAAA</color>
     <color name="text_hint">#555555</color>
     <color name="text_error">#FF4444</color>
     <color name="button_primary">#1F877E</color>
     <color name="button_text">#FFFFFF</color>
+ <!-- Background color for dark mode -->
+    <color name="light_gray">#1E1E1E</color> <!-- Lighter background for elements -->
+    <color name="blue">#1D76FB</color> <!-- Blue for buttons and links -->
+    <color name="green">#34C759</color> <!-- Green for the 'Mark as Ready' button -->
+    <color name="semiTransparentColor">#1AB8FF73</color> <!-- Semi-transparent color for elements -->
 </resources>
