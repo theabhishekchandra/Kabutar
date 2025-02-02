@@ -1,6 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kabutar</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_prompt_for_email_generation">Enter prompt for email generation</string>
     <string name="generated_email_template_will_appear_here">Generated email template will appear here...</string>
     <string name="generate_email">Generate Email</string>
