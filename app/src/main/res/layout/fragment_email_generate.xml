@@ -1,14 +1,120 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".layout.EmailGenerateFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <include
+        android:id="@+id/toolbar_generate_text"
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
+        android:id="@+id/textViewGeneratedEmail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/bg_rounded"
+        android:padding="12dp"
+        android:text="@string/generated_email_template_will_appear_here"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:gravity="top"
+        android:scrollbars="vertical"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_generate_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/editTextPrompt"/>
+
+    <EditText
+        android:id="@+id/editTextPrompt"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"
+        android:autofillHints="text"
+        android:hint="@string/enter_prompt_for_email_generation"
+        android:background="@drawable/bg_input"
+        android:padding="12dp"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:minLines="3"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomLayout"/>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/buttonGenerateEmail"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/generate_email"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/blue"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:drawableStart="@drawable/ic_generate_text" />
+
+        <Button
+            android:id="@+id/buttonMarkAsReady"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/mark_as_ready"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/green"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:drawableStart="@drawable/ic_read_more" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/semiTransparentColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:visibility="gone">
 
-</FrameLayout>
+        <!--        <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:progressDrawable="@drawable/progress_bar_style"
+                     />-->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="#03A9F4"
+            android:layout_marginTop="20dp"
+            android:indeterminateTintMode="src_atop" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,4 +11,32 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semiTransparentColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <!--        <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:progressDrawable="@drawable/progress_bar_style"
+                     />-->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="#03A9F4"
+            android:layout_marginTop="20dp"
+            android:indeterminateTintMode="src_atop" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </FrameLayout>

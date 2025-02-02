@@ -32,10 +32,18 @@ class MainActivity : AppCompatActivity() {
         return this.navController
     }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     override fun onBackPressed() {
-        super.onBackPressed()
-        navController.popBackStack()
+        if (navController.currentDestination?.id == R.id.homeFragment) {
+            // If at home, exit the app
+            finish()
+        } else {
+            if (!navController.popBackStack()) {
+                super.onBackPressed()
+            }
+        }
     }
+
 
     /*override fun onBackPressed() {
         var actionFound = false

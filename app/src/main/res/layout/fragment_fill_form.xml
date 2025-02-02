@@ -6,14 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".layout.FillFormFragment"
-    android:background="@color/background"
-    android:padding="16dp">
+    android:background="@color/background">
+    <include
+        android:id="@+id/toolbarFillForm"
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- CardView for the form -->
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="26dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -79,6 +82,7 @@
                 android:inputType="phone"
                 android:background="@drawable/edittext_background"
                 android:padding="12dp"
+                android:maxLength="10"
                 android:layout_marginBottom="12dp"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_hint" />
@@ -170,4 +174,32 @@
                 tools:ignore="SmallSp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semiTransparentColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <!--        <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:progressDrawable="@drawable/progress_bar_style"
+                     />-->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="#03A9F4"
+            android:layout_marginTop="20dp"
+            android:indeterminateTintMode="src_atop" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
