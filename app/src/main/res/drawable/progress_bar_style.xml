@@ -1,0 +1,5 @@
+<!-- res/drawable/progress_bar_style.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:drawable/progress_horizontal"/>
+    <item android:drawable="@drawable/progress_ring"/>
+</layer-list>
