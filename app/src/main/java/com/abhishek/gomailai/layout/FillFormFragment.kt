@@ -11,10 +11,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.abhishek.gomailai.R
-import com.abhishek.gomailai.core.appsharepref.APPSharedPref
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
+import com.abhishek.gomailai.core.local.entities.UsersEntity
 import com.abhishek.gomailai.core.model.UserInfo
+import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.databinding.FragmentFillFormBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,9 +24,13 @@ import javax.inject.Inject
 class FillFormFragment : Fragment() {
     private lateinit var binding: FragmentFillFormBinding
     private val emailViewModel: EmailViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
 
     @Inject
     lateinit var appSharedPref: IAPPSharedPref
+    @Inject
+    lateinit var navigation: INavigation
+
     private var hintClicked = false
 
     override fun onCreateView(
@@ -38,22 +44,58 @@ class FillFormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+    initialize()
+    observer()
+    listener()
+    }
+
+    private fun initialize(){
+        binding.toolbarFillForm.textView.text = "User Information"
+    }
+    private fun observer() {
+        userViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.loader.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        userViewModel.responseMessage.observe(viewLifecycleOwner) { message ->
+            message?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                userViewModel.clearResponseMessage()
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            userViewModel.users.collect { userList ->
+                if (userList.isNotEmpty()) {
+                    // Handle user data update
+                    Toast.makeText(requireContext(), "Users fetched: ${userList.size}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun listener(){
+        binding.toolbarFillForm.imageView.setOnClickListener{
+            navigation.getNavController().popBackStack()
+        }
         binding.buttonSubmit.setOnClickListener {
             if (validateForm() ) {
                 val userName = binding.editTextUserName.text.toString()
                 val mobileNumber = binding.editTextMobileNumber.text.toString()
                 val email = binding.editTextEmail.text.toString()
                 val password = binding.editTextPassword.text.toString()
-                val userInfo = UserInfo(userName, mobileNumber, email, password)
-                appSharedPref.setUserInfo(userInfo)
-                emailViewModel.setUserInformation(userInfo)
-
+                appSharedPref.setUserInfo(UserInfo(userName, mobileNumber, email, password))
+//                emailViewModel.setUserInformation(userInfo)
+                userViewModel.insertUser(UsersEntity(
+                    name = userName, email = email,
+                    password = password, isLoggedIn = true))
+                navigation.getNavController().popBackStack()
             }
         }
         binding.infoIcon.setOnClickListener {
             showPasswordHint()
         }
-
     }
     private fun showPasswordHint() {
         hintClicked = true
