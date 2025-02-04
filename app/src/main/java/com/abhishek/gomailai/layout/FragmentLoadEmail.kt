@@ -1,26 +1,19 @@
 package com.abhishek.gomailai.layout
 
 import android.content.Context
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.provider.OpenableColumns
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.abhishek.gomailai.R
 import com.abhishek.gomailai.core.model.EmailDM
-import com.abhishek.gomailai.core.model.EmailHeaderDM
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.databinding.FragmentLoadEmailBinding
+import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.BufferedReader

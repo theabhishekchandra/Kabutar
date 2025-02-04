@@ -1,4 +1,4 @@
-package com.abhishek.gomailai.layout
+package com.abhishek.gomailai.layout.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -20,7 +20,6 @@ import javax.mail.internet.MimeMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

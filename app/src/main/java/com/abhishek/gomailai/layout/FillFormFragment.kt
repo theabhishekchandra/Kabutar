@@ -18,6 +18,8 @@ import com.abhishek.gomailai.core.local.entities.UsersEntity
 import com.abhishek.gomailai.core.model.UserInfo
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.databinding.FragmentFillFormBinding
+import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
+import com.abhishek.gomailai.layout.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 @AndroidEntryPoint
