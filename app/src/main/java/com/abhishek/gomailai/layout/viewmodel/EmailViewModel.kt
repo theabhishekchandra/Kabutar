@@ -258,19 +258,16 @@ class EmailViewModel @Inject constructor(
         val subject = lines.first().trim()
         val body = lines.drop(1).joinToString("\n").trim()
 
-        // Regex to detect placeholders like [Your Name], [Company Name], etc.
         val placeholderRegex = "\\[([^\\]]+)\\]".toRegex()
 
-        // Find missing fields in subject and body
         val missingSubjectFields = placeholderRegex.findAll(subject).map { it.value }.toList()
         val missingBodyFields = placeholderRegex.findAll(body).map { it.value }.toList()
 
-        // Collect all missing fields
         missingFields.addAll(missingSubjectFields)
         missingFields.addAll(missingBodyFields)
 
         return if (missingFields.isEmpty()) {
-            Pair(subject, body) // Return subject and body if no placeholders are missing
+            Pair(subject, body)
         } else {
             withContext(Dispatchers.Main) {
                 Toast.makeText(
@@ -279,7 +276,7 @@ class EmailViewModel @Inject constructor(
                     Toast.LENGTH_LONG
                 ).show()
             }
-            null // Return null if fields are missing
+            null
         }
     }
 }

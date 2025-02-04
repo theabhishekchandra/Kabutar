@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
+import com.abhishek.gomailai.core.model.EmailTemplateDM
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.databinding.FragmentSendEmailBinding
 import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
@@ -26,6 +27,8 @@ class SendEmailFragment : Fragment() {
     @Inject
     lateinit var navigation: INavigation
 
+    private val mailTemplate = mutableSetOf<EmailTemplateDM>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,30 +40,36 @@ class SendEmailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: Use the ViewModel
-
+        emailViewModel.getAllEmailTemplates()
         initialize()
         listener()
-//        observer()
+        observer()
     }
 
     private fun observer() {
-        TODO("Not yet implemented")
+        with(emailViewModel) {
+            emailTemplateLiveData.observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    mailTemplate.addAll(it)
+                }
+            }
+        }
     }
 
     private fun listener() {
         binding.toolbar.imageView.setOnClickListener {
             navigation.getNavController().popBackStack()
         }
-        binding.nextTemplateButton.setOnClickListener {
-
+        binding.buttonNextTemplate.setOnClickListener {
+            binding.editTextSubject.setText(mailTemplate.random().subject.toString())
+            binding.editTextEmailBody.setText(mailTemplate.random().body.toString())
         }
-        binding.confirmEmailButton.setOnClickListener {
+        binding.buttonConfirmEmail.setOnClickListener {
             val value = appSharedPref.getUserInfo()
             emailViewModel.setUserInformation(value)
             if (validate()) {
-                val emailSubject = binding.emailSubjectTemplateEditText.text.toString()
-                val emailBody = binding.emailBodyTemplateEditText.text.toString()
+                val emailSubject = binding.editTextSubject.text.toString()
+                val emailBody = binding.editTextEmailBody.text.toString()
                 emailViewModel.sendBulkEmail(emailSubject, emailBody, requireContext())
             }
         }
@@ -72,14 +81,14 @@ class SendEmailFragment : Fragment() {
 
     private fun validate() : Boolean {
         val value = appSharedPref.getUserInfo().numberMails ?: 0
-        val emailSubject = binding.emailSubjectTemplateEditText.text.toString()
-        val emailBody = binding.emailBodyTemplateEditText.text.toString()
+        val emailSubject = binding.editTextSubject.text.toString()
+        val emailBody = binding.editTextEmailBody.text.toString()
         if (emailSubject.isEmpty()) {
-            binding.emailSubjectTemplateEditText.error = "Please enter a subject"
+            binding.editTextSubject.error = "Please enter a subject"
             return false
         }
         if (emailSubject.isNotEmpty()) {
-            binding.emailSubjectTemplateEditText.error = "Please enter a Email Body"
+            binding.editTextEmailBody.error = "Please enter a Email Body"
             return false
         }
 //        if (value <= 0) {

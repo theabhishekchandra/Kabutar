@@ -14,93 +14,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <EditText
+        android:id="@+id/editTextSubject"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:layout_margin="10dp"
+        android:autofillHints="text"
+        android:hint="Subjects"
+        android:background="@drawable/bg_input"
+        android:padding="12dp"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:minLines="3"
+        android:gravity="top"
+        android:inputType="textMultiLine"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@id/buttonContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/editTextEmailBody"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/bg_rounded"
+        android:padding="12dp"
+        android:hint="Email Body"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:gravity="top"
+        android:scrollbars="vertical"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:fillViewport="true">
+        app:layout_constraintTop_toBottomOf="@id/editTextSubject"
+        app:layout_constraintBottom_toTopOf="@id/bottomLayout"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/emailSubjectTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="Page Header" />
-
-            <EditText
-                android:id="@+id/emailSubjectTemplateEditText"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:hint="Enter email Subject content here..."
-                android:gravity="top"
-                android:background="@android:color/white"
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:minHeight="200dp"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical" />
-
-            <TextView
-                android:id="@+id/emailBodyTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:text="Page Header" />
-
-            <EditText
-                android:id="@+id/emailBodyTemplateEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter email content here..."
-                android:gravity="top"
-                android:background="@android:color/white"
-                android:padding="16dp"
-                android:textSize="16sp"
-                android:minHeight="200dp"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <!-- Button Container -->
     <LinearLayout
-        android:id="@+id/buttonContainer"
+        android:id="@+id/bottomLayout"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <Button
-            android:id="@+id/nextTemplateButton"
+            android:id="@+id/buttonNextTemplate"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="Next Template"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Next Template" />
+            android:backgroundTint="@color/blue"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:drawableStart="@drawable/ic_read_more" />
 
         <Button
-            android:id="@+id/confirmEmailButton"
+            android:id="@+id/buttonConfirmEmail"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="Confirm Email"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Confirm Email" />
+            android:backgroundTint="@color/green"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="10dp"/>
     </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
