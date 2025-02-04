@@ -1,6 +1,7 @@
 *.iml
 .gradle
 /local.properties
+/secrets.properties
 /gradle.properties
 /.idea/caches
 /.idea/libraries
@@ -15,3 +16,4 @@
 .cxx
 gradle.properties
 local.properties
+secrets.properties
