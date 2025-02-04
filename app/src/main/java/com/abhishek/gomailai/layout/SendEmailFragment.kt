@@ -27,8 +27,6 @@ class SendEmailFragment : Fragment() {
     @Inject
     lateinit var navigation: INavigation
 
-    private val mailTemplate = mutableSetOf<EmailTemplateDM>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,9 +46,12 @@ class SendEmailFragment : Fragment() {
 
     private fun observer() {
         with(emailViewModel) {
-            emailTemplateLiveData.observe(viewLifecycleOwner) {
-                if (it.isNotEmpty()) {
-                    mailTemplate.addAll(it)
+            emailTemplateLiveData.observe(viewLifecycleOwner) { listTemplate ->
+                if (listTemplate.isNotEmpty()) {
+                    binding.buttonNextTemplate.setOnClickListener {
+                        binding.editTextSubject.setText(listTemplate.random().subject.toString())
+                        binding.editTextEmailBody.setText(listTemplate.random().body.toString())
+                    }
                 }
             }
         }
@@ -60,10 +61,7 @@ class SendEmailFragment : Fragment() {
         binding.toolbar.imageView.setOnClickListener {
             navigation.getNavController().popBackStack()
         }
-        binding.buttonNextTemplate.setOnClickListener {
-            binding.editTextSubject.setText(mailTemplate.random().subject.toString())
-            binding.editTextEmailBody.setText(mailTemplate.random().body.toString())
-        }
+
         binding.buttonConfirmEmail.setOnClickListener {
             val value = appSharedPref.getUserInfo()
             emailViewModel.setUserInformation(value)
