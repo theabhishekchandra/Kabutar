@@ -11,14 +11,14 @@
         layout="@layout/toolbar"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
+    <EditText
         android:id="@+id/textViewGeneratedEmail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="15dp"
         android:background="@drawable/bg_rounded"
         android:padding="12dp"
-        android:text="@string/generated_email_template_will_appear_here"
+        android:hint="@string/generated_email_template_will_appear_here"
         android:textColor="@color/text_primary"
         android:textSize="16sp"
         android:gravity="top"
@@ -32,7 +32,7 @@
     <EditText
         android:id="@+id/editTextPrompt"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="90dp"
         android:layout_margin="10dp"
         android:autofillHints="text"
         android:hint="@string/enter_prompt_for_email_generation"
