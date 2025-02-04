@@ -28,7 +28,10 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${GEMINI_API_KEY}" />
+            android:value="GEMINI_API_KEY" />
+        <meta-data
+            android:name="com.google.android.geo.API_MODEL"
+            android:value="GEMINI_API_MODEL" />
     </application>
 
 </manifest>
