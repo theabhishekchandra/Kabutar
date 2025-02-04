@@ -19,6 +19,8 @@ data class UsersEntity(
     val email: String = "",
     val mobile: String = "",
     val password: String = "",
+    val designation: String = "",
+    val numberMails: Int = 0,
     val isLoggedIn: Boolean = false,
     val lastLoggedIn: Long = 0,
 )

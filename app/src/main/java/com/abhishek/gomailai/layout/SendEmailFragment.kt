@@ -5,56 +5,94 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.abhishek.gomailai.R
+import androidx.fragment.app.viewModels
+import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
+import com.abhishek.gomailai.core.model.EmailTemplateDM
+import com.abhishek.gomailai.core.nav.INavigation
+import com.abhishek.gomailai.databinding.FragmentSendEmailBinding
+import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
+import com.abhishek.gomailai.layout.viewmodel.UserViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SendEmailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class SendEmailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentSendEmailBinding
+    private val emailViewModel: EmailViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    @Inject
+    lateinit var appSharedPref: IAPPSharedPref
+    @Inject
+    lateinit var navigation: INavigation
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_send_email, container, false)
+    ): View {
+        binding = FragmentSendEmailBinding.inflate(inflater, container, false)
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SendEmailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SendEmailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        emailViewModel.getAllEmailTemplates()
+        initialize()
+        listener()
+        observer()
+    }
+
+    private fun observer() {
+        with(emailViewModel) {
+            emailTemplateLiveData.observe(viewLifecycleOwner) { listTemplate ->
+                if (listTemplate.isNotEmpty()) {
+                    binding.buttonNextTemplate.setOnClickListener {
+                        binding.editTextSubject.setText(listTemplate.random().subject.toString())
+                        binding.editTextEmailBody.setText(listTemplate.random().body.toString())
+                    }
                 }
             }
+        }
+    }
+
+    private fun listener() {
+        binding.toolbar.imageView.setOnClickListener {
+            navigation.getNavController().popBackStack()
+        }
+
+        binding.buttonConfirmEmail.setOnClickListener {
+            val value = appSharedPref.getUserInfo()
+            emailViewModel.setUserInformation(value)
+            if (validate()) {
+                val emailSubject = binding.editTextSubject.text.toString()
+                val emailBody = binding.editTextEmailBody.text.toString()
+                emailViewModel.sendBulkEmail(emailSubject, emailBody, requireContext())
+            }
+        }
+    }
+
+    private fun initialize() {
+        binding.toolbar.textView.text = "Send Email"
+    }
+
+    private fun validate() : Boolean {
+        val value = appSharedPref.getUserInfo().numberMails ?: 0
+        val emailSubject = binding.editTextSubject.text.toString()
+        val emailBody = binding.editTextEmailBody.text.toString()
+        if (emailSubject.isEmpty()) {
+            binding.editTextSubject.error = "Please enter a subject"
+            return false
+        }
+        if (emailSubject.isNotEmpty()) {
+            binding.editTextEmailBody.error = "Please enter a Email Body"
+            return false
+        }
+//        if (value <= 0) {
+//            binding.emailBodyTemplateEditText.error = "Please Buy Email Data"
+//            return false
+//        }
+        return true
     }
 }

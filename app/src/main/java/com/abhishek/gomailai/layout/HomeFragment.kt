@@ -1,18 +1,18 @@
 package com.abhishek.gomailai.layout
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
+import com.abhishek.gomailai.BuildConfig
 import com.abhishek.gomailai.R
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.databinding.FragmentHomeBinding
-import com.google.ai.client.generativeai.BuildConfig
+import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
+import com.abhishek.gomailai.layout.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 @AndroidEntryPoint
@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
         initialize()
         observer()
         listener()
+
     }
     private fun initialize(){
         val user = appSharedPref.getUserInfo()
@@ -56,8 +57,7 @@ class HomeFragment : Fragment() {
     private fun listener(){
 
         binding.sendMailCard.setOnClickListener {
-            // TODO: Handle send mail card click
-//            emailViewModel.insertTestData()
+            navigation.getNavController().navigate(R.id.sendEmailFragment)
         }
         binding.checkMailStatus.setOnClickListener {
             // TODO: Handle check mail status card click

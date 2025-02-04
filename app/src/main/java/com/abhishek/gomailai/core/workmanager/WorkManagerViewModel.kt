@@ -1,14 +1,13 @@
 package com.abhishek.gomailai.core.workmanager
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 
-class WorkManagerViewModel : ViewModel() {
-    private val application = Application().applicationContext
+class WorkManagerViewModel(application: Application) : AndroidViewModel(application) {
     private val workManager = WorkManager.getInstance(application)
 
     private val _taskStatuses = MutableLiveData<WorkManagerTaskStatusValue>()
@@ -26,10 +25,9 @@ class WorkManagerViewModel : ViewModel() {
             val cancelledTasks = workInfos.count { it.state == WorkInfo.State.CANCELLED }
 
             val totalTasks = pendingTasks + completedTasks + failedTasks + cancelledTasks
-//            val progress = if (totalTasks > 0) (completedTasks.toFloat() / totalTasks) * 100 else 0f
 
             val taskStatus = WorkManagerTaskStatusValue(
-                tag = "Hello",
+                tag = tag,
                 pending = pendingTasks,
                 completed = completedTasks,
                 failed = failedTasks,

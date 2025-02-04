@@ -8,6 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.abhishek.gomailai.R
 import com.abhishek.gomailai.databinding.ActivityMainBinding
+import com.abhishek.gomailai.layout.viewmodel.EmailGenerateViewModel
+import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

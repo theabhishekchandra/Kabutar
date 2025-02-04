@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.abhishek.gomailai.core.local.database.AppDatabase
 import com.abhishek.gomailai.core.local.entities.EmailDataEntity
+import com.abhishek.gomailai.core.local.entities.EmailTemplateEntity
 import com.abhishek.gomailai.core.local.entities.UsersEntity
 import com.abhishek.gomailai.core.utils.DatabaseConst
 import dagger.Module
@@ -24,15 +25,6 @@ class DatabaseModule {
         return application.applicationContext
     }
 
-    /*@Provides
-    @Singleton
-    fun provideDatabase(application: Application): AppDatabase {
-        return Room.databaseBuilder(
-            application.applicationContext,
-            AppDatabase::class.java,
-            "app_database"
-        ).build()
-    }*/
     @Provides
     @Singleton
     fun providedDatabase(@ApplicationContext context: Context)
@@ -44,6 +36,7 @@ class DatabaseModule {
         .fallbackToDestructiveMigration()
         .build()
 
+    // DAO
     @Provides
     @Singleton
     fun provideEmailDao(database: AppDatabase) = database.emailDao()
@@ -51,6 +44,10 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideUserDao(database: AppDatabase) = database.userDao()
+
+    @Provides
+    @Singleton
+    fun provideEmailTemplateDao(database: AppDatabase) = database.emailTemplateDao()
 
     // Entity
     @Provides
@@ -61,13 +58,8 @@ class DatabaseModule {
     @Singleton
     fun provideUserEmail() = UsersEntity()
 
-
-    /*@Provides
-    @Singleton
-    fun provideTestsDao(db: TestDB) = db.testDao
-
-
     @Provides
     @Singleton
-    fun provideEntity() = TestEntity()*/
+    fun provideEmailTemplateEntity() = EmailTemplateEntity()
+
 }
