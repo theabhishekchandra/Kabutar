@@ -75,6 +75,8 @@ class APPSharedPref @Inject constructor(
             editor?.putString(MainConst.USER_MOBILE_NUMBER, userInfo.mobileNumber)
             editor?.putString(MainConst.USER_EMAIL, userInfo.email)
             editor?.putString(MainConst.USER_PASSWORD, userInfo.password)
+            editor?.putString(MainConst.USER_DESIGNATION, userInfo.designation)
+            editor?.putInt(MainConst.USER_NUMBER_MAILS, userInfo.numberMails ?: 0)
             editor?.commit()
         }catch (e: Exception){
 
@@ -86,7 +88,19 @@ class APPSharedPref @Inject constructor(
         val userMobileNumber = SP?.getString(MainConst.USER_MOBILE_NUMBER, "")
         val userEmail = SP?.getString(MainConst.USER_EMAIL, "")
         val userPassword = SP?.getString(MainConst.USER_PASSWORD, "")
-        return UserInfo(userName, userMobileNumber, userEmail, userPassword)
+        val userDesignation = SP?.getString(MainConst.USER_DESIGNATION, "")
+        val userNumberMails = SP?.getInt(MainConst.USER_NUMBER_MAILS, 0)
+        return UserInfo(userName = userName, mobileNumber = userMobileNumber, email = userEmail,
+            password = userPassword,designation = userDesignation, numberMails = userNumberMails
+        )
+    }
+
+    override fun setUserNumberMails(number: Int) {
+        editor?.putInt(MainConst.USER_NUMBER_MAILS, number)
+    }
+
+    override fun getUserNumberMails(): Int {
+        return SP?.getInt(MainConst.USER_NUMBER_MAILS, 0) ?: 0
     }
 
     override fun setAIAccessKey(accessKey: String) {
