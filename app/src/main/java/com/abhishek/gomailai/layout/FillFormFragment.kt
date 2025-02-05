@@ -87,11 +87,12 @@ class FillFormFragment : Fragment() {
                 val mobileNumber = binding.editTextMobileNumber.text.toString()
                 val email = binding.editTextEmail.text.toString()
                 val password = binding.editTextPassword.text.toString()
-                appSharedPref.setUserInfo(UserInfo(userName, mobileNumber, email, password))
+                val designation = binding.editTextDesignation.text.toString()
+                appSharedPref.setUserInfo(UserInfo(userName, mobileNumber, email, password, designation))
 //                emailViewModel.setUserInformation(userInfo)
                 userViewModel.insertUser(UsersEntity(
-                    name = userName, email = email,
-                    password = password, isLoggedIn = true))
+                    name = userName, email = email, password = password,
+                    designation =  designation, isLoggedIn = true))
                 navigation.getNavController().popBackStack()
             }
         }
@@ -126,42 +127,46 @@ class FillFormFragment : Fragment() {
         val email = binding.editTextEmail.text.toString().trim()
         val password = binding.editTextPassword.text.toString().trim()
 
-        var isValid = true
-
         // Validate User Name
         if (userName.isEmpty()) {
             binding.editTextUserName.error = "Please enter your name"
-            isValid = false
+            return false
         } else if (userName.length < 3) {
             binding.editTextUserName.error = "Name must be at least 3 characters"
-            isValid = false
+            return false
         }
 
         // Validate Mobile Number
         if (mobileNumber.isEmpty()) {
             binding.editTextMobileNumber.error = "Please enter your mobile number"
-            isValid = false
+            return false
         } else if (!mobileNumber.matches(Regex("^[6-9][0-9]{9}\$"))) {
             binding.editTextMobileNumber.error = "Please enter a valid 10-digit mobile number"
-            isValid = false
+            return false
         }
 
+        // Validate Designation
+        if (email.isEmpty()) {
+            binding.editTextEmail.error = "Please enter your designation"
+            return false
+        }
+        
         // Validate Email
         if (email.isEmpty()) {
             binding.editTextEmail.error = "Please enter your email"
-            isValid = false
+            return false
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.editTextEmail.error = "Please enter a valid email address"
-            isValid = false
+            return false
         }
 
         // Validate Password
         if (password.isEmpty()) {
             binding.editTextPassword.error = "Please enter your password"
-            isValid = false
+            return false
         } else if (password.length < 6) {
             binding.editTextPassword.error = "Password must be at least 6 characters long"
-            isValid = false
+            return false
         }
         // Validate Hint Clicked Once
         if (!hintClicked) {
@@ -169,10 +174,10 @@ class FillFormFragment : Fragment() {
                 requireContext(),
                 "Please click the hint icon to see the password requirements",
                 Toast.LENGTH_LONG).show()
-            isValid = false
+            return false
         }
 
-        return isValid
+        return true
     }
 
 
