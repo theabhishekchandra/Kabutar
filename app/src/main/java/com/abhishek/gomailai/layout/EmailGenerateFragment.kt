@@ -1,10 +1,6 @@
 package com.abhishek.gomailai.layout
 
-import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +8,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.abhishek.gomailai.BuildConfig
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
-import com.abhishek.gomailai.core.local.entities.EmailTemplateEntity
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.core.utils.MainConst
 import com.abhishek.gomailai.databinding.FragmentEmailGenerateBinding
@@ -111,6 +105,8 @@ class EmailGenerateFragment : Fragment() {
             ButtonTextFiled.MARK_AS_READY -> {
                 emailViewModel.insertEmailTemplate(generatedTemplate, requireContext())
                 Toast.makeText(context, "Email Template is saved Please Send mail.", Toast.LENGTH_SHORT).show()
+                binding.editTextPrompt.setText("")
+                binding.textViewGeneratedEmail.setText("")
             }
             else -> {
                 // Handle other cases if needed
