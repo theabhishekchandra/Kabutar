@@ -43,4 +43,13 @@ class UserRepositoryImpl @Inject constructor(
             DBResponseModel.Error("Delete failed: ${e.message}", e)
         }
     }
+
+    override fun updateNumberMailsByEmail(email: String, newMailCount: Int) : DBResponseModel<Unit>   {
+        try {
+            usersDao.updateNumberMailsByEmail(email, newMailCount)
+            return DBResponseModel.Success(Unit)
+        } catch (e: Exception) {
+            return DBResponseModel.Error(e.message ?: "Unknown error occurred")
+        }
+    }
 }

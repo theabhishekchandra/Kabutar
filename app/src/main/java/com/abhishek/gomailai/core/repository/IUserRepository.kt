@@ -8,5 +8,5 @@ interface IUserRepository {
     suspend fun insertUser(user: UsersEntity) : DBResponseModel<Unit>
     fun getAllUsers(): Flow<DBResponseModel<List<UsersEntity>>>
     suspend fun deleteUser(user: UsersEntity) : DBResponseModel<Unit>
-
+    fun updateNumberMailsByEmail(email: String, newMailCount: Int) : DBResponseModel<Unit>
 }
