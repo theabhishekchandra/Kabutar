@@ -37,6 +37,11 @@
         android:name="com.abhishek.gomailai.layout.CheckMailStatusFragment"
         android:label="fragment_check_mail_status"
         tools:layout="@layout/fragment_check_mail_status" />
+    <fragment
+        android:id="@+id/setYourEmailFragment"
+        android:name="com.abhishek.gomailai.layout.SetYourEmailFragment"
+        android:label="fragment_set_your_email"
+        tools:layout="@layout/fragment_set_your_email" />
 
 
 </navigation>

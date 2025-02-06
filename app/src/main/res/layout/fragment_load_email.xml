@@ -18,7 +18,7 @@
      android:id="@+id/titleText"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:text="Buy Emails"
+     tools:text="Buy Emails"
      android:textSize="30sp"
      android:textColor="@color/text_primary"
      android:textStyle="bold"
@@ -45,49 +45,55 @@
      app:layout_constraintEnd_toEndOf="parent"/>
 
  <!-- Input for Number of Emails -->
+
+ <!-- Price Display -->
+
  <EditText
      android:id="@+id/editTextEmailCount"
      android:layout_width="0dp"
      android:layout_height="wrap_content"
+     android:layout_marginStart="100dp"
+     android:layout_marginEnd="100dp"
      android:background="@drawable/edittext_background"
      android:hint="Number of Emails"
      android:inputType="number"
      android:padding="14dp"
      android:textColor="@color/black"
      android:textSize="16sp"
-     app:layout_constraintTop_toBottomOf="@id/instructionText"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintBottom_toTopOf="@+id/priceText"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@id/instructionText"
+
      tools:ignore="TextFields" />
 
- <!-- Price Display -->
  <TextView
      android:id="@+id/priceText"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:text="Total Price: $0"
+     android:text="Total Price: ₹ 0"
      android:textColor="@color/text_primary"
      android:textSize="20sp"
      android:layout_marginTop="16dp"
-     app:layout_constraintTop_toBottomOf="@id/editTextEmailCount"
+     android:layout_marginBottom="30dp"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
-     app:layout_constraintBottom_toBottomOf="parent"/>
+     app:layout_constraintBottom_toTopOf="@id/buttonBuyNow"/>
 
  <!-- Buy Now Button -->
  <Button
      android:id="@+id/buttonBuyNow"
      android:layout_width="0dp"
      android:layout_height="wrap_content"
+     android:layout_marginTop="32dp"
+     android:backgroundTint="@color/button_primary"
      android:text="Buy Now"
      android:textColor="@color/white"
-     android:backgroundTint="@color/button_primary"
+     android:layout_margin="40dp"
      android:textSize="18sp"
-     android:layout_marginTop="32dp"
-     app:layout_constraintTop_toBottomOf="@id/priceText"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintEnd_toEndOf="parent"/>
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent" />
 
  <!-- Loader (Progress Bar in a semi-transparent overlay) -->
  <androidx.appcompat.widget.LinearLayoutCompat

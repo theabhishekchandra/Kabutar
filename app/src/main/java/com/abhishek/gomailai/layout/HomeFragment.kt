@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
 
         }
         binding.selectTemplate.setOnClickListener {
-            Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+            navigation.getNavController().navigate(R.id.setYourEmailFragment)
         }
         binding.generateMail.setOnClickListener {
             navigation.getNavController().navigate(R.id.emailGenerateFragment)

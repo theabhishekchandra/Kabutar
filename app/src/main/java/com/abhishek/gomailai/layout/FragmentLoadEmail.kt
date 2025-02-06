@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
@@ -45,6 +46,7 @@ class FragmentLoadEmail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.textView.text = "Load Emails"
 
         // Load CSV data when the fragment is created
         loadCsvDataFromAssets()
@@ -62,6 +64,15 @@ class FragmentLoadEmail : Fragment() {
     }
 
     private fun listener() {
+        binding.toolbar.imageView.setOnClickListener{
+            navigation.getNavController().popBackStack()
+        }
+        binding.editTextEmailCount.doOnTextChanged { text, _, _, _ ->
+            val count = text?.toString()?.toIntOrNull() ?: 0
+            binding.priceText.text = "Total Price: ₹ ${count * 0.23}"
+        }
+
+
         binding.buttonBuyNow.setOnClickListener {
             val value = binding.editTextEmailCount.text.toString().toInt()
             if (validate()){
