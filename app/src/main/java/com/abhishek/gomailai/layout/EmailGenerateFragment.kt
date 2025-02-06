@@ -158,7 +158,7 @@ enum class ButtonTextFiled(val buttonText: String) {
     companion object {
 
         fun fromString(buttonText: String): ButtonTextFiled? {
-            return values().find { it.buttonText == buttonText }
+            return entries.find { it.buttonText == buttonText }
         }
     }
 }

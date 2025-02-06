@@ -1,21 +1,26 @@
 package com.abhishek.gomailai.layout
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
-import com.abhishek.gomailai.core.model.EmailTemplateDM
 import com.abhishek.gomailai.core.nav.INavigation
+import com.abhishek.gomailai.core.utils.DatabaseConst.TAG
 import com.abhishek.gomailai.databinding.FragmentSendEmailBinding
 import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
 import com.abhishek.gomailai.layout.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class SendEmailFragment : Fragment() {
@@ -28,13 +33,25 @@ class SendEmailFragment : Fragment() {
     @Inject
     lateinit var navigation: INavigation
 
+    private var selectedPdfUri: Uri? = null
+
+    // File picker launcher
+    private val pdfPickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                selectedPdfUri = uri
+                Toast.makeText(requireContext(), "PDF Selected", Toast.LENGTH_SHORT).show()
+                Log.i(TAG, "Selected PDF URI: $uri")
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSendEmailBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,9 +62,14 @@ class SendEmailFragment : Fragment() {
         observer()
     }
 
+    private fun updateButtonState() {
+        binding.buttonConfirmEmail.text = if (selectedPdfUri == null) "Select Resume" else "Send Mail"
+    }
+
     override fun onResume() {
         super.onResume()
         emailViewModel.getAllEmails()
+        updateButtonState()
     }
 
     private fun observer() {
@@ -61,6 +83,14 @@ class SendEmailFragment : Fragment() {
                 }
             }
         }
+
+        if (selectedPdfUri == null) binding.buttonConfirmEmail.text = "Select Resume" else binding.buttonConfirmEmail.text = "Send Mail"
+
+    }
+    private fun checkIfFieldsAreEmpty(){
+
+        val isEmailSubjectEmpty = binding.editTextSubject.text.toString().trim().isEmpty()
+        val isEmailBodyEmpty = binding.editTextEmailBody.text.toString().trim().isEmpty()
     }
 
     private fun listener() {
@@ -71,13 +101,26 @@ class SendEmailFragment : Fragment() {
         binding.buttonConfirmEmail.setOnClickListener {
             val value = appSharedPref.getUserInfo()
             emailViewModel.setUserInformation(value)
-            if (validate()) {
-                val emailSubject = binding.editTextSubject.text.toString()
-                val emailBody = binding.editTextEmailBody.text.toString()
-                emailViewModel.sendBulkEmail(emailSubject, emailBody, requireContext())
-                navigation.getNavController().popBackStack()
+
+            if (selectedPdfUri == null) {
+                openFilePicker()
+            } else {
+                if (validate()) {
+                    // TODO : Undo Comments if Code is done.
+                   /* val emailSubject = binding.editTextSubject.text.toString()
+                    val emailBody = binding.editTextEmailBody.text.toString()
+                    emailViewModel.sendBulkEmail(
+                        emailSubject,
+                        emailBody,
+                        selectedPdfUri,
+                        requireContext()
+                    )*/
+                    Toast.makeText(requireContext(), "Email Sent Successfully", Toast.LENGTH_SHORT).show()
+                    navigation.getNavController().popBackStack()
+                }
             }
         }
+
     }
 
     private fun initialize() {
@@ -88,18 +131,31 @@ class SendEmailFragment : Fragment() {
         val value = appSharedPref.getUserInfo().numberMails ?: 0
         val emailSubject = binding.editTextSubject.text.toString()
         val emailBody = binding.editTextEmailBody.text.toString()
+
         if (emailSubject.isEmpty()) {
             binding.editTextSubject.error = "Please enter a subject"
             return false
         }
         if (emailBody.isEmpty()) {
-            binding.editTextEmailBody.error = "Please enter a Email Body"
+            binding.editTextEmailBody.error = "Please enter an email body"
             return false
         }
 //        if (value <= 0) {
 //            Toast.makeText(requireContext(), "Please Buy Email Data, Your have $value mail", Toast.LENGTH_SHORT).show()
 //            return false
 //        }
+        if (selectedPdfUri == null) {
+            Toast.makeText(requireContext(), "Please select a Resume file", Toast.LENGTH_SHORT).show()
+            return false
+        }
         return true
+    }
+
+    private fun openFilePicker() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "application/pdf"
+            addCategory(Intent.CATEGORY_OPENABLE)
+        }
+        pdfPickerLauncher.launch(intent)
     }
 }

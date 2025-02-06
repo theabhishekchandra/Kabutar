@@ -22,6 +22,8 @@ object MainConst {
     const val WM_RECIPIENT_EMAIL = "recipient_email"
     const val WM_SUBJECT = "subject"
     const val WM_MESSAGE_BODY = "message_body"
+    const val WM_ATTACHMENT_URI = "attachment_uri"
+
 
     // Email Template
     const val EMAIL_TEMPLATE_ID = 1

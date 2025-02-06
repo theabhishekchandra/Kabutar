@@ -2,6 +2,7 @@ package com.abhishek.gomailai.layout.viewmodel
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -182,6 +183,7 @@ class EmailViewModel @Inject constructor(
     fun sendBulkEmail(
         emailSubject: String,
         emailBody: String,
+        pdfUri: Uri?,
         context: Context
     ) {
         val email = _saveUserInfo.value?.email ?: return
@@ -198,7 +200,7 @@ class EmailViewModel @Inject constructor(
         if (/*numberMails*/ 1 > 0) {
             val workRequests = mutableListOf<OneTimeWorkRequest>()
 
-            for (i in 0 until /*numberMails*/4) {
+            for (i in 0 until /*numberMails*/2) {
 //                val selectedEmail = validEmails.getOrNull(i) ?: break // Pick the next available email
 
                 val constraints = Constraints.Builder()
@@ -210,7 +212,8 @@ class EmailViewModel @Inject constructor(
                     MainConst.WM_SENDER_PASSWORD to password,
                     MainConst.WM_RECIPIENT_EMAIL to "ac928920@gmail.com", // TODO: Change this to recipient email.
                     MainConst.WM_SUBJECT to emailSubject,
-                    MainConst.WM_MESSAGE_BODY to emailBody
+                    MainConst.WM_MESSAGE_BODY to emailBody,
+                    MainConst.WM_ATTACHMENT_URI to (pdfUri?.toString() ?: "")
                 )
 
                 val emailWorkRequest = OneTimeWorkRequestBuilder<EmailSenderWorker>()
