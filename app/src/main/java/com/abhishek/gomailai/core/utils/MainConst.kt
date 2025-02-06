@@ -7,6 +7,8 @@ object MainConst {
     const val USER_MOBILE_NUMBER: String = "user_mobile_number"
     const val USER_EMAIL: String = "user_email"
     const val USER_PASSWORD: String = "user_password"
+    const val USER_NUMBER_MAILS: String = "user_number_mails"
+    const val USER_DESIGNATION: String = "user_designation"
     const val AI_ACCESS_KEY: String = "ai_access_key"
     const val AI_MODEL: String = "ai_model"
     const val DESIGNATION: String = "%}DESIGNATION{%"
@@ -29,13 +31,13 @@ object MainConst {
     const val EMAIL_TYPE_WORKER = "worker"
 
     // Email Generate Prompts List
-    val EMAIL_GENERATE_PROMPTS = listOf(
+    private val EMAIL_GENERATE_PROMPTS = listOf(
         "Write a cold email for a job application. I am currently working as an %}DESIGNATION{% and am interested in applying for a %}DESIGNATION{% role.",
         "Help me draft a cold email for applying to a %}DESIGNATION{% position. I am currently working as an %}DESIGNATION{%.",
         "Create a cold email template for a %}DESIGNATION{% role. My current designation is %}DESIGNATION{%.",
         "Generate a professional cold email for a %}DESIGNATION{% position, highlighting my current role as an %}DESIGNATION{%.",
         "Write a concise cold email for a %}DESIGNATION{% position. I am presently working as an %}DESIGNATION{%.",
-        "Help me write a cold email for the position of UI/UX Designer, mentioning that I am currently an %}DESIGNATION{%.",
+        "Help me write a cold email for the position of %}DESIGNATION{%, mentioning that I am currently an %}DESIGNATION{%.",
         "Draft a cold email for a %}DESIGNATION{% role, introducing myself as an %}DESIGNATION{%.",
         "Write a job application cold email for the role of %}DESIGNATION{%. My current job title is %}DESIGNATION{%.",
         "Create a cold email applying for a %}DESIGNATION{% position while mentioning my current job as an %}DESIGNATION{%.",

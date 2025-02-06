@@ -30,4 +30,9 @@ interface EmailDataDao {
 
     @Delete
     suspend fun deleteEmail(email: EmailDataEntity)
+
+    @Query("UPDATE ${DatabaseConst.EMAIL_DATA_TABLE} SET isUsed = :isUsed WHERE email = :email")
+    suspend fun updateEmailUsageStatus(email: String, isUsed: Boolean)
+
+
 }

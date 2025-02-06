@@ -12,6 +12,8 @@ interface IAPPSharedPref {
     fun getUserEmail(): String
     fun setUserInfo(userInfo: UserInfo)
     fun getUserInfo(): UserInfo
+    fun setUserNumberMails(number: Int)
+    fun getUserNumberMails(): Int
     fun setAIAccessKey(accessKey: String)
     fun getAIAccessKey(): String
     fun setAIModel(model: String)

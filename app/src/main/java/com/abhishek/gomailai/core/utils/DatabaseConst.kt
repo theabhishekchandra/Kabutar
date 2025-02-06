@@ -1,9 +1,13 @@
 package com.abhishek.gomailai.core.utils
 
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+
 object DatabaseConst {
+    const val TAG = "DatabaseConst"
     // Database
     const val DB_NAME = "gomailai.db"
-    const val DB_VERSION = 1
+    const val DB_VERSION = 2
     // Tables
     const val USER_TABLE = "users"
     const val USER_EMAIL_TABLE = "user_email"
@@ -38,4 +42,12 @@ object DatabaseConst {
     const val EMAIL_LABEL_ITEM_TABLE = "email_label_item"
     const val EMAIL_THREAD_TABLE = "email_thread"
     const val EMAIL_THREAD_ITEM_TABLE = "email_thread_item"
+
+    val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            // Adding a new column 'uID' to email_template_table
+            database.execSQL("ALTER TABLE email_template_table ADD COLUMN uID TEXT NOT NULL DEFAULT ''")
+        }
+    }
+
 }
