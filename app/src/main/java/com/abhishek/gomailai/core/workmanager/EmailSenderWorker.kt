@@ -3,12 +3,14 @@ package com.abhishek.gomailai.core.workmanager
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.abhishek.gomailai.core.repository.EmailRepositoryImpl
 import com.abhishek.gomailai.core.utils.MainConst
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Properties
+import javax.inject.Inject
 import javax.mail.Message
 import javax.mail.PasswordAuthentication
 import javax.mail.Session
@@ -18,16 +20,23 @@ import javax.mail.internet.MimeMessage
 
 class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
+
+    @Inject
+    lateinit var emailRepository: EmailRepositoryImpl
+
+
     override suspend fun doWork(): Result {
+        val senderEmail = inputData.getString(MainConst.WM_SENDER_EMAIL) ?: return Result.failure()
+        val senderPassword = inputData.getString(MainConst.WM_SENDER_PASSWORD) ?: return Result.failure()
+        val recipientEmail = inputData.getString(MainConst.WM_RECIPIENT_EMAIL) ?: return Result.failure()
+        val subject = inputData.getString(MainConst.WM_SUBJECT) ?: return Result.failure()
+        val messageBody = inputData.getString(MainConst.WM_MESSAGE_BODY) ?: return Result.failure()
+
         return withContext(Dispatchers.IO) {
             try {
-                val senderEmail = inputData.getString(MainConst.WM_SENDER_EMAIL) ?: return@withContext Result.failure()
-                val senderPassword = inputData.getString(MainConst.WM_SENDER_PASSWORD) ?: return@withContext Result.failure()
-                val recipientEmail = inputData.getString(MainConst.WM_RECIPIENT_EMAIL) ?: return@withContext Result.failure()
-                val subject = inputData.getString(MainConst.WM_SUBJECT) ?: return@withContext Result.failure()
-                val messageBody = inputData.getString(MainConst.WM_MESSAGE_BODY) ?: return@withContext Result.failure()
-
                 sendEmail(senderEmail, senderPassword, recipientEmail, subject, messageBody)
+
+//                emailRepository.markEmailAsUsed(recipientEmail)
 
                 Result.success()
             } catch (e: Exception) {

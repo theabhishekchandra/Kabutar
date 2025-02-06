@@ -1,26 +1,46 @@
 package com.abhishek.gomailai.core.repository
 
+import com.abhishek.gomailai.core.local.DBResponseModel
 import com.abhishek.gomailai.core.local.dao.EmailDataDao
 import com.abhishek.gomailai.core.local.entities.EmailDataEntity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class EmailRepositoryImpl @Inject constructor(
     private val emailDataDao: EmailDataDao
 ) : IEmailRepository {
 
-    override suspend fun insertEmail(email: EmailDataEntity) {
-        emailDataDao.insertEmail(email)
+    override suspend fun insertEmail(email: EmailDataEntity): DBResponseModel<Unit> {
+        return try {
+            emailDataDao.insertEmail(email)
+            DBResponseModel.Success(Unit)
+        } catch (e: Exception) {
+            DBResponseModel.Error("Delete failed: ${e.message}", e)
+        }
     }
 
-    override fun getAllEmails(): Flow<List<EmailDataEntity>> {
-        return emailDataDao.getAllEmails()
-    }
+    override fun getAllEmails(): Flow<DBResponseModel<List<EmailDataEntity>>> = flow {
+        try {
+            emailDataDao.getAllEmails().collect { allMail ->
+                emit(DBResponseModel.Success(allMail))
+            }
+        } catch (e: Exception) {
+            emit(DBResponseModel.Error(e.localizedMessage ?: "Unknown Error"))
+        }
+    }.flowOn(Dispatchers.IO)
 
-    override suspend fun deleteEmail(email: EmailDataEntity) {
-        emailDataDao.deleteEmail(email)
+    override suspend fun deleteEmail(email: EmailDataEntity): DBResponseModel<Unit> {
+        return try {
+            emailDataDao.deleteEmail(email)
+            DBResponseModel.Success(Unit)
+        } catch (e: Exception) {
+            DBResponseModel.Error("Delete failed: ${e.message}", e)
+        }
     }
 
     // Synchronizing email data (similar to user data)
@@ -43,4 +63,14 @@ class EmailRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun markEmailAsUsed(email: String): DBResponseModel<Unit> {
+        return try {
+            /*emailDataDao.updateEmailUsageStatus(email, true)*/
+            DBResponseModel.Success(Unit)
+        } catch (e: Exception) {
+            DBResponseModel.Error("Delete failed: ${e.message}", e)
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ import com.abhishek.gomailai.core.local.entities.EmailDataEntity
 import com.abhishek.gomailai.core.local.entities.EmailTemplateEntity
 import com.abhishek.gomailai.core.local.entities.UsersEntity
 import com.abhishek.gomailai.core.utils.DatabaseConst
+import com.abhishek.gomailai.core.utils.DatabaseConst.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +34,8 @@ class DatabaseModule {
         AppDatabase::class.java,
         DatabaseConst.DB_NAME)
         .allowMainThreadQueries()
-        .fallbackToDestructiveMigration()
+        .addMigrations(MIGRATION_1_2)
+        /*.fallbackToDestructiveMigration() // This will reset the database*/
         .build()
 
     // DAO

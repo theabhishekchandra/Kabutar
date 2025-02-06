@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
 import com.abhishek.gomailai.core.model.EmailTemplateDM
@@ -44,6 +45,11 @@ class SendEmailFragment : Fragment() {
         observer()
     }
 
+    override fun onResume() {
+        super.onResume()
+        emailViewModel.getAllEmails()
+    }
+
     private fun observer() {
         with(emailViewModel) {
             emailTemplateLiveData.observe(viewLifecycleOwner) { listTemplate ->
@@ -69,6 +75,7 @@ class SendEmailFragment : Fragment() {
                 val emailSubject = binding.editTextSubject.text.toString()
                 val emailBody = binding.editTextEmailBody.text.toString()
                 emailViewModel.sendBulkEmail(emailSubject, emailBody, requireContext())
+                navigation.getNavController().popBackStack()
             }
         }
     }
@@ -85,12 +92,12 @@ class SendEmailFragment : Fragment() {
             binding.editTextSubject.error = "Please enter a subject"
             return false
         }
-        if (emailSubject.isNotEmpty()) {
+        if (emailBody.isEmpty()) {
             binding.editTextEmailBody.error = "Please enter a Email Body"
             return false
         }
 //        if (value <= 0) {
-//            binding.emailBodyTemplateEditText.error = "Please Buy Email Data"
+//            Toast.makeText(requireContext(), "Please Buy Email Data, Your have $value mail", Toast.LENGTH_SHORT).show()
 //            return false
 //        }
         return true

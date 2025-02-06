@@ -84,4 +84,18 @@ class UserViewModel @Inject constructor(
         }
 
     }
+    fun updateUserNumberMails(email: String, newMailCount: Int) = viewModelScope.launch {
+        try {
+            _isLoading.value = true
+            when (val result = repository.updateNumberMailsByEmail(email, newMailCount)) {
+                is DBResponseModel.Success -> _responseMessage.value = result.message
+                is DBResponseModel.Error -> _responseMessage.value = result.message
+                else -> {}
+            }
+        } catch (e: Exception) {
+            _responseMessage.value = "Exception handled: ${e.localizedMessage}"
+        } finally {
+            _isLoading.value = false
+        }
+    }
 }

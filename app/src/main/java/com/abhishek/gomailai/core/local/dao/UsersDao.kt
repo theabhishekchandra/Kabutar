@@ -23,4 +23,7 @@ interface UsersDao {
 
     @Query("SELECT * FROM  ${DatabaseConst.USER_TABLE}")
     fun getAllUsers(): Flow<List<UsersEntity>>
+
+    @Query("UPDATE ${DatabaseConst.USER_TABLE} SET numberMails = :numberMails WHERE email = :email")
+    fun updateNumberMailsByEmail(email: String, numberMails: Int)
 }
