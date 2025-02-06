@@ -1,5 +1,6 @@
 package com.abhishek.gomailai.layout.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
@@ -9,9 +10,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.Constraints
 import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkContinuation
 import androidx.work.WorkManager
 import androidx.work.workDataOf
+import com.abhishek.gomailai.core.local.DBResponseModel
 import com.abhishek.gomailai.core.local.entities.EmailDataEntity
 import com.abhishek.gomailai.core.local.entities.EmailTemplateEntity
 import com.abhishek.gomailai.core.model.EmailDM
@@ -19,21 +23,12 @@ import com.abhishek.gomailai.core.model.EmailTemplateDM
 import com.abhishek.gomailai.core.model.UserInfo
 import com.abhishek.gomailai.core.repository.EmailRepositoryImpl
 import com.abhishek.gomailai.core.repository.EmailTemplateRepo
+import com.abhishek.gomailai.core.utils.DatabaseConst.TAG
 import com.abhishek.gomailai.core.utils.MainConst
 import com.abhishek.gomailai.core.workmanager.EmailSenderWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import javax.mail.Session
-import javax.mail.Message
-import javax.mail.Transport
-import javax.mail.PasswordAuthentication
-import javax.mail.internet.InternetAddress
-import javax.mail.internet.MimeMessage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -52,8 +47,8 @@ class EmailViewModel @Inject constructor(
     private val _saveUserInfo = MutableLiveData<UserInfo?>()
     val saveUserInfo: LiveData<UserInfo?> get() = _saveUserInfo
 
-    private val _loadMailData = MutableLiveData<List<EmailDM>>()
-    val loadMailData: LiveData<List<EmailDM>> get() = _loadMailData
+    private val _loadMailData = MutableLiveData<List<EmailDataEntity>>()
+    val loadMailData: LiveData<List<EmailDataEntity>> get() = _loadMailData
 
     private val _emailTemplateLiveData = MutableLiveData<List<EmailTemplateDM>>()
     val emailTemplateLiveData: LiveData<List<EmailTemplateDM>> = _emailTemplateLiveData
@@ -72,16 +67,20 @@ class EmailViewModel @Inject constructor(
     }
 
     fun insertEmailTemplate(email: String,context: Context) {
+        val emailData = extractSubjectAndBody(email,context)
         viewModelScope.launch(exceptionHandler) {
             _isLoading.value = true
-            val emailData = extractSubjectAndBody(email,context)
             val emailTemplate = EmailTemplateEntity(
                 subject = emailData?.first?:"",
                 body = emailData?.second?:"",
             )
             try {
-                templateRepository.insertEmailTemplate(emailTemplate)
-                Log.d("EmailViewModel", "Inserted email template: ${emailTemplate.body}")
+                val response = templateRepository.insertEmailTemplate(emailTemplate)
+                when(response){
+                    is DBResponseModel.Success -> _responseMessage.value = response.message
+                    is DBResponseModel.Error -> _responseMessage.value = response.message
+                    else -> {}
+                }
             } finally {
                 _isLoading.value = false
             }
@@ -94,15 +93,20 @@ class EmailViewModel @Inject constructor(
             _isLoading.value = true
             try {
                 val templates = templateRepository.getEmailTemplates()
-                _emailTemplateLiveData.value = templates.map { entity ->
-                    EmailTemplateDM(
-                        id = entity.id.toString(),
-                        uID = entity.uID,
-                        subject = entity.subject,
-                        body = entity.body
-                    )
+                templates.let {
+                    when (templates) {
+                        is DBResponseModel.Success -> _emailTemplateLiveData.value = templates.data.map { entity ->
+                            EmailTemplateDM(
+                                id = entity.id.toString(),
+                                uID = entity.uID,
+                                subject = entity.subject,
+                                body = entity.body
+                            )
+                        }
+                        is DBResponseModel.Error -> _responseMessage.value = templates.message
+                        else -> {}
+                    }
                 }
-                Log.d("EmailViewModel", "Fetched ${templates.size} email templates from DB")
             } finally {
                 _isLoading.value = false
             }
@@ -115,7 +119,7 @@ class EmailViewModel @Inject constructor(
             _isLoading.value = true
             try {
                 templateRepository.deleteEmailTemplate(emailTemplate)
-                Log.d("EmailViewModel", "Deleted email template: ${emailTemplate.body}")
+                Log.d(TAG, "Deleted email template: ${emailTemplate.body}")
             } finally {
                 _isLoading.value = false
             }
@@ -124,7 +128,7 @@ class EmailViewModel @Inject constructor(
     // Synchronize email data with local database (insert if not exists)
     private fun insertEmail(email: EmailDataEntity) = viewModelScope.launch(exceptionHandler) {
         emailRepository.insertEmail(email)
-        Log.d("EmailViewModel", "Inserted email: ${email.email}")
+        Log.d(TAG, "Inserted email: ${email.email}")
     }
 
     // Upload emails from external source (i.e. extracted from somewhere like API or UI) to database
@@ -143,12 +147,17 @@ class EmailViewModel @Inject constructor(
             }
         }
     }
+    // Fetch all emails Company from local database
     fun getAllEmails() {
-        val emailList = MutableStateFlow<List<EmailDataEntity>>(emptyList())
         viewModelScope.launch {
-            emailRepository.getAllEmails().collect {
-                emailList.value = it
-                Log.d("EmailViewModel", "Fetched emails from DB: ${it.size}")
+            emailRepository.getAllEmails().collect { result ->
+                result.let {
+                    when (result) {
+                        is DBResponseModel.Success -> _loadMailData.value = result.data
+                        is DBResponseModel.Error -> _responseMessage.value = result.message
+                        else -> {}
+                    }
+                }
             }
         }
     }
@@ -156,13 +165,12 @@ class EmailViewModel @Inject constructor(
     fun deleteEmail(email: EmailDataEntity) {
         viewModelScope.launch {
             emailRepository.deleteEmail(email)
-            Log.d("EmailViewModel", "Deleted email: ${email.email}")
+            Log.d(TAG, "Deleted email: ${email.email}")
         }
     }
 
     // Set extracted email data
     fun setMasterList(extractedData: List<EmailDM>) {
-        _loadMailData.value = extractedData
         _loadMailDataAll.value = extractedData.toSet()
         uploadEmailInDatabase()
     }
@@ -170,6 +178,7 @@ class EmailViewModel @Inject constructor(
     fun setUserInformation(userInfo: UserInfo) {
         _saveUserInfo.value = userInfo
     }
+    @SuppressLint("EnqueueWork")
     fun sendBulkEmail(
         emailSubject: String,
         emailBody: String,
@@ -178,9 +187,20 @@ class EmailViewModel @Inject constructor(
         val email = _saveUserInfo.value?.email ?: return
         val password = _saveUserInfo.value?.password ?: return
         val numberMails = _saveUserInfo.value?.numberMails ?: return
+        val companyMails = _loadMailData.value ?: return  // Get all emails
+        val validEmails = companyMails.filter { !it.isUsed }  // Filter unused emails
 
-        if (numberMails > 0) {
-            for (i in 0 until numberMails) {
+        if (validEmails.isEmpty()) {
+            Toast.makeText(context, "No available email to send", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (/*numberMails*/ 1 > 0) {
+            val workRequests = mutableListOf<OneTimeWorkRequest>()
+
+            for (i in 0 until /*numberMails*/4) {
+//                val selectedEmail = validEmails.getOrNull(i) ?: break // Pick the next available email
+
                 val constraints = Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
                     .build()
@@ -188,63 +208,40 @@ class EmailViewModel @Inject constructor(
                 val inputData = workDataOf(
                     MainConst.WM_SENDER_EMAIL to email,
                     MainConst.WM_SENDER_PASSWORD to password,
-                    MainConst.WM_RECIPIENT_EMAIL to email,
+                    MainConst.WM_RECIPIENT_EMAIL to "ac928920@gmail.com", // TODO: Change this to recipient email.
                     MainConst.WM_SUBJECT to emailSubject,
                     MainConst.WM_MESSAGE_BODY to emailBody
                 )
 
-                val reminderRequest = OneTimeWorkRequestBuilder<EmailSenderWorker>()
-                    .setInitialDelay(5, TimeUnit.SECONDS)
+                val emailWorkRequest = OneTimeWorkRequestBuilder<EmailSenderWorker>()
+                    .setInitialDelay(i * 5L, TimeUnit.SECONDS)
                     .addTag(MainConst.EMAIL_SENDING_WORKER_TAG)
                     .setInputData(inputData)
                     .setConstraints(constraints)
                     .build()
 
-                WorkManager.getInstance(context).enqueue(reminderRequest)
+                workRequests.add(emailWorkRequest)
+//                WorkManager.getInstance(context).enqueue(emailWorkRequest)
+
+                // Mark the email as used in the database
+                /*GlobalScope.launch {
+                    emailRepository.markEmailAsUsed(selectedEmail.email)
+                }*/
             }
+
+            // Begin work chain
+            WorkManager.getInstance(context)
+                .beginWith(workRequests)
+                .enqueue()
+
             Toast.makeText(context, "Emails are being sent", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(context, "No emails to send", Toast.LENGTH_LONG).show()
         }
     }
 
-    /*private fun sendEmail(
-        senderEmail: String,
-        senderPassword: String,
-        recipientEmail: String,
-        subject: String,
-        messageBody: String
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val properties = System.getProperties().apply {
-                put("mail.smtp.auth", "true")
-                put("mail.smtp.starttls.enable", "true")
-                put("mail.smtp.host", "smtp.gmail.com")
-                put("mail.smtp.port", "587")
-            }
 
-            val session = Session.getInstance(properties, object : javax.mail.Authenticator() {
-                override fun getPasswordAuthentication(): PasswordAuthentication {
-                    return PasswordAuthentication(senderEmail, senderPassword)
-                }
-            })
-
-            try {
-                val message = MimeMessage(session).apply {
-                    setFrom(InternetAddress(senderEmail))
-                    setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail))
-                    setSubject(subject)
-                    setText(messageBody)
-                }
-
-                Transport.send(message)
-                println("Email sent successfully to: $recipientEmail")
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }*/
-    private suspend fun extractSubjectAndBody(emailContent: String, context: Context): Pair<String, String>? {
+    private fun extractSubjectAndBody(emailContent: String, context: Context): Pair<String, String>? {
         val missingFields = mutableListOf<String>()
 
         // Split email content into subject and body
@@ -269,13 +266,11 @@ class EmailViewModel @Inject constructor(
         return if (missingFields.isEmpty()) {
             Pair(subject, body)
         } else {
-            withContext(Dispatchers.Main) {
                 Toast.makeText(
                     context,
                     "Please fill in the following fields: ${missingFields.joinToString(", ")}",
                     Toast.LENGTH_LONG
                 ).show()
-            }
             null
         }
     }

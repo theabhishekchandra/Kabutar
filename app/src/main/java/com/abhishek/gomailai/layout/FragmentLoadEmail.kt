@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
 import com.abhishek.gomailai.core.model.EmailDM
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.databinding.FragmentLoadEmailBinding
 import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
+import com.abhishek.gomailai.layout.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.BufferedReader
@@ -25,8 +27,12 @@ class FragmentLoadEmail : Fragment() {
 
     private lateinit var binding: FragmentLoadEmailBinding
     private val emailViewModel: EmailViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
+
     @Inject
     lateinit var navigation: INavigation
+    @Inject
+    lateinit var appSharedPref: IAPPSharedPref
     private var isClicked = false
 
     override fun onCreateView(
@@ -42,6 +48,41 @@ class FragmentLoadEmail : Fragment() {
 
         // Load CSV data when the fragment is created
         loadCsvDataFromAssets()
+        listener()
+        observer()
+    }
+
+    private fun observer() {
+        userViewModel.responseMessage.observe(viewLifecycleOwner){
+            it?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                userViewModel.clearResponseMessage()
+            }
+        }
+    }
+
+    private fun listener() {
+        binding.buttonBuyNow.setOnClickListener {
+            val value = binding.editTextEmailCount.text.toString().toInt()
+            if (validate()){
+                appSharedPref.setUserNumberMails(value)
+                val email = appSharedPref.getUserEmail()
+                userViewModel.updateUserNumberMails(email, value)
+                navigation.getNavController().popBackStack()
+            }
+        }
+    }
+
+    private fun validate() : Boolean {
+        if (binding.editTextEmailCount.text.toString().isEmpty()){
+            Toast.makeText(requireContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (binding.editTextEmailCount.text.toString().toInt() <= 0){
+            Toast.makeText(requireContext(), "Number is greater then 0", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
     private fun loadCsvDataFromAssets() {
