@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -88,11 +89,11 @@ class FillFormFragment : Fragment() {
                 val email = binding.editTextEmail.text.toString()
                 val password = binding.editTextPassword.text.toString()
                 val designation = binding.editTextDesignation.text.toString()
-                appSharedPref.setUserInfo(UserInfo(userName, mobileNumber, email, password, designation))
+                appSharedPref.setUserInfo(UserInfo(userName, mobileNumber, email, password, designation, numberMails = 10))
 //                emailViewModel.setUserInformation(userInfo)
                 userViewModel.insertUser(UsersEntity(
                     name = userName, email = email, password = password,
-                    designation =  designation, isLoggedIn = true))
+                    designation =  designation, isLoggedIn = true, numberMails = 10))
                 navigation.getNavController().popBackStack()
             }
         }
@@ -140,8 +141,8 @@ class FillFormFragment : Fragment() {
         if (mobileNumber.isEmpty()) {
             binding.editTextMobileNumber.error = "Please enter your mobile number"
             return false
-        } else if (!mobileNumber.matches(Regex("^[6-9][0-9]{9}\$"))) {
-            binding.editTextMobileNumber.error = "Please enter a valid 10-digit mobile number"
+        } else if (!Patterns.PHONE.matcher(mobileNumber).matches()) {
+            binding.editTextMobileNumber.error = "Please enter a valid mobile number"
             return false
         }
 

@@ -127,7 +127,7 @@ class EmailViewModel @Inject constructor(
         }
     }
     // Synchronize email data with local database (insert if not exists)
-    private fun insertEmail(email: EmailDataEntity) = viewModelScope.launch(exceptionHandler) {
+    fun insertEmail(email: EmailDataEntity) = viewModelScope.launch(exceptionHandler) {
         emailRepository.insertEmail(email)
         Log.d(TAG, "Inserted email: ${email.email}")
     }

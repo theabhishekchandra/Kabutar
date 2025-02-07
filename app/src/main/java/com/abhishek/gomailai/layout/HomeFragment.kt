@@ -74,8 +74,10 @@ class HomeFragment : Fragment() {
 
         }
         binding.loadFileData.setOnClickListener {
+            /* TODO: Uncomment if code is ready.
             navigation.getNavController().navigate(R.id.fragmentLoadEmail)
-
+            */
+            Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
         }
         binding.selectTemplate.setOnClickListener {
             navigation.getNavController().navigate(R.id.setYourEmailFragment)

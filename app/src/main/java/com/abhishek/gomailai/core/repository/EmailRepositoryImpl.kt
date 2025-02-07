@@ -20,7 +20,7 @@ class EmailRepositoryImpl @Inject constructor(
             emailDataDao.insertEmail(email)
             DBResponseModel.Success(Unit)
         } catch (e: Exception) {
-            DBResponseModel.Error("Delete failed: ${e.message}", e)
+            DBResponseModel.Error("Insert failed: ${e.message}", e)
         }
     }
 
@@ -69,7 +69,7 @@ class EmailRepositoryImpl @Inject constructor(
             /*emailDataDao.updateEmailUsageStatus(email, true)*/
             DBResponseModel.Success(Unit)
         } catch (e: Exception) {
-            DBResponseModel.Error("Delete failed: ${e.message}", e)
+            DBResponseModel.Error("Error: ${e.message}", e)
         }
     }
 
