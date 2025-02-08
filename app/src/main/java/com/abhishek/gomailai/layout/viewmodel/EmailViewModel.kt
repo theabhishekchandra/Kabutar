@@ -162,6 +162,11 @@ class EmailViewModel @Inject constructor(
             }
         }
     }
+    fun markEmailAsUsed(email: String) {
+        viewModelScope.launch {
+            emailRepository.markEmailAsUsed(email)
+        }
+    }
 
     fun deleteEmail(email: EmailDataEntity) {
         viewModelScope.launch {
@@ -193,7 +198,7 @@ class EmailViewModel @Inject constructor(
         val validEmails = companyMails.filter { !it.isUsed }  // Filter unused emails
 
         if (validEmails.isEmpty()) {
-            Toast.makeText(context, "No available email to send", Toast.LENGTH_LONG).show()
+            _errorMessage.value = "No available email to send"
             return
         }
 
@@ -238,9 +243,9 @@ class EmailViewModel @Inject constructor(
                 .beginWith(workRequests)
                 .enqueue()
 
-            Toast.makeText(context, "Emails are being sent", Toast.LENGTH_LONG).show()
+            _errorMessage.value = "Emails are being sent"
         } else {
-            Toast.makeText(context, "No emails to send", Toast.LENGTH_LONG).show()
+            _errorMessage.value = "No emails to send"
         }
     }
 

@@ -14,8 +14,12 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
+import com.abhishek.gomailai.core.local.DBResponseModel
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.core.utils.DatabaseConst.TAG
+import com.abhishek.gomailai.core.utils.MainConst.EMAIL_SENDING_WORKER_TAG
+import com.abhishek.gomailai.core.utils.MainConst.WM_OUTPUT_DATA_RECIPIENT_EMAIL
+import com.abhishek.gomailai.core.workmanager.WorkManagerViewModel
 import com.abhishek.gomailai.databinding.FragmentSendEmailBinding
 import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
 import com.abhishek.gomailai.layout.viewmodel.UserViewModel
@@ -27,6 +31,7 @@ class SendEmailFragment : Fragment() {
     private lateinit var binding: FragmentSendEmailBinding
     private val emailViewModel: EmailViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
+    private val viewModel: WorkManagerViewModel by viewModels()
 
     @Inject
     lateinit var appSharedPref: IAPPSharedPref
@@ -60,7 +65,10 @@ class SendEmailFragment : Fragment() {
         initialize()
         listener()
         observer()
+        viewModel.updateTaskStatuses(EMAIL_SENDING_WORKER_TAG)
     }
+
+
 
     private fun updateButtonState() {
         binding.buttonConfirmEmail.text = if (selectedPdfUri == null) "Select Resume" else "Send Mail"
@@ -82,10 +90,29 @@ class SendEmailFragment : Fragment() {
                     }
                 }
             }
+            errorMessage.observe(viewLifecycleOwner){
+                it.let {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
+            }
+            isLoading.observe(viewLifecycleOwner){
+                binding.loader.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
 
         if (selectedPdfUri == null) binding.buttonConfirmEmail.text = "Select Resume" else binding.buttonConfirmEmail.text = "Send Mail"
 
+        viewModel.taskEmailList.observe(viewLifecycleOwner){
+            it.forEach { workData ->
+                // Perform necessary actions based on the status of the work
+                if (workData.isEmailSend){
+                    emailViewModel.markEmailAsUsed(workData.recipientEmail.toString())
+                    val value = appSharedPref.getUserInfo().numberMails?: 0
+                    userViewModel.updateUserNumberMails(workData.senderEmail.toString(), value -1)
+                    appSharedPref.setUserNumberMails(value-1)
+                }
+            }
+        }
     }
     private fun checkIfFieldsAreEmpty(){
 
@@ -114,7 +141,6 @@ class SendEmailFragment : Fragment() {
                         selectedPdfUri,
                         requireContext()
                     )
-                    Toast.makeText(requireContext(), "Email Sent Successfully", Toast.LENGTH_SHORT).show()
                     navigation.getNavController().popBackStack()
                 }
             }

@@ -32,6 +32,9 @@
         <meta-data
             android:name="com.google.android.geo.API_MODEL"
             android:value="GEMINI_API_MODEL" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
