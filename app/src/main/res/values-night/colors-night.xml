@@ -17,4 +17,13 @@
     <color name="blue">#1D76FB</color> <!-- Blue for buttons and links -->
     <color name="green">#34C759</color> <!-- Green for the 'Mark as Ready' button -->
     <color name="semiTransparentColor">#1AB8FF73</color> <!-- Semi-transparent color for elements -->
+
+    <!-- Status Colors-->
+    <color name="status_pending">#FF9800</color>
+    <color name="status_completed">#4CAF50</color>
+    <color name="status_failed">#F44336</color>
+    <color name="status_cancelled">#FF0000</color>
+    <color name="card_background">#1E1E1E</color>
+    <color name="card_border">#333333</color>
+
 </resources>
