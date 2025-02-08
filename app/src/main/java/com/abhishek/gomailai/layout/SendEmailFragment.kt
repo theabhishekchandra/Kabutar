@@ -106,15 +106,14 @@ class SendEmailFragment : Fragment() {
                 openFilePicker()
             } else {
                 if (validate()) {
-                    // TODO : Undo Comments if Code is done.
-                   /* val emailSubject = binding.editTextSubject.text.toString()
+                    val emailSubject = binding.editTextSubject.text.toString()
                     val emailBody = binding.editTextEmailBody.text.toString()
                     emailViewModel.sendBulkEmail(
                         emailSubject,
                         emailBody,
                         selectedPdfUri,
                         requireContext()
-                    )*/
+                    )
                     Toast.makeText(requireContext(), "Email Sent Successfully", Toast.LENGTH_SHORT).show()
                     navigation.getNavController().popBackStack()
                 }

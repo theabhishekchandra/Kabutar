@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.abhishek.gomailai.R
+import com.abhishek.gomailai.core.model.EmailWorkerDM
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.core.utils.MainConst.EMAIL_SENDING_WORKER_TAG
 import com.abhishek.gomailai.core.workmanager.WorkManagerViewModel
 import com.abhishek.gomailai.databinding.FragmentCheckMailStatusBinding
+import com.abhishek.gomailai.layout.adapter.EmailTaskAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,6 +26,8 @@ class CheckMailStatusFragment : Fragment() {
 
     @Inject
     lateinit var navigator: INavigation
+
+    private lateinit var  taskAdapter: EmailTaskAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,17 +44,29 @@ class CheckMailStatusFragment : Fragment() {
         viewModel.updateTaskStatuses(EMAIL_SENDING_WORKER_TAG)
 
         viewModel.taskStatuses.observe(viewLifecycleOwner) { taskStatus ->
-            binding.tvPending.text = "Pending Mail: ${taskStatus.pending}"
-            binding.tvCompleted.text = "Completed Mail: ${taskStatus.completed}"
-            binding.tvFailed.text = "Failed Mail: ${taskStatus.failed}"
-            binding.tvCancelled.text = "Cancelled Mail: ${taskStatus.cancelled}"
-            binding.tvTotal.text = "Total Mail: ${taskStatus.total}"
+            binding.tvPending.text = "Pending : ${taskStatus.pending}"
+            binding.tvCompleted.text = "Completed : ${taskStatus.completed}"
+            binding.tvFailed.text = "Failed : ${taskStatus.failed}"
+            binding.tvCancelled.text = "Cancelled : ${taskStatus.cancelled}"
         }
 
         binding.toolbar.imageView.setOnClickListener {
             navigator.getNavController().popBackStack()
         }
 
+        binding.mailRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            taskAdapter = EmailTaskAdapter(requireContext(), emptyList())
+            adapter = taskAdapter
+        }
 
+        viewModel.taskEmailList.observe(viewLifecycleOwner){
+            // Sample data (Replace with your actual data source)
+//            val emailList = listOf(
+//                EmailWorkerDM("sender@example.com", "recipient1@example.com", "Job Application", "Your resume is attached", true, "Completed"),
+//                EmailWorkerDM("sender@example.com", "recipient2@example.com", "Follow-up Email", "Checking back on my application", false, "Pending")
+//            )
+            taskAdapter.setEmailTaskData(it)
+        }
     }
 }

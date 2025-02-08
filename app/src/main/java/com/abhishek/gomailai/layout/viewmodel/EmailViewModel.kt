@@ -197,11 +197,11 @@ class EmailViewModel @Inject constructor(
             return
         }
 
-        if (/*numberMails*/ 1 > 0) {
+        if (numberMails > 0) {
             val workRequests = mutableListOf<OneTimeWorkRequest>()
 
-            for (i in 0 until /*numberMails*/2) {
-//                val selectedEmail = validEmails.getOrNull(i) ?: break // Pick the next available email
+            for (i in 0 until numberMails) {
+                val selectedEmail = validEmails.getOrNull(i) ?: break // Pick the next available email
 
                 val constraints = Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -210,7 +210,8 @@ class EmailViewModel @Inject constructor(
                 val inputData = workDataOf(
                     MainConst.WM_SENDER_EMAIL to email,
                     MainConst.WM_SENDER_PASSWORD to password,
-                    MainConst.WM_RECIPIENT_EMAIL to "ac928920@gmail.com", // TODO: Change this to recipient email.
+                    MainConst.WM_RECIPIENT_EMAIL to selectedEmail.email,
+                    MainConst.WM_RECIPIENT_NAME to selectedEmail.name,
                     MainConst.WM_SUBJECT to emailSubject,
                     MainConst.WM_MESSAGE_BODY to emailBody,
                     MainConst.WM_ATTACHMENT_URI to (pdfUri?.toString() ?: "")
@@ -255,7 +256,7 @@ class EmailViewModel @Inject constructor(
             return null
         }
 
-        val subject = lines.first().trim()
+        val subject = lines.first().trim().replace("Subject: ", "").trim()
         val body = lines.drop(1).joinToString("\n").trim()
 
         val placeholderRegex = "\\[([^\\]]+)\\]".toRegex()
