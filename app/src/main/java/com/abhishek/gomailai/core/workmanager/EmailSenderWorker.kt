@@ -95,6 +95,7 @@ class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
 
             try {
                 val message = MimeMessage(session).apply {
+
                     setFrom(InternetAddress(senderEmail))
                     setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail))
                     setSubject(subject)
