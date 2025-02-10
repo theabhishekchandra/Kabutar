@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".layout.HomeFragment">
 
-    <include
-        android:id="@+id/toolbar_home"
-        layout="@layout/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:background="@color/tool_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Hello! Abhishek" />
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout"
@@ -19,7 +26,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         app:columnCount="2"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home"
+        app:layout_constraintTop_toBottomOf="@id/heading"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

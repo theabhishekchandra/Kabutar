@@ -39,6 +39,7 @@ class SendEmailFragment : Fragment() {
     lateinit var navigation: INavigation
 
     private var selectedPdfUri: Uri? = null
+    private var totalEmails: Int = 0
 
     // File picker launcher
     private val pdfPickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -102,14 +103,19 @@ class SendEmailFragment : Fragment() {
 
         if (selectedPdfUri == null) binding.buttonConfirmEmail.text = "Select Resume" else binding.buttonConfirmEmail.text = "Send Mail"
 
-        viewModel.taskEmailList.observe(viewLifecycleOwner){
-            it.forEach { workData ->
-                // Perform necessary actions based on the status of the work
-                if (workData.isEmailSend){
-                    emailViewModel.markEmailAsUsed(workData.recipientEmail.toString())
-                    val value = appSharedPref.getUserInfo().numberMails?: 0
-                    userViewModel.updateUserNumberMails(workData.senderEmail.toString(), value -1)
-                    appSharedPref.setUserNumberMails(value-1)
+        userViewModel.getTotalNumberMails().observe(viewLifecycleOwner) { total ->
+            totalEmails = total ?: 0
+            appSharedPref.setUserNumberMails(totalEmails)
+
+            viewModel.taskEmailList.observe(viewLifecycleOwner) { taskList ->
+                taskList.forEach { workData ->
+                    if (workData.isEmailSend) {
+                        emailViewModel.markEmailAsUsed(workData.recipientEmail.toString())
+
+                        val updatedValue = if (totalEmails <= 0) 0 else totalEmails - 1
+                        appSharedPref.setUserNumberMails(updatedValue)
+                        userViewModel.updateUserNumberMails(workData.senderEmail.toString(), updatedValue)
+                    }
                 }
             }
         }
@@ -136,6 +142,7 @@ class SendEmailFragment : Fragment() {
                     val emailSubject = binding.editTextSubject.text.toString()
                     val emailBody = binding.editTextEmailBody.text.toString()
                     emailViewModel.sendBulkEmail(
+                        value.userName.toString(),
                         emailSubject,
                         emailBody,
                         selectedPdfUri,
@@ -153,7 +160,6 @@ class SendEmailFragment : Fragment() {
     }
 
     private fun validate() : Boolean {
-        val value = appSharedPref.getUserInfo().numberMails ?: 0
         val emailSubject = binding.editTextSubject.text.toString()
         val emailBody = binding.editTextEmailBody.text.toString()
 
@@ -165,10 +171,10 @@ class SendEmailFragment : Fragment() {
             binding.editTextEmailBody.error = "Please enter an email body"
             return false
         }
-//        if (value <= 0) {
-//            Toast.makeText(requireContext(), "Please Buy Email Data, Your have $value mail", Toast.LENGTH_SHORT).show()
-//            return false
-//        }
+        if (totalEmails <= 0) {
+            Toast.makeText(requireContext(), "Please Buy Email Data, Your have $totalEmails mail", Toast.LENGTH_SHORT).show()
+            return false
+        }
         if (selectedPdfUri == null) {
             Toast.makeText(requireContext(), "Please select a Resume file", Toast.LENGTH_SHORT).show()
             return false

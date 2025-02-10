@@ -2,6 +2,7 @@ package com.abhishek.gomailai.core.model
 
 data class EmailWorkerDM(
     val senderEmail: String? = null,
+    val senderName: String? = null,
     val recipientEmail: String? = null,
     val subject: String? = null,
     val messageBody: String? = null,

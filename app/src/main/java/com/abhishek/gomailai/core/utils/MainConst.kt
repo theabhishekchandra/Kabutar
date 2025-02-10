@@ -19,6 +19,7 @@ object MainConst {
     const val EMAIL_SENDING_WORKER_NAME = "email_sending_worker"
     const val EMAIL_SENDING_WORKER_TAG = "email_sending_worker_tag"
     const val WM_SENDER_EMAIL = "sender_email"
+    const val WM_SENDER_NAME = "sender_name"
     const val WM_SENDER_PASSWORD = "sender_password"
     const val WM_RECIPIENT_EMAIL = "recipient_email"
     const val WM_RECIPIENT_NAME = "recipient_name"

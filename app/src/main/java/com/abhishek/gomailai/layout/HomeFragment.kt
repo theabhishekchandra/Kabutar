@@ -51,8 +51,9 @@ class HomeFragment : Fragment() {
     }
     private fun initialize(){
         val user = appSharedPref.getUserInfo()
-        binding.toolbarHome.imageView.visibility = View.GONE
-        binding.toolbarHome.textView.text = "Hello! ${user.userName}"
+        if (!user.userName.isNullOrEmpty()) {
+            binding.heading.text = "Hello! ${user.userName.split(" ")[0]}"
+        }
 
     }
     private fun observer(){

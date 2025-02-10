@@ -186,6 +186,7 @@ class EmailViewModel @Inject constructor(
     }
     @SuppressLint("EnqueueWork")
     fun sendBulkEmail(
+        senderName: String,
         emailSubject: String,
         emailBody: String,
         pdfUri: Uri?,
@@ -213,6 +214,7 @@ class EmailViewModel @Inject constructor(
                     .build()
 
                 val inputData = workDataOf(
+                    MainConst.WM_SENDER_NAME to senderName,
                     MainConst.WM_SENDER_EMAIL to email,
                     MainConst.WM_SENDER_PASSWORD to password,
                     MainConst.WM_RECIPIENT_EMAIL to selectedEmail.email,

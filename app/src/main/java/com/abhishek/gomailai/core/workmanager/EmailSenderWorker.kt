@@ -33,20 +33,31 @@ import javax.mail.util.ByteArrayDataSource
 class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
-    @Inject
-    lateinit var emailRepository: EmailRepositoryImpl
-
-
     override suspend fun doWork(): Result {
+        val senderName = inputData.getString(MainConst.WM_SENDER_NAME) ?: return Result.failure()
         val senderEmail = inputData.getString(MainConst.WM_SENDER_EMAIL) ?: return Result.failure()
-        val senderPassword = inputData.getString(MainConst.WM_SENDER_PASSWORD) ?: return Result.failure()
-        val recipientEmail = inputData.getString(MainConst.WM_RECIPIENT_EMAIL) ?: return Result.failure()
+        val senderPassword =
+            inputData.getString(MainConst.WM_SENDER_PASSWORD) ?: return Result.failure()
+        val recipientEmail =
+            inputData.getString(MainConst.WM_RECIPIENT_EMAIL) ?: return Result.failure()
+        val recipientName =
+            inputData.getString(MainConst.WM_RECIPIENT_NAME) ?: return Result.failure()
         val subject = inputData.getString(MainConst.WM_SUBJECT) ?: return Result.failure()
         val messageBody = inputData.getString(MainConst.WM_MESSAGE_BODY) ?: return Result.failure()
         val pdfUri = inputData.getString(MainConst.WM_ATTACHMENT_URI)
 
         return try {
-            val emailWorker = sendEmail(senderEmail, senderPassword, recipientEmail, subject, messageBody, pdfUri, applicationContext)
+            val emailWorker = sendEmail(
+                senderName,
+                senderEmail,
+                senderPassword,
+                recipientEmail,
+                recipientName,
+                subject,
+                messageBody,
+                pdfUri,
+                applicationContext
+            )
 
             val outputData = workDataOf(
                 WM_OUTPUT_DATA_SENDER_EMAIL to emailWorker.senderEmail,
@@ -71,9 +82,11 @@ class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
         }
     }
     private suspend fun sendEmail(
+        senderName: String,
         senderEmail: String,
         senderPassword: String,
         recipientEmail: String,
+        recipientName: String,
         subject: String,
         messageBody: String,
         pdfUri: String?,
@@ -95,8 +108,7 @@ class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
 
             try {
                 val message = MimeMessage(session).apply {
-
-                    setFrom(InternetAddress(senderEmail))
+                    setFrom(InternetAddress(senderEmail, senderName))
                     setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail))
                     setSubject(subject)
 
@@ -107,7 +119,7 @@ class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
                     multipart.addBodyPart(textPart)
 
                     // Attach PDF properly with original file name
-                    pdfUri?.takeIf { it.isNotEmpty() }?.let { uriString ->
+                    /*pdfUri?.takeIf { it.isNotEmpty() }?.let { uriString ->
                         try {
                             val uri = Uri.parse(uriString)
                             val contentResolver = context.contentResolver
@@ -115,9 +127,9 @@ class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
                             val fileName = cursor?.use {
                                 if (it.moveToFirst()) {
                                     val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                                    if (nameIndex != -1) it.getString(nameIndex) else "resume.pdf"
-                                } else "resume.pdf"
-                            } ?: "resume.pdf"
+                                    if (nameIndex != -1) it.getString(nameIndex) else "Resume.pdf"
+                                } else "Resume.pdf"
+                            } ?: "Resume.pdf"
 
                             val inputStream = contentResolver.openInputStream(uri)
                             val byteArray = inputStream?.readBytes()
@@ -140,7 +152,7 @@ class EmailSenderWorker (context: Context, workerParams: WorkerParameters) :
                                 isEmailSend = false
                             )
                         }
-                    }
+                    }*/
 
                     setContent(multipart)
                 }

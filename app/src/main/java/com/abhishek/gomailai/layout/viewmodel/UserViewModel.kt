@@ -98,4 +98,12 @@ class UserViewModel @Inject constructor(
             _isLoading.value = false
         }
     }
+
+    fun getTotalNumberMails(): LiveData<Int> {
+        val totalMails = MutableLiveData<Int>()
+        viewModelScope.launch {
+            totalMails.postValue(repository.getTotalNumberMails())
+        }
+        return totalMails
+    }
 }
