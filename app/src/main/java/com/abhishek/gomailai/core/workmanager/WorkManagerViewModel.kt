@@ -52,7 +52,7 @@ class WorkManagerViewModel(application: Application) : AndroidViewModel(applicat
                     subject = workInfo.outputData.getString(WM_OUTPUT_DATA_SUBJECT)?: "",
                     messageBody = workInfo.outputData.getString(WM_OUTPUT_DATA_MESSAGE_BODY)?: "",
                     isEmailSend = workInfo.outputData.getBoolean(WM_OUTPUT_DATA_IS_EMAIL_SEND,false),
-                    stateName = workInfo.state.name,
+                    stateName = if(workInfo.state == WorkInfo.State.ENQUEUED || workInfo.state == WorkInfo.State.RUNNING ) "PENDING" else workInfo.state.name,
                     tags = workInfo.tags.firstOrNull()?: "",
                 )
                 statusList.add(emailWorkerDM)

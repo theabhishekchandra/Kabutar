@@ -9,12 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abhishek.gomailai.R
+import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
 import com.abhishek.gomailai.core.model.EmailWorkerDM
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.core.utils.MainConst.EMAIL_SENDING_WORKER_TAG
 import com.abhishek.gomailai.core.workmanager.WorkManagerViewModel
 import com.abhishek.gomailai.databinding.FragmentCheckMailStatusBinding
 import com.abhishek.gomailai.layout.adapter.EmailTaskAdapter
+import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
+import com.abhishek.gomailai.layout.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,9 +26,13 @@ class CheckMailStatusFragment : Fragment() {
     private lateinit var binding: FragmentCheckMailStatusBinding
 
     private val viewModel: WorkManagerViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
+    private val emailViewModel: EmailViewModel by viewModels()
 
     @Inject
     lateinit var navigator: INavigation
+    @Inject
+    lateinit var appSharedPref: IAPPSharedPref
 
     private lateinit var  taskAdapter: EmailTaskAdapter
 
@@ -68,5 +75,22 @@ class CheckMailStatusFragment : Fragment() {
 //            )
             taskAdapter.setEmailTaskData(it)
         }
+
+        /*userViewModel.getTotalNumberMails().observe(viewLifecycleOwner) { total ->
+            val totalEmails = total ?: 0
+            appSharedPref.setUserNumberMails(totalEmails)
+
+            viewModel.taskEmailList.observe(viewLifecycleOwner) { taskList ->
+                taskList.forEach { workData ->
+                    if (workData.isEmailSend) {
+                        emailViewModel.markEmailAsUsed(workData.recipientEmail.toString())
+
+                        val updatedValue = if (totalEmails <= 0) 0 else totalEmails - 1
+                        appSharedPref.setUserNumberMails(updatedValue)
+                        userViewModel.updateUserNumberMails(workData.senderEmail.toString(), updatedValue)
+                    }
+                }
+            }
+        }*/
     }
 }

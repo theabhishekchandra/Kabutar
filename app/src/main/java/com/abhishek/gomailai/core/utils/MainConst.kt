@@ -33,6 +33,25 @@ object MainConst {
     const val WM_OUTPUT_DATA_MESSAGE_BODY = "message_body"
     const val WM_OUTPUT_DATA_IS_EMAIL_SEND = "is_email_send"
 
+    const val HIRING_MANGER_NAME = "[Hiring Manager Name]"
+
+    // Email Generate Prompts
+    /*
+    HI [Hiring Manager Name]
+    Hi [Hiring Manager Name],
+
+    I hope this email Hiring Manager Name finds you well. [Hiring Manager Name] I am writing to express my interest in applying for your {{DESIGNATION}} role.
+
+    I am currently a || [Hiring Manager Name]||, and I am excited to pursue [] a career in the [Current Job Title] industry. I am passionate about [Current Job Title] and would love to learn more about the role and the opportunity it presents.
+
+    I have a strong background in [Previous Job Title] and have worked closely with [Previous Employer Name] on various projects. I am confident that I would be a valuable asset to your team, and I would be thrilled to work with you on this project.
+
+    I have a strong understanding of the technical aspects of your role, and I am eager to learn more about the technologies you are using. I would be more than happy to provide additional information or answer any questions you may have about the role.
+
+
+
+    */
+
 
     // Email Template
     const val EMAIL_TEMPLATE_ID = 1

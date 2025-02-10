@@ -26,6 +26,7 @@ import com.abhishek.gomailai.core.repository.EmailRepositoryImpl
 import com.abhishek.gomailai.core.repository.EmailTemplateRepo
 import com.abhishek.gomailai.core.utils.DatabaseConst.TAG
 import com.abhishek.gomailai.core.utils.MainConst
+import com.abhishek.gomailai.core.utils.MainConst.HIRING_MANGER_NAME
 import com.abhishek.gomailai.core.workmanager.EmailSenderWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -220,7 +221,7 @@ class EmailViewModel @Inject constructor(
                     MainConst.WM_RECIPIENT_EMAIL to selectedEmail.email,
                     MainConst.WM_RECIPIENT_NAME to selectedEmail.name,
                     MainConst.WM_SUBJECT to emailSubject,
-                    MainConst.WM_MESSAGE_BODY to emailBody,
+                    MainConst.WM_MESSAGE_BODY to emailBody.replace(HIRING_MANGER_NAME, selectedEmail.name),
                     MainConst.WM_ATTACHMENT_URI to (pdfUri?.toString() ?: "")
                 )
 
