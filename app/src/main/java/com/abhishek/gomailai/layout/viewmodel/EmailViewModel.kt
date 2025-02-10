@@ -2,6 +2,7 @@ package com.abhishek.gomailai.layout.viewmodel
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -126,7 +127,7 @@ class EmailViewModel @Inject constructor(
         }
     }
     // Synchronize email data with local database (insert if not exists)
-    private fun insertEmail(email: EmailDataEntity) = viewModelScope.launch(exceptionHandler) {
+    fun insertEmail(email: EmailDataEntity) = viewModelScope.launch(exceptionHandler) {
         emailRepository.insertEmail(email)
         Log.d(TAG, "Inserted email: ${email.email}")
     }
@@ -161,6 +162,11 @@ class EmailViewModel @Inject constructor(
             }
         }
     }
+    fun markEmailAsUsed(email: String) {
+        viewModelScope.launch {
+            emailRepository.markEmailAsUsed(email)
+        }
+    }
 
     fun deleteEmail(email: EmailDataEntity) {
         viewModelScope.launch {
@@ -182,6 +188,7 @@ class EmailViewModel @Inject constructor(
     fun sendBulkEmail(
         emailSubject: String,
         emailBody: String,
+        pdfUri: Uri?,
         context: Context
     ) {
         val email = _saveUserInfo.value?.email ?: return
@@ -191,15 +198,15 @@ class EmailViewModel @Inject constructor(
         val validEmails = companyMails.filter { !it.isUsed }  // Filter unused emails
 
         if (validEmails.isEmpty()) {
-            Toast.makeText(context, "No available email to send", Toast.LENGTH_LONG).show()
+            _errorMessage.value = "No available email to send"
             return
         }
 
-        if (/*numberMails*/ 1 > 0) {
+        if (numberMails > 0) {
             val workRequests = mutableListOf<OneTimeWorkRequest>()
 
-            for (i in 0 until /*numberMails*/4) {
-//                val selectedEmail = validEmails.getOrNull(i) ?: break // Pick the next available email
+            for (i in 0 until numberMails) {
+                val selectedEmail = validEmails.getOrNull(i) ?: break // Pick the next available email
 
                 val constraints = Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -208,9 +215,11 @@ class EmailViewModel @Inject constructor(
                 val inputData = workDataOf(
                     MainConst.WM_SENDER_EMAIL to email,
                     MainConst.WM_SENDER_PASSWORD to password,
-                    MainConst.WM_RECIPIENT_EMAIL to "ac928920@gmail.com", // TODO: Change this to recipient email.
+                    MainConst.WM_RECIPIENT_EMAIL to selectedEmail.email,
+                    MainConst.WM_RECIPIENT_NAME to selectedEmail.name,
                     MainConst.WM_SUBJECT to emailSubject,
-                    MainConst.WM_MESSAGE_BODY to emailBody
+                    MainConst.WM_MESSAGE_BODY to emailBody,
+                    MainConst.WM_ATTACHMENT_URI to (pdfUri?.toString() ?: "")
                 )
 
                 val emailWorkRequest = OneTimeWorkRequestBuilder<EmailSenderWorker>()
@@ -234,9 +243,9 @@ class EmailViewModel @Inject constructor(
                 .beginWith(workRequests)
                 .enqueue()
 
-            Toast.makeText(context, "Emails are being sent", Toast.LENGTH_LONG).show()
+            _errorMessage.value = "Emails are being sent"
         } else {
-            Toast.makeText(context, "No emails to send", Toast.LENGTH_LONG).show()
+            _errorMessage.value = "No emails to send"
         }
     }
 
@@ -252,7 +261,7 @@ class EmailViewModel @Inject constructor(
             return null
         }
 
-        val subject = lines.first().trim()
+        val subject = lines.first().trim().replace("Subject: ", "").trim()
         val body = lines.drop(1).joinToString("\n").trim()
 
         val placeholderRegex = "\\[([^\\]]+)\\]".toRegex()

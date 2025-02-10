@@ -26,7 +26,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val emailViewModel: EmailViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
-    private val workManagerViewModel: WorkManagerViewModel by viewModels()
 
     @Inject
     lateinit var navigation: INavigation
@@ -51,7 +50,6 @@ class HomeFragment : Fragment() {
 
     }
     private fun initialize(){
-        workManagerViewModel.updateTaskStatuses(EMAIL_SENDING_WORKER_TAG)
         val user = appSharedPref.getUserInfo()
         binding.toolbarHome.imageView.visibility = View.GONE
         binding.toolbarHome.textView.text = "Hello! ${user.userName}"
@@ -60,9 +58,6 @@ class HomeFragment : Fragment() {
     private fun observer(){
         userViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.loader.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }
-        workManagerViewModel.taskStatuses.observe(viewLifecycleOwner){
-            Log.d(TAG, "Status update: $it")
         }
 
     }
@@ -79,11 +74,14 @@ class HomeFragment : Fragment() {
 
         }
         binding.loadFileData.setOnClickListener {
+            /* TODO: Uncomment if code is ready.
             navigation.getNavController().navigate(R.id.fragmentLoadEmail)
-
+            */
+//            Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+            navigation.getNavController().navigate(R.id.fragmentLoadEmail)
         }
         binding.selectTemplate.setOnClickListener {
-            Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+            navigation.getNavController().navigate(R.id.setYourEmailFragment)
         }
         binding.generateMail.setOnClickListener {
             navigation.getNavController().navigate(R.id.emailGenerateFragment)

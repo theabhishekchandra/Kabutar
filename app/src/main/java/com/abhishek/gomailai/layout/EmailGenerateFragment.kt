@@ -48,7 +48,6 @@ class EmailGenerateFragment : Fragment() {
 
     private fun initialize() {
         binding.toolbarGenerateText.textView.text = ButtonTextFiled.GENERATED_EMAIL.buttonText
-
         val prompt = binding.editTextPrompt.text.toString().trim()
         updateButtonTexts(prompt.isEmpty())
     }
@@ -79,7 +78,8 @@ class EmailGenerateFragment : Fragment() {
         if (prompt.isNotEmpty()) {
             emailGenerateViewModel.sendPrompt(prompt)
         } else {
-            val randomPrompt = MainConst.getRandomPrompt("Android Developer")
+            val profile =  appSharedPref.getUserInfo().designation ?: ""
+            val randomPrompt = MainConst.getRandomPrompt(profile)
             binding.editTextPrompt.setText(randomPrompt)
         }
     }
@@ -99,12 +99,12 @@ class EmailGenerateFragment : Fragment() {
                 }
             }
             ButtonTextFiled.GENERATE_PROMPT, ButtonTextFiled.NEXT_PROMPTS -> {
-                val randomPrompt = MainConst.getRandomPrompt("Android Developer")
+                val profile =  appSharedPref.getUserInfo().designation ?: ""
+                val randomPrompt = MainConst.getRandomPrompt(profile)
                 binding.editTextPrompt.setText(randomPrompt)
             }
             ButtonTextFiled.MARK_AS_READY -> {
                 emailViewModel.insertEmailTemplate(generatedTemplate, requireContext())
-                Toast.makeText(context, "Email Template is saved Please Send mail.", Toast.LENGTH_SHORT).show()
                 binding.editTextPrompt.setText("")
                 binding.textViewGeneratedEmail.setText("")
             }
@@ -158,7 +158,7 @@ enum class ButtonTextFiled(val buttonText: String) {
     companion object {
 
         fun fromString(buttonText: String): ButtonTextFiled? {
-            return values().find { it.buttonText == buttonText }
+            return entries.find { it.buttonText == buttonText }
         }
     }
 }

@@ -52,4 +52,17 @@ class UserRepositoryImpl @Inject constructor(
             return DBResponseModel.Error(e.message ?: "Unknown error occurred")
         }
     }
+
+    override fun getUsersDetails(): DBResponseModel<UsersEntity> {
+        return try {
+            val user = usersDao.getUsersDetails()
+            if (user != null) {
+                DBResponseModel.Success(user)
+            } else {
+                DBResponseModel.Error("User not found")
+            }
+        } catch (e: Exception) {
+            DBResponseModel.Error(e.message?: "Unknown error occurred")
+        }
+    }
 }

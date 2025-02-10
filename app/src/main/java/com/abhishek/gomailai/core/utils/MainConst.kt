@@ -13,6 +13,7 @@ object MainConst {
     const val AI_MODEL: String = "ai_model"
     private const val DESIGNATION: String = "{{DESIGNATION}}"
     private const val FIRST_NAME: String = "{{First Name}}"
+    private const val NAME: String = "{{Name}}"
 
     // Work Manager
     const val EMAIL_SENDING_WORKER_NAME = "email_sending_worker"
@@ -20,8 +21,17 @@ object MainConst {
     const val WM_SENDER_EMAIL = "sender_email"
     const val WM_SENDER_PASSWORD = "sender_password"
     const val WM_RECIPIENT_EMAIL = "recipient_email"
+    const val WM_RECIPIENT_NAME = "recipient_name"
     const val WM_SUBJECT = "subject"
     const val WM_MESSAGE_BODY = "message_body"
+    const val WM_ATTACHMENT_URI = "attachment_uri"
+    const val WM_OUTPUT_DATA = "output_data"
+    const val WM_OUTPUT_DATA_SENDER_EMAIL = "sender_email"
+    const val WM_OUTPUT_DATA_RECIPIENT_EMAIL = "recipient_email"
+    const val WM_OUTPUT_DATA_SUBJECT = "subject"
+    const val WM_OUTPUT_DATA_MESSAGE_BODY = "message_body"
+    const val WM_OUTPUT_DATA_IS_EMAIL_SEND = "is_email_send"
+
 
     // Email Template
     const val EMAIL_TEMPLATE_ID = 1

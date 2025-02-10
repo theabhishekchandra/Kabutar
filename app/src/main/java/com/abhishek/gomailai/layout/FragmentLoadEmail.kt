@@ -8,12 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.abhishek.gomailai.R
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
 import com.abhishek.gomailai.core.model.EmailDM
+import com.abhishek.gomailai.core.model.IndustryCategoryDM
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.databinding.FragmentLoadEmailBinding
+import com.abhishek.gomailai.layout.adapter.LoadEmailAdapter
+import com.abhishek.gomailai.layout.adapter.OnIndustryItemClickListener
 import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
 import com.abhishek.gomailai.layout.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +40,7 @@ class FragmentLoadEmail : Fragment() {
     lateinit var navigation: INavigation
     @Inject
     lateinit var appSharedPref: IAPPSharedPref
+    private lateinit var loadEmailAdapter: LoadEmailAdapter
     private var isClicked = false
 
     override fun onCreateView(
@@ -45,11 +53,27 @@ class FragmentLoadEmail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.textView.text = "Load Emails"
 
         // Load CSV data when the fragment is created
-        loadCsvDataFromAssets()
+        // TODO: Uncomment if Code is ready.
+//        loadCsvDataFromAssets()
+        setRecyclerView()
         listener()
         observer()
+    }
+
+    private fun setRecyclerView() {
+        binding.industryRecyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(),3, RecyclerView.VERTICAL, false)
+            loadEmailAdapter = LoadEmailAdapter(requireContext(), emptyList(),
+                object : OnIndustryItemClickListener {
+                    override fun onItemClick(industry: IndustryCategoryDM) {
+                        // Ignore
+                    }
+                })
+            adapter = loadEmailAdapter
+        }
     }
 
     private fun observer() {
@@ -59,9 +83,48 @@ class FragmentLoadEmail : Fragment() {
                 userViewModel.clearResponseMessage()
             }
         }
+
+        val dummyIndustryList = listOf(
+            IndustryCategoryDM("Finance", R.drawable.ic_finance),
+            IndustryCategoryDM("Bio Tech", R.drawable.ic_biotech),
+            IndustryCategoryDM("Healthcare", R.drawable.ic_healthcare),
+            IndustryCategoryDM("Retail", R.drawable.ic_retail),
+            IndustryCategoryDM("Education", R.drawable.ic_education),
+            IndustryCategoryDM("Defence", R.drawable.ic_defense),
+            IndustryCategoryDM("Real Estate", R.drawable.ic_real_estate),
+//            IndustryCategoryDM("Travel", R.drawable.ic_travel),
+//            IndustryCategoryDM("Energy", R.drawable.ic_energy),
+//            IndustryCategoryDM("Food & Beverage", R.drawable.ic_food_beverage),
+            IndustryCategoryDM("Manufacturing", R.drawable.ic_manufacturing),
+            IndustryCategoryDM("Government", R.drawable.ic_gov),
+//            IndustryCategoryDM("Consumer Goods", R.drawable.ic_consumer_goods),
+            IndustryCategoryDM("Media & Entertainment", R.drawable.ic_media),
+            IndustryCategoryDM("Marketing", R.drawable.ic_marketing),
+//            IndustryCategoryDM("Insurance", R.drawable.ic_insurance),
+            IndustryCategoryDM("Construction", R.drawable.ic_construction),
+            IndustryCategoryDM("Gaming", R.drawable.ic_gaming),
+            IndustryCategoryDM("HR", R.drawable.ic_hr),
+            IndustryCategoryDM("IT", R.drawable.ic_it),
+            IndustryCategoryDM("Manufacturing", R.drawable.ic_manufacturing),
+            IndustryCategoryDM("Pharmaceuticals", R.drawable.ic_pharma),
+            IndustryCategoryDM("Restaurant", R.drawable.ic_restaurants),
+            IndustryCategoryDM("Space", R.drawable.ic_space),
+            IndustryCategoryDM("Sustainability", R.drawable.ic_sustainability)
+        )
+        loadEmailAdapter.setIndustryData(dummyIndustryList)
     }
 
     private fun listener() {
+        binding.toolbar.imageView.setOnClickListener{
+            navigation.getNavController().popBackStack()
+        }
+        binding.editTextEmailCount.doOnTextChanged { text, _, _, _ ->
+            val count = text?.toString()?.toIntOrNull() ?: 0
+            val value = count * 0.23
+            binding.priceText.text = " ₹ ${value.toFloat()}"
+        }
+
+
         binding.buttonBuyNow.setOnClickListener {
             val value = binding.editTextEmailCount.text.toString().toInt()
             if (validate()){

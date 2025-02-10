@@ -170,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Load File Data"
+                    android:text="Buy Emails"
                     android:textSize="16sp"
                     android:textAlignment="center" />
             </LinearLayout>
@@ -208,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Select Template"
+                    android:text="Set Your Email"
                     android:textAlignment="center"
                     android:textSize="16sp" />
             </LinearLayout>
