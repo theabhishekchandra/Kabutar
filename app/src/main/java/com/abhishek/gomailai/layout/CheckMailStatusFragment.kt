@@ -75,6 +75,9 @@ class CheckMailStatusFragment : Fragment() {
 //            )
             taskAdapter.setEmailTaskData(it)
         }
+        binding.tvFailed.setOnClickListener {
+            viewModel.clearWorkManagerData()
+        }
 
         /*userViewModel.getTotalNumberMails().observe(viewLifecycleOwner) { total ->
             val totalEmails = total ?: 0

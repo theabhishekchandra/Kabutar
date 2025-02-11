@@ -25,6 +25,11 @@ class WorkManagerViewModel(application: Application) : AndroidViewModel(applicat
 
     private val _workInfoTag = MutableLiveData<String>()
 
+    fun clearWorkManagerData() {
+        workManager.cancelAllWorkByTag(_workInfoTag.value ?: "")
+        workManager.pruneWork()
+    }
+
     fun updateTaskStatuses(tag: String) {
         _workInfoTag.value = tag
         val workInfosLiveData = workManager.getWorkInfosByTagLiveData(tag)

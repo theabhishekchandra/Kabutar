@@ -85,7 +85,7 @@ class EmailGenerateFragment : Fragment() {
     }
 
     private fun handleMarkAsReadyButtonClick() {
-        val generatedTemplate = binding.textViewGeneratedEmail.text.toString().trim()
+        val generatedTemplate = binding.textViewGeneratedEmail.text.toString()
         val buttonText = binding.buttonMarkAsReady.text.toString()
         val buttonAction = ButtonTextFiled.fromString(buttonText)
 

@@ -13,7 +13,6 @@ object MainConst {
     const val AI_MODEL: String = "ai_model"
     private const val DESIGNATION: String = "{{DESIGNATION}}"
     private const val FIRST_NAME: String = "{{First Name}}"
-    private const val NAME: String = "{{Name}}"
 
     // Work Manager
     const val EMAIL_SENDING_WORKER_NAME = "email_sending_worker"
@@ -34,11 +33,29 @@ object MainConst {
     const val WM_OUTPUT_DATA_IS_EMAIL_SEND = "is_email_send"
 
     const val HIRING_MANGER_NAME = "[Hiring Manager Name]"
+    const val COMPANY_NAME = "[Company Name]"
+    const val YOUR_NAME = "[Your Name]"
+    const val YOUR_PHONE_NUMBER = "[Your Phone Number]"
+    const val JOB_TITLE = "[Job Title]"
 
     // Email Generate Prompts
     /*
     HI [Hiring Manager Name]
     Hi [Hiring Manager Name],
+Subject: Experienced Android Developer - [Your Name]
+
+Dear [Hiring Manager Name],
+
+I'm an Android Developer with [Number] years of experience and came across the open position at [Company Name].  My current role at Gram Unnati Foundation  involves Android Developer.
+
+I'm confident my skills and experience align well with your requirements, and I'd appreciate the opportunity to discuss this further.  My resume is attached for your review.
+
+Thank you for your time and consideration.
+
+Sincerely,
+
+[Your Name]
+
 
     I hope this email Hiring Manager Name finds you well. [Hiring Manager Name] I am writing to express my interest in applying for your {{DESIGNATION}} role.
 
