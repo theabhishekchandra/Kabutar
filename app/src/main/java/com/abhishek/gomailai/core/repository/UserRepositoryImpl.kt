@@ -53,6 +53,10 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getTotalNumberMails(): Int {
+        return usersDao.getTotalNumberMails() ?: 0
+    }
+
     override fun getUsersDetails(): DBResponseModel<UsersEntity> {
         return try {
             val user = usersDao.getUsersDetails()

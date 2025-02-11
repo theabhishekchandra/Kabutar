@@ -119,15 +119,21 @@ class FragmentLoadEmail : Fragment() {
             navigation.getNavController().popBackStack()
         }
         binding.editTextEmailCount.doOnTextChanged { text, _, _, _ ->
-            val count = text?.toString()?.toIntOrNull() ?: 0
+            val count = text?.toString()?.trim()?.toIntOrNull() ?: return@doOnTextChanged
             val value = count * 0.23
             binding.priceText.text = " ₹ ${value.toFloat()}"
         }
 
 
         binding.buttonBuyNow.setOnClickListener {
-            val value = binding.editTextEmailCount.text.toString().toInt()
-            if (validate()){
+            val value = binding.editTextEmailCount.text.toString().trim().toIntOrNull()
+
+            if (value == null || value <= 0) {
+                Toast.makeText(requireContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (validate()) {
                 appSharedPref.setUserNumberMails(value)
                 val email = appSharedPref.getUserEmail()
                 userViewModel.updateUserNumberMails(email, value)

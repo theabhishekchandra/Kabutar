@@ -13,7 +13,6 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkContinuation
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.abhishek.gomailai.core.local.DBResponseModel
@@ -26,6 +25,9 @@ import com.abhishek.gomailai.core.repository.EmailRepositoryImpl
 import com.abhishek.gomailai.core.repository.EmailTemplateRepo
 import com.abhishek.gomailai.core.utils.DatabaseConst.TAG
 import com.abhishek.gomailai.core.utils.MainConst
+import com.abhishek.gomailai.core.utils.MainConst.COMPANY_NAME
+import com.abhishek.gomailai.core.utils.MainConst.HIRING_MANGER_NAME
+import com.abhishek.gomailai.core.utils.MainConst.YOUR_NAME
 import com.abhishek.gomailai.core.workmanager.EmailSenderWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -76,11 +78,13 @@ class EmailViewModel @Inject constructor(
                 body = emailData?.second?:"",
             )
             try {
-                val response = templateRepository.insertEmailTemplate(emailTemplate)
-                when(response){
-                    is DBResponseModel.Success -> _responseMessage.value = response.message
-                    is DBResponseModel.Error -> _responseMessage.value = response.message
-                    else -> {}
+                if (emailTemplate.subject.isNotEmpty() && emailTemplate.body.isNotEmpty()) {
+                    val response = templateRepository.insertEmailTemplate(emailTemplate)
+                    when(response){
+                        is DBResponseModel.Success -> _responseMessage.value = response.message
+                        is DBResponseModel.Error -> _responseMessage.value = response.message
+                        else -> {}
+                    }
                 }
             } finally {
                 _isLoading.value = false
@@ -186,6 +190,7 @@ class EmailViewModel @Inject constructor(
     }
     @SuppressLint("EnqueueWork")
     fun sendBulkEmail(
+        senderName: String,
         emailSubject: String,
         emailBody: String,
         pdfUri: Uri?,
@@ -213,12 +218,19 @@ class EmailViewModel @Inject constructor(
                     .build()
 
                 val inputData = workDataOf(
+                    MainConst.WM_SENDER_NAME to senderName,
                     MainConst.WM_SENDER_EMAIL to email,
                     MainConst.WM_SENDER_PASSWORD to password,
                     MainConst.WM_RECIPIENT_EMAIL to selectedEmail.email,
                     MainConst.WM_RECIPIENT_NAME to selectedEmail.name,
-                    MainConst.WM_SUBJECT to emailSubject,
-                    MainConst.WM_MESSAGE_BODY to emailBody,
+                    MainConst.WM_SUBJECT to emailSubject
+                        .replace(HIRING_MANGER_NAME, selectedEmail.name.split(" ")[0])
+                        .replace(YOUR_NAME,senderName)
+                        .replace(COMPANY_NAME,selectedEmail.company),
+                    MainConst.WM_MESSAGE_BODY to emailBody
+                        .replace(HIRING_MANGER_NAME, selectedEmail.name.split(" ")[0])
+                        .replace(YOUR_NAME,senderName)
+                        .replace(COMPANY_NAME,selectedEmail.company),
                     MainConst.WM_ATTACHMENT_URI to (pdfUri?.toString() ?: "")
                 )
 
@@ -271,6 +283,12 @@ class EmailViewModel @Inject constructor(
 
         missingFields.addAll(missingSubjectFields)
         missingFields.addAll(missingBodyFields)
+
+        // List of placeholders to exclude
+        val excludeKeywords = listOf(HIRING_MANGER_NAME, COMPANY_NAME, YOUR_NAME)
+
+        // Filter out the placeholders that should not be flagged
+        missingFields.removeAll(excludeKeywords)
 
         return if (missingFields.isEmpty()) {
             Pair(subject, body)

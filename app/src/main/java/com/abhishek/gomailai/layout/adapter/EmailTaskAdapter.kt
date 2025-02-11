@@ -33,9 +33,18 @@ class EmailTaskAdapter(private val context: Context, private var emailList: List
     inner class EmailStatusViewHolder(private val binding: ItemEmailStatusBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(email: EmailWorkerDM){
-            binding.tvRecipientEmail.text = "Recipient: ${email.recipientEmail}"
-            binding.tvSubject.text = "Subject: ${email.subject}"
-            binding.tvStatus.text = "Status: ${email.stateName}"
+            binding.tvRecipientEmail.text = "Recipient: ${email?.recipientEmail ?:"NA"}"
+            binding.tvSubject.text = "Subject: ${email?.subject ?:"NA"}"
+            val statusColor = when (email.stateName) {
+                "PENDING" -> com.abhishek.gomailai.R.color.status_pending
+                "SUCCEEDED" -> com.abhishek.gomailai.R.color.status_completed
+                "FAILED" -> com.abhishek.gomailai.R.color.status_failed
+                "CANCELLED" -> com.abhishek.gomailai.R.color.status_cancelled
+                else -> com.abhishek.gomailai.R.color.text_primary
+            }
+
+            binding.tvStatus.setTextColor(binding.root.context.getColor(statusColor))
+            binding.tvStatus.text = email.stateName
         }
     }
 
