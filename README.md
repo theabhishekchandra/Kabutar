@@ -1,4 +1,6 @@
 # 📧 Kabutar – AI-Powered Mail Assistant
+# Video Semple LinkedIn Link : [https://www.linkedin.com/posts/theabhishekchandra_kabutarapp-ai-emailautomation-activity-7295060258417192960-VG_F?utm_source=share&utm_medium=member_desktop&rcm=ACoAADP5CncB8n__kIBWrVA51Q82m22xkTB7bUU]
+
 
 🚀 **Bulk Email Sending & AI Cold Email Writing** – Simplified!
 
