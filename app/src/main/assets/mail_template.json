@@ -1,0 +1,562 @@
+[
+  {
+    "id": "referral_01",
+    "title": "Job Referral Request - Software Engineer",
+    "industry": "IT",
+    "body": "Hi {{referrer_name}},\n\nI hope you're doing well. I recently came across an opening for a Software Engineer at {{company}} and was excited to see the role aligns with my skills and experience. I’d greatly appreciate it if you could refer me internally.\n\nI’ve attached my resume for your reference. Please let me know if you need any other information.\n\nThanks and regards,\n{{your_name}}",
+    "tags": ["job", "referral", "software engineer"]
+  },
+  {
+    "id": "referral_02",
+    "title": "Referral Request for Android Developer Role",
+    "industry": "IT",
+    "body": "Hello {{referrer_name}},\n\nI’m writing to ask if you could kindly refer me for the Android Developer position at {{company}}. I’ve been following the company’s work and would be thrilled to be part of the team.\n\nPlease find my resume attached. Looking forward to your support.\n\nBest,\n{{your_name}}",
+    "tags": ["referral", "android", "developer"]
+  },
+  {
+    "id": "referral_03",
+    "title": "Referral Email for Data Analyst Position",
+    "industry": "Analytics",
+    "body": "Dear {{referrer_name}},\n\nI noticed an opening for a Data Analyst at {{company}}. Since you work there, I wanted to ask if you could refer me for this role.\n\nI have experience with data modeling, SQL, and Power BI. Resume is attached. Thanks a lot for considering this.\n\nWarm regards,\n{{your_name}}",
+    "tags": ["data", "referral", "analytics"]
+  },
+  {
+    "id": "referral_04",
+    "title": "UI/UX Designer Referral",
+    "industry": "Design",
+    "body": "Hi {{referrer_name}},\n\nI hope you're well! I came across a UI/UX Designer role at {{company}} and wanted to check if you’d be open to referring me.\n\nDesign is my passion, and I’d love to contribute to your team. My portfolio and resume are attached.\n\nThanks,\n{{your_name}}",
+    "tags": ["design", "uiux", "referral"]
+  },
+  {
+    "id": "referral_05",
+    "title": "Requesting Referral - Frontend Developer",
+    "industry": "Web Development",
+    "body": "Hey {{referrer_name}},\n\nI saw a Frontend Developer position at {{company}} and thought it matched my skill set well. Could you please refer me if possible?\n\nThanks a ton! I’ve attached my resume.\n\nRegards,\n{{your_name}}",
+    "tags": ["referral", "frontend", "developer"]
+  },
+  {
+    "id": "referral_06",
+    "title": "Referral for Product Manager Role",
+    "industry": "Product",
+    "body": "Dear {{referrer_name}},\n\nI hope all is well. I’m looking to apply for a Product Manager position at {{company}} and would appreciate your referral.\n\nI've led several cross-functional teams and delivered features with high user impact. Resume is attached.\n\nThanks in advance,\n{{your_name}}",
+    "tags": ["product", "referral", "manager"]
+  },
+  {
+    "id": "referral_07",
+    "title": "QA Engineer Referral Request",
+    "industry": "QA",
+    "body": "Hi {{referrer_name}},\n\nHope you're doing great. I’m seeking a referral for a QA Engineer role at {{company}}.\n\nI have experience in test automation, Selenium, and Agile practices. Please find my resume attached.\n\nThanks a lot,\n{{your_name}}",
+    "tags": ["qa", "referral", "testing"]
+  },
+  {
+    "id": "referral_08",
+    "title": "Referral Request - DevOps Engineer",
+    "industry": "DevOps",
+    "body": "Hi {{referrer_name}},\n\nI saw a DevOps Engineer opening at {{company}}. I'd love to apply and was hoping you might consider referring me.\n\nI’ve worked with CI/CD pipelines, Docker, and AWS. Resume is attached.\n\nBest,\n{{your_name}}",
+    "tags": ["devops", "referral", "infrastructure"]
+  },
+  {
+    "id": "referral_09",
+    "title": "Machine Learning Engineer Referral",
+    "industry": "AI",
+    "body": "Hi {{referrer_name}},\n\nI came across a Machine Learning Engineer opening at {{company}} and would be grateful if you could refer me.\n\nI’ve worked on several ML models in Python and TensorFlow. Resume is attached.\n\nThanks,\n{{your_name}}",
+    "tags": ["machine learning", "referral", "ai"]
+  },
+  {
+    "id": "referral_10",
+    "title": "Cybersecurity Role - Requesting Referral",
+    "industry": "Cybersecurity",
+    "body": "Hi {{referrer_name}},\n\nI’m very interested in the Cybersecurity Analyst position at {{company}}. If possible, could you kindly refer me?\n\nMy resume is attached. Looking forward to your support.\n\nWarm regards,\n{{your_name}}",
+    "tags": ["security", "referral", "cyber"]
+  },
+  {
+    "id": "referral_11",
+    "title": "Marketing Executive Referral Request",
+    "industry": "Marketing",
+    "body": "Hello {{referrer_name}},\n\nI hope you're doing well! I wanted to reach out regarding a Marketing Executive role at {{company}}.\n\nIf possible, could you refer me? My resume is attached for your reference.\n\nThanks in advance,\n{{your_name}}",
+    "tags": ["marketing", "referral", "executive"]
+  },
+  {
+    "id": "referral_12",
+    "title": "Request for HR Referral",
+    "industry": "Human Resources",
+    "body": "Dear {{referrer_name}},\n\nI’m applying for an HR Executive role at {{company}}. Could you please consider referring me internally?\n\nI have a strong background in recruitment and employee engagement. Resume attached.\n\nThank you,\n{{your_name}}",
+    "tags": ["hr", "referral", "recruitment"]
+  },
+  {
+    "id": "referral_13",
+    "title": "Operations Manager Referral Email",
+    "industry": "Operations",
+    "body": "Hi {{referrer_name}},\n\nI came across an Operations Manager vacancy at {{company}}. I’d really appreciate your help with a referral.\n\nPlease find my resume attached. Thank you for considering!\n\nRegards,\n{{your_name}}",
+    "tags": ["operations", "referral", "manager"]
+  },
+  {
+    "id": "referral_14",
+    "title": "Requesting Referral for Remote Role",
+    "industry": "Remote",
+    "body": "Hey {{referrer_name}},\n\nI noticed a remote position at {{company}} that aligns with my profile. Would you be willing to refer me?\n\nResume attached. I appreciate your time!\n\nThanks,\n{{your_name}}",
+    "tags": ["remote", "referral", "job"]
+  },
+  {
+    "id": "referral_15",
+    "title": "Referral for Internship Opportunity",
+    "industry": "Fresher",
+    "body": "Hello {{referrer_name}},\n\nI’m interested in an internship opportunity at {{company}}. If it’s not too much trouble, could you please refer me?\n\nResume attached. Thank you!\n\nBest,\n{{your_name}}",
+    "tags": ["internship", "referral", "fresher"]
+  },
+  {
+    "id": "referral_16",
+    "title": "Cloud Engineer Referral Email",
+    "industry": "Cloud",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for a Cloud Engineer position at {{company}} and wanted to ask for your referral.\n\nMy experience includes AWS, GCP, and infrastructure automation. Resume attached.\n\nRegards,\n{{your_name}}",
+    "tags": ["cloud", "referral", "engineer"]
+  },
+  {
+    "id": "referral_17",
+    "title": "Request for Referral - Sales Role",
+    "industry": "Sales",
+    "body": "Hi {{referrer_name}},\n\nI hope this message finds you well. I’m applying for a Sales Executive position at {{company}} and would be grateful if you could refer me.\n\nThanks so much!\n{{your_name}}",
+    "tags": ["sales", "referral", "executive"]
+  },
+  {
+    "id": "referral_18",
+    "title": "Tech Support Engineer Referral",
+    "industry": "Support",
+    "body": "Hi {{referrer_name}},\n\nThere’s a Tech Support opening at {{company}} I’m interested in. Would you be open to referring me?\n\nThanks and appreciate your help!\n{{your_name}}",
+    "tags": ["support", "referral", "engineer"]
+  },
+  {
+    "id": "referral_19",
+    "title": "Finance Analyst Referral Email",
+    "industry": "Finance",
+    "body": "Dear {{referrer_name}},\n\nI’m excited about the Finance Analyst opportunity at {{company}}. Could you kindly refer me?\n\nI’ve attached my resume. Thanks!\n{{your_name}}",
+    "tags": ["finance", "referral", "analyst"]
+  },
+  {
+    "id": "referral_20",
+    "title": "Requesting Referral for Business Analyst Role",
+    "industry": "Business",
+    "body": "Hello {{referrer_name}},\n\nI saw a Business Analyst position at {{company}}. I’d really appreciate your support with a referral.\n\nMy resume is attached.\n\nWarm regards,\n{{your_name}}",
+    "tags": ["business", "referral", "analyst"]
+  },
+  {
+    "id": "referral_21",
+    "title": "Fresher Job Referral Request",
+    "industry": "Fresher",
+    "body": "Hi {{referrer_name}},\n\nI hope you're doing well. I'm currently seeking my first full-time opportunity and came across an opening at {{company}} that aligns with my academic background. I'd be grateful if you could refer me.\n\nResume attached. Thank you so much!\n\nBest,\n{{your_name}}",
+    "tags": ["referral", "fresher", "job"]
+  },
+  {
+    "id": "referral_22",
+    "title": "Informal Referral Request to a Friend",
+    "industry": "General",
+    "body": "Hey {{referrer_name}},\n\nI saw your company {{company}} is hiring! There’s a role I’m really interested in. Mind giving me a referral?\n\nThanks, I owe you one!\n\n- {{your_name}}",
+    "tags": ["informal", "referral", "friend"]
+  },
+  {
+    "id": "referral_23",
+    "title": "Reaching Out for Internal Referral",
+    "industry": "General",
+    "body": "Dear {{referrer_name}},\n\nI’m applying for a role at {{company}} and saw you're currently working there. Would you be open to referring me internally?\n\nI’ve included my resume. Let me know if you need anything else.\n\nThanks in advance,\n{{your_name}}",
+    "tags": ["referral", "internal", "employee"]
+  },
+  {
+    "id": "referral_24",
+    "title": "Follow-up on Previous Referral Request",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nJust checking in to follow up on my previous referral request for the {{position}} role at {{company}}. Let me know if you had a chance to look at my resume.\n\nAppreciate your time either way!\n\nRegards,\n{{your_name}}",
+    "tags": ["referral", "followup", "job"]
+  },
+  {
+    "id": "referral_25",
+    "title": "Referral for Senior Developer Position",
+    "industry": "IT",
+    "body": "Hi {{referrer_name}},\n\nI came across a Senior Developer role at {{company}} and it aligns with my 6+ years of experience in backend and cloud systems. Would appreciate a referral if you're open to it.\n\nThanks!\n{{your_name}}",
+    "tags": ["referral", "senior", "developer"]
+  },
+  {
+    "id": "referral_26",
+    "title": "Referral for Contract-Based Job",
+    "industry": "Freelance",
+    "body": "Hi {{referrer_name}},\n\nI saw a contract-based opportunity at {{company}} and I believe it matches my profile. Can you help me out with a referral?\n\nThanks so much,\n{{your_name}}",
+    "tags": ["contract", "freelance", "referral"]
+  },
+  {
+    "id": "referral_27",
+    "title": "LinkedIn Connection Referral Request",
+    "industry": "Networking",
+    "body": "Hi {{referrer_name}},\n\nI noticed you work at {{company}} and we’re connected here on LinkedIn. I’m really interested in a current job opening there. Would you be willing to refer me?\n\nThanks,\n{{your_name}}",
+    "tags": ["linkedin", "referral", "connection"]
+  },
+  {
+    "id": "referral_28",
+    "title": "Referral to Apply via Employee Portal",
+    "industry": "General",
+    "body": "Hello {{referrer_name}},\n\nCould you please help me apply via the internal employee portal for the {{position}} role at {{company}}? I’ve heard it speeds up the process.\n\nThanks so much!\n{{your_name}}",
+    "tags": ["employee", "portal", "referral"]
+  },
+  {
+    "id": "referral_29",
+    "title": "Polite Referral Request for Senior Role",
+    "industry": "Leadership",
+    "body": "Dear {{referrer_name}},\n\nI hope this message finds you well. I’m exploring leadership roles and came across an exciting opportunity at {{company}}. Would you consider referring me for the {{position}} role?\n\nI’ve attached my resume for your reference.\n\nSincerely,\n{{your_name}}",
+    "tags": ["leadership", "referral", "senior"]
+  },
+  {
+    "id": "referral_30",
+    "title": "Referral for Designer Internship",
+    "industry": "Design",
+    "body": "Hi {{referrer_name}},\n\nI came across a Design Internship at {{company}} and would love to apply. Can you refer me?\n\nMy resume and portfolio are attached.\n\nThanks!\n{{your_name}}",
+    "tags": ["design", "internship", "referral"]
+  },
+  {
+    "id": "referral_31",
+    "title": "Short and Direct Referral Ask",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nWould you be open to referring me for a role at {{company}}? Here's my resume for reference.\n\nThanks,\n{{your_name}}",
+    "tags": ["short", "referral", "ask"]
+  },
+  {
+    "id": "referral_32",
+    "title": "Referral Request from College Senior",
+    "industry": "Education",
+    "body": "Hi {{referrer_name}},\n\nAs a fellow alumnus of {{college_name}}, I wanted to reach out to request a referral at {{company}}.\n\nThank you so much for your time!\n\nBest,\n{{your_name}}",
+    "tags": ["college", "alumni", "referral"]
+  },
+  {
+    "id": "referral_33",
+    "title": "Cold Referral Email Template",
+    "industry": "Networking",
+    "body": "Hi {{referrer_name}},\n\nYou don’t know me, but I admire your work at {{company}}. I’m reaching out to ask if you’d be willing to refer me for a position that aligns with my background.\n\nThank you in advance.\n\nRegards,\n{{your_name}}",
+    "tags": ["cold", "referral", "networking"]
+  },
+  {
+    "id": "referral_34",
+    "title": "Referral from Former Colleague",
+    "industry": "Professional",
+    "body": "Hey {{referrer_name}},\n\nLong time! I saw an opening at {{company}} and thought of you. Would love it if you could refer me.\n\nHope all is well.\n\nCheers,\n{{your_name}}",
+    "tags": ["colleague", "referral", "professional"]
+  },
+  {
+    "id": "referral_35",
+    "title": "Referral Email with LinkedIn Job Link",
+    "industry": "IT",
+    "body": "Hi {{referrer_name}},\n\nI found this job on LinkedIn: {{job_link}}. It’s at your company {{company}} and matches my experience. Would you be able to refer me?\n\nThanks a lot!\n\n{{your_name}}",
+    "tags": ["linkedin", "job", "referral"]
+  },
+  {
+    "id": "referral_36",
+    "title": "Referral Request for MNC Job",
+    "industry": "Corporate",
+    "body": "Dear {{referrer_name}},\n\nI’m interested in applying for a position at {{company}}, a company I’ve long admired. Would you be open to giving me a referral?\n\nResume attached.\n\nThank you,\n{{your_name}}",
+    "tags": ["mnc", "referral", "corporate"]
+  },
+  {
+    "id": "referral_37",
+    "title": "Referral for Customer Support Role",
+    "industry": "Support",
+    "body": "Hi {{referrer_name}},\n\nThere’s a Customer Support role at {{company}} that I’d like to apply for. Could you refer me, please?\n\nThanks in advance!\n\n{{your_name}}",
+    "tags": ["support", "referral", "customer"]
+  },
+  {
+    "id": "referral_38",
+    "title": "Referral from Networking Event",
+    "industry": "Events",
+    "body": "Hi {{referrer_name}},\n\nIt was great meeting you at {{event_name}}. I noticed a job opening at {{company}} and was wondering if you’d be open to referring me.\n\nThanks,\n{{your_name}}",
+    "tags": ["event", "referral", "network"]
+  },
+  {
+    "id": "referral_39",
+    "title": "Referral for Content Writer Role",
+    "industry": "Writing",
+    "body": "Hello {{referrer_name}},\n\nI’m interested in the Content Writer role at {{company}}. Can you refer me?\n\nThanks,\n{{your_name}}",
+    "tags": ["writing", "referral", "content"]
+  },
+  {
+    "id": "referral_40",
+    "title": "Referral for HRBP Position",
+    "industry": "HR",
+    "body": "Dear {{referrer_name}},\n\nI’m applying for the HR Business Partner role at {{company}}. Would you be willing to refer me?\n\nResume attached.\n\nSincerely,\n{{your_name}}",
+    "tags": ["hrbp", "referral", "hr"]
+  },
+  {
+    "id": "referral_41",
+    "title": "Referral for Blockchain Developer Role",
+    "industry": "Blockchain",
+    "body": "Hi {{referrer_name}},\n\nI’m really excited about the Blockchain Developer role at {{company}}. I’ve worked with Ethereum smart contracts and dApps.\n\nWould you be willing to refer me? My resume is attached.\n\nThank you,\n{{your_name}}",
+    "tags": ["blockchain", "referral", "developer"]
+  },
+  {
+    "id": "referral_42",
+    "title": "Referral Email for Technical Writer Position",
+    "industry": "Writing",
+    "body": "Hi {{referrer_name}},\n\nI’m looking to apply for the Technical Writer role at {{company}}. Could you please refer me for the same?\n\nThanks in advance for your support!\n\n{{your_name}}",
+    "tags": ["technical", "writer", "referral"]
+  },
+  {
+    "id": "referral_43",
+    "title": "Referral Request for Remote-first Company",
+    "industry": "Remote",
+    "body": "Hi {{referrer_name}},\n\nI noticed {{company}} is hiring for remote roles. I’m very interested in contributing to a globally distributed team. Can you refer me?\n\nThanks,\n{{your_name}}",
+    "tags": ["remote", "distributed", "referral"]
+  },
+  {
+    "id": "referral_44",
+    "title": "Startup Referral Email Template",
+    "industry": "Startup",
+    "body": "Hey {{referrer_name}},\n\nI see your startup {{company}} is hiring. I love working in fast-paced environments and think I’d be a great fit. Would you refer me?\n\nThanks!\n{{your_name}}",
+    "tags": ["startup", "referral", "job"]
+  },
+  {
+    "id": "referral_45",
+    "title": "Referral for EdTech Company",
+    "industry": "Education",
+    "body": "Dear {{referrer_name}},\n\nI saw that {{company}} has an opening in the EdTech space, and I would love to be referred for the role.\n\nThanks in advance,\n{{your_name}}",
+    "tags": ["education", "referral", "edtech"]
+  },
+  {
+    "id": "referral_46",
+    "title": "Referral Email to Former Manager",
+    "industry": "Professional",
+    "body": "Dear {{referrer_name}},\n\nI hope you’re doing well. I’m applying for a role at {{company}}, and would be honored if you could refer me.\n\nThanks again for all the guidance during our previous time working together.\n\nWarmly,\n{{your_name}}",
+    "tags": ["manager", "referral", "professional"]
+  },
+  {
+    "id": "referral_47",
+    "title": "Referral for Diversity Hiring Program",
+    "industry": "DEI",
+    "body": "Hi {{referrer_name}},\n\nI’m excited to apply under the Diversity Hiring Program at {{company}}. If you’re able to refer me, I’d be grateful.\n\nThanks,\n{{your_name}}",
+    "tags": ["diversity", "referral", "inclusion"]
+  },
+  {
+    "id": "referral_48",
+    "title": "Referral Request for Cybersecurity Internship",
+    "industry": "Security",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for the Cybersecurity internship at {{company}}. I’ve been studying network security and ethical hacking.\n\nCould you kindly refer me?\n\nThanks,\n{{your_name}}",
+    "tags": ["cybersecurity", "referral", "internship"]
+  },
+  {
+    "id": "referral_49",
+    "title": "Confident Referral Request for Experienced Role",
+    "industry": "Experienced",
+    "body": "Hi {{referrer_name}},\n\nWith 7+ years in the industry, I believe I’d be a strong match for the role at {{company}}. If you can refer me, I’d be grateful.\n\nBest,\n{{your_name}}",
+    "tags": ["senior", "referral", "experienced"]
+  },
+  {
+    "id": "referral_50",
+    "title": "Referral for Business Development Role",
+    "industry": "Sales",
+    "body": "Hi {{referrer_name}},\n\nI’m looking to apply for the Business Development Executive role at {{company}}. Would you be open to referring me?\n\nThanks,\n{{your_name}}",
+    "tags": ["referral", "bd", "executive"]
+  },
+  {
+    "id": "referral_51",
+    "title": "Referral for AI Research Role",
+    "industry": "AI",
+    "body": "Dear {{referrer_name}},\n\nI’m passionate about AI and came across a research opportunity at {{company}}. Would love a referral from you.\n\nThanks,\n{{your_name}}",
+    "tags": ["ai", "research", "referral"]
+  },
+  {
+    "id": "referral_52",
+    "title": "Short Referral Request for Developer Job",
+    "industry": "IT",
+    "body": "Hi {{referrer_name}},\n\nJust reaching out to ask if you’d be willing to refer me to {{company}}. I’ve attached my resume.\n\nAppreciate it!\n\n{{your_name}}",
+    "tags": ["short", "developer", "referral"]
+  },
+  {
+    "id": "referral_53",
+    "title": "Referral Request for Government Tech Project",
+    "industry": "GovTech",
+    "body": "Hello {{referrer_name}},\n\nI saw a tech role at {{company}} working on government digital projects. Would you be able to refer me?\n\nThanks in advance,\n{{your_name}}",
+    "tags": ["govtech", "referral", "project"]
+  },
+  {
+    "id": "referral_54",
+    "title": "Referral for Legal Tech Company",
+    "industry": "LegalTech",
+    "body": "Hi {{referrer_name}},\n\nI’d like to apply for the role at {{company}} in the LegalTech space. Can you refer me?\n\nWarm regards,\n{{your_name}}",
+    "tags": ["legal", "referral", "technology"]
+  },
+  {
+    "id": "referral_55",
+    "title": "Referral for NGO or Non-Profit Role",
+    "industry": "NGO",
+    "body": "Hi {{referrer_name}},\n\nI’m interested in contributing to {{company}}'s social mission. I’d really appreciate it if you could refer me.\n\nThank you,\n{{your_name}}",
+    "tags": ["ngo", "nonprofit", "referral"]
+  },
+  {
+    "id": "referral_56",
+    "title": "Referral for Finance Role in FinTech",
+    "industry": "FinTech",
+    "body": "Hi {{referrer_name}},\n\nI noticed {{company}} is hiring in its finance team. Could you refer me for the Analyst role?\n\nThanks,\n{{your_name}}",
+    "tags": ["fintech", "referral", "finance"]
+  },
+  {
+    "id": "referral_57",
+    "title": "Referral from LinkedIn Job Alert",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nI received a LinkedIn alert for a role at {{company}}. I’m very interested — would you be able to refer me?\n\nAppreciate your time!\n\n{{your_name}}",
+    "tags": ["linkedin", "alert", "referral"]
+  },
+  {
+    "id": "referral_58",
+    "title": "Referral to Join Ex-Employer",
+    "industry": "Rejoin",
+    "body": "Hi {{referrer_name}},\n\nI used to work at {{company}} and would love to return in a new role. Could you refer me?\n\nThanks for helping!\n\n{{your_name}}",
+    "tags": ["referral", "return", "ex-employer"]
+  },
+  {
+    "id": "referral_59",
+    "title": "Referral with GitHub Portfolio Link",
+    "industry": "Tech",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for the role at {{company}} and wanted to share my GitHub: {{github_link}}. Could you refer me?\n\nThanks,\n{{your_name}}",
+    "tags": ["github", "referral", "developer"]
+  },
+  {
+    "id": "referral_60",
+    "title": "Referral for Freelance Collaboration",
+    "industry": "Freelance",
+    "body": "Hi {{referrer_name}},\n\nI saw {{company}} is hiring freelance contributors. I’d love to apply. Can you refer me?\n\nThanks,\n{{your_name}}",
+    "tags": ["freelance", "referral", "collab"]
+  },
+  {
+    "id": "referral_61",
+    "title": "Referral Request After Layoff",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nI was recently impacted by a layoff and am actively looking for my next opportunity. I saw a role at {{company}} that matches my skills. Could you kindly refer me?\n\nThanks a lot,\n{{your_name}}",
+    "tags": ["layoff", "referral", "job"]
+  },
+  {
+    "id": "referral_62",
+    "title": "Referral Request for Contract to Full-time",
+    "industry": "Freelance",
+    "body": "Hi {{referrer_name}},\n\nI worked on a contract with {{company}} previously and noticed a full-time opening in a related role. Could you refer me internally?\n\nAppreciate your help!\n{{your_name}}",
+    "tags": ["contract", "full-time", "referral"]
+  },
+  {
+    "id": "referral_63",
+    "title": "Referral via Slack Message",
+    "industry": "Internal",
+    "body": "Hey {{referrer_name}},\n\nQuick ask — I saw an open role at {{company}} that matches my profile. Would you be able to refer me?\n\nResume attached. Thanks!\n\n{{your_name}}",
+    "tags": ["slack", "referral", "internal"]
+  },
+  {
+    "id": "referral_64",
+    "title": "Referral via Twitter DM",
+    "industry": "Networking",
+    "body": "Hi {{referrer_name}},\n\nBig fan of your work at {{company}}. I noticed a job opening I’m interested in — would you be open to referring me?\n\nThanks a ton,\n{{your_name}}",
+    "tags": ["twitter", "referral", "dm"]
+  },
+  {
+    "id": "referral_65",
+    "title": "Referral Through Alumni Mentorship",
+    "industry": "Education",
+    "body": "Dear {{referrer_name}},\n\nAs part of the alumni mentorship program, I came across an opportunity at your organization {{company}}. I'd be honored if you could refer me.\n\nThank you,\n{{your_name}}",
+    "tags": ["alumni", "referral", "mentor"]
+  },
+  {
+    "id": "referral_66",
+    "title": "Referral with Resume and Cover Letter",
+    "industry": "Corporate",
+    "body": "Hi {{referrer_name}},\n\nHope you're doing well. I’m applying for a role at {{company}} and have attached my resume and cover letter. If you could refer me, I’d be very grateful.\n\nThank you,\n{{your_name}}",
+    "tags": ["cover letter", "referral", "resume"]
+  },
+  {
+    "id": "referral_67",
+    "title": "Referral for NGO Field Role",
+    "industry": "Non-profit",
+    "body": "Hi {{referrer_name}},\n\nI’m passionate about community development and saw a role at {{company}}. Would you be open to referring me?\n\nRegards,\n{{your_name}}",
+    "tags": ["ngo", "field", "referral"]
+  },
+  {
+    "id": "referral_68",
+    "title": "Referral Email with Project Showcase",
+    "industry": "Creative",
+    "body": "Hi {{referrer_name}},\n\nI’m interested in the open role at {{company}} and have attached my resume as well as a few recent projects for review. Would appreciate a referral!\n\nThanks,\n{{your_name}}",
+    "tags": ["portfolio", "referral", "project"]
+  },
+  {
+    "id": "referral_69",
+    "title": "Referral for Government Consultant Role",
+    "industry": "Gov",
+    "body": "Hello {{referrer_name}},\n\nI saw a consultant opening at {{company}} on a government project. Could you refer me internally?\n\nThanks,\n{{your_name}}",
+    "tags": ["government", "consultant", "referral"]
+  },
+  {
+    "id": "referral_70",
+    "title": "Referral for Entry-Level Tech Support",
+    "industry": "Support",
+    "body": "Hi {{referrer_name}},\n\nI noticed an opening for a Tech Support Associate at {{company}} and would love your help with a referral.\n\nThanks in advance,\n{{your_name}}",
+    "tags": ["entry-level", "support", "referral"]
+  },
+  {
+    "id": "referral_71",
+    "title": "Referral for Sustainable Energy Company",
+    "industry": "GreenTech",
+    "body": "Dear {{referrer_name}},\n\nI am highly motivated to work in sustainability, and {{company}} caught my eye. Would you be open to referring me for the open position?\n\nThanks,\n{{your_name}}",
+    "tags": ["greentech", "sustainability", "referral"]
+  },
+  {
+    "id": "referral_72",
+    "title": "Referral Based on Hackathon Interaction",
+    "industry": "Tech",
+    "body": "Hey {{referrer_name}},\n\nIt was great working with you at {{hackathon_name}}. I saw your company {{company}} is hiring — would you consider referring me?\n\nBest,\n{{your_name}}",
+    "tags": ["hackathon", "referral", "developer"]
+  },
+  {
+    "id": "referral_73",
+    "title": "Referral for DEI-focused Role",
+    "industry": "HR",
+    "body": "Hi {{referrer_name}},\n\nI came across a Diversity & Inclusion role at {{company}} and was hoping you might be able to refer me.\n\nThanks,\n{{your_name}}",
+    "tags": ["dei", "referral", "hr"]
+  },
+  {
+    "id": "referral_74",
+    "title": "Referral for Contract Remote QA Role",
+    "industry": "QA",
+    "body": "Hello {{referrer_name}},\n\nI’m applying for the contract QA Engineer role at {{company}} (remote). Could you please refer me?\n\nThank you,\n{{your_name}}",
+    "tags": ["qa", "remote", "referral"]
+  },
+  {
+    "id": "referral_75",
+    "title": "Referral Request After Conference Meetup",
+    "industry": "Professional",
+    "body": "Hi {{referrer_name}},\n\nIt was great meeting you at {{event_name}}. I’m applying for a role at {{company}} and wanted to ask for a referral.\n\nThanks!\n{{your_name}}",
+    "tags": ["conference", "networking", "referral"]
+  },
+  {
+    "id": "referral_76",
+    "title": "Referral for Junior Data Role",
+    "industry": "Data",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for the Junior Data Analyst role at {{company}}. I’d appreciate a referral from you.\n\nThanks,\n{{your_name}}",
+    "tags": ["data", "junior", "referral"]
+  },
+  {
+    "id": "referral_77",
+    "title": "Referral for Creative Copywriter Role",
+    "industry": "Marketing",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for the Copywriter position at {{company}}. Would you be able to refer me?\n\nResume attached.\n\nRegards,\n{{your_name}}",
+    "tags": ["copywriter", "referral", "marketing"]
+  },
+  {
+    "id": "referral_78",
+    "title": "Referral After Cold Email",
+    "industry": "Outreach",
+    "body": "Hi {{referrer_name}},\n\nWe haven’t met, but I’m reaching out to request a referral for a role at {{company}}. My resume is attached. Thanks for considering!\n\nSincerely,\n{{your_name}}",
+    "tags": ["cold email", "referral", "outreach"]
+  },
+  {
+    "id": "referral_79",
+    "title": "Referral from Career Fair",
+    "industry": "Campus",
+    "body": "Hello {{referrer_name}},\n\nWe briefly interacted at the {{college_name}} career fair. I’d love to be considered for a role at {{company}} — could you refer me?\n\nBest,\n{{your_name}}",
+    "tags": ["career fair", "referral", "student"]
+  },
+  {
+    "id": "referral_80",
+    "title": "Referral via Meetup Group",
+    "industry": "Networking",
+    "body": "Hi {{referrer_name}},\n\nEnjoyed our discussions in the {{group_name}} meetup. I’m applying to {{company}} and would be grateful for a referral.\n\nRegards,\n{{your_name}}",
+    "tags": ["meetup", "referral", "community"]
+  }
+]

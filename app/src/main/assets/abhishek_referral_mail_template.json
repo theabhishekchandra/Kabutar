@@ -1,0 +1,352 @@
+[
+  {
+    "id": "referral_abhishek_01",
+    "title": "Referral for Android Developer Role - Jetpack & MVVM",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for the Android Developer position at {{company}} and would love your referral. I’ve worked extensively with Jetpack Compose, MVVM architecture, and Firebase. I’m currently working at Gram Unnati where I’m contributing to scalable, multilingual Android apps.\n\nI’ve attached my resume. Thanks so much for considering!\n\nRegards,\nAbhishek Chandra",
+    "tags": ["jetpack", "firebase", "referral"]
+  },
+  {
+    "id": "referral_abhishek_02",
+    "title": "Requesting Referral for Kotlin Android Developer Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI hope you're doing well. I’m excited to apply for the {{position}} role at {{company}}. With my experience in Kotlin, Clean Architecture, Room, and CI/CD pipelines (GitHub Actions & Azure DevOps), I’m confident I can make a meaningful contribution.\n\nPlease find my resume attached. Would appreciate a referral!\n\nThanks,\nAbhishek Chandra",
+    "tags": ["kotlin", "clean architecture", "referral"]
+  },
+  {
+    "id": "referral_abhishek_03",
+    "title": "Referral for Android Role - Compose & Firebase",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI came across an Android role at {{company}} and would be grateful if you could refer me. I’ve recently built a bulk-email Android app with AI features (Kabutar), and also developed invoicing, push notifications, and multilingual support in production apps.\n\nHappy to share more details. Thanks!\n\nBest,\nAbhishek Chandra",
+    "tags": ["firebase", "compose", "referral"]
+  },
+  {
+    "id": "referral_abhishek_04",
+    "title": "Referral for Android Engineer - Startup Experience",
+    "industry": "Android",
+    "body": "Hey {{referrer_name}},\n\nI’m exploring new Android roles and saw an exciting opportunity at {{company}}. I’ve led end-to-end app development at Gram Unnati and Websbaba, and worked on everything from video onboarding to offline Room DB caching.\n\nIf you’re open to it, a referral would mean a lot.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["startup", "end-to-end", "referral"]
+  },
+  {
+    "id": "referral_abhishek_05",
+    "title": "Referral for Android Developer Role - Resume Attached",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m currently working as a Junior Android Developer at Gram Unnati and actively applying to Android positions. I’ve attached my resume here — I’d be truly grateful if you could refer me for a role at {{company}}.\n\nThanks in advance!\n\nRegards,\nAbhishek Chandra",
+    "tags": ["resume", "android", "referral"]
+  },
+  {
+    "id": "referral_abhishek_06",
+    "title": "Referral for Android Role – Offline + PDF Expertise",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI noticed an Android Developer role at {{company}} and wanted to ask if you'd be open to referring me. I’ve built apps with dynamic PDF generation, offline Room DB caching, and Firebase FCM for smart notifications.\n\nI’ve attached my resume. Thanks in advance!\n\nBest,\nAbhishek Chandra",
+    "tags": ["pdf", "offline", "firebase", "referral"]
+  },
+  {
+    "id": "referral_abhishek_07",
+    "title": "Referral for AI + Kotlin Android App Developer",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI'm applying for an Android Developer role at {{company}} and thought I’d reach out for a referral. I recently built Kabutar – an AI-powered bulk email app – using Kotlin, Firebase Auth, Retrofit, and SQL backend.\n\nWould love to connect. Thanks!\n\nRegards,\nAbhishek Chandra",
+    "tags": ["kotlin", "ai", "referral", "kabutar"]
+  },
+  {
+    "id": "referral_abhishek_08",
+    "title": "Referral for Compose-Based Android Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m interested in an Android Developer role at {{company}}, especially because it involves Jetpack Compose. I’ve been working with Compose in recent projects along with MVVM and Clean Architecture.\n\nWould be grateful if you could refer me.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["compose", "mvvm", "referral"]
+  },
+  {
+    "id": "referral_abhishek_09",
+    "title": "Referral for Multilingual Android Developer Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for an Android Developer position at {{company}}. I recently implemented full English-Hindi language support using Android's Locale API and am passionate about inclusive mobile UX.\n\nWould love your referral if you're open to it.\n\nWarm regards,\nAbhishek Chandra",
+    "tags": ["multilingual", "locale", "referral"]
+  },
+  {
+    "id": "referral_abhishek_10",
+    "title": "Referral for Android Role – Full Cycle Experience",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI'm currently working as a Junior Android Developer and have led full-cycle app development – from authentication to PDF generation, Room DB to cloud messaging.\n\nIf you can refer me to {{company}}, I’d truly appreciate it.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["full-cycle", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_11",
+    "title": "Referral for Android Role at Product Company",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI came across an exciting Android Developer role at {{company}}. I have experience building scalable and production-ready apps using Kotlin, MVVM, and Firebase. I'd be really grateful if you could refer me.\n\nBest,\nAbhishek Chandra",
+    "tags": ["product", "android", "referral"]
+  },
+  {
+    "id": "referral_abhishek_12",
+    "title": "Referral for Remote Android Developer Job",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI’m applying for a remote Android Developer position at {{company}}. I’ve worked with distributed teams and built features like real-time sync, multilingual UI, and AI-powered automation.\n\nWould appreciate your referral!\n\nRegards,\nAbhishek Chandra",
+    "tags": ["remote", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_13",
+    "title": "Referral for Fintech Android App Role",
+    "industry": "Fintech",
+    "body": "Hi {{referrer_name}},\n\nI’m very interested in the Android role at {{company}}. My experience includes secure login, payment gateway integration, and PDF-based invoicing. Could you kindly refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["fintech", "pdf", "referral"]
+  },
+  {
+    "id": "referral_abhishek_14",
+    "title": "Referral for Clean Architecture-Based Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nAs an advocate of Clean Architecture and MVVM, I’ve applied for the Android Developer role at {{company}}. Would you be open to referring me?\n\nThanks for considering,\nAbhishek Chandra",
+    "tags": ["clean architecture", "referral", "mvvm"]
+  },
+  {
+    "id": "referral_abhishek_15",
+    "title": "Referral with GitHub Portfolio",
+    "industry": "Android",
+    "body": "Hey {{referrer_name}},\n\nI've applied for an Android Developer job at {{company}}. My GitHub portfolio includes projects like Kabutar and Matall — would you mind referring me?\n\nThanks a lot!\n\nAbhishek Chandra",
+    "tags": ["github", "portfolio", "referral"]
+  },
+  {
+    "id": "referral_abhishek_16",
+    "title": "Referral for Junior Android Developer Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for a Junior Android Developer role at {{company}} and I’d be grateful for your referral. I’m currently working on enterprise apps and have internship-to-full-time experience.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["junior", "referral", "developer"]
+  },
+  {
+    "id": "referral_abhishek_17",
+    "title": "Referral for Firebase-Centric Android Job",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’ve worked on multiple apps with Firebase (Auth, Firestore, FCM) and came across an opening at {{company}} that matches my skills. I’d really appreciate a referral.\n\nWarm regards,\nAbhishek Chandra",
+    "tags": ["firebase", "referral", "developer"]
+  },
+  {
+    "id": "referral_abhishek_18",
+    "title": "Referral for Startup Android Role",
+    "industry": "Startup",
+    "body": "Hello {{referrer_name}},\n\nI’ve applied to {{company}}, and I’m excited about their startup culture. I've developed fast, scalable Android apps from scratch — would love your referral.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["startup", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_19",
+    "title": "Referral for Android App with AI Integration",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI developed Kabutar, an Android app with AI-powered email generation. I’m looking to join {{company}} and would appreciate your referral.\n\nRegards,\nAbhishek Chandra",
+    "tags": ["ai", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_20",
+    "title": "Referral for App with Dynamic PDF Features",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI've built invoice modules using dynamic PDF generation in Kotlin and am applying for an Android role at {{company}}. Could you refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["pdf", "referral", "invoice"]
+  },
+  {
+    "id": "referral_abhishek_21",
+    "title": "Referral with Real-World Feature Experience",
+    "industry": "Android",
+    "body": "Hey {{referrer_name}},\n\nI’ve implemented features like camera enhancements, watermarking, and background sync in my current role. Can you refer me to {{company}}?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["camera", "features", "referral"]
+  },
+  {
+    "id": "referral_abhishek_22",
+    "title": "Referral for Android Testing & CI/CD Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’ve worked with JUnit, Espresso, and CI/CD tools like GitHub Actions and Azure DevOps. If {{company}} is hiring for Android with automation experience, could you refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["ci/cd", "testing", "referral"]
+  },
+  {
+    "id": "referral_abhishek_23",
+    "title": "Referral for App with Multilingual Support",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’ve implemented Hindi-English multilingual support using Locale API. I’m applying to {{company}} for their Android Developer role. Would appreciate a referral.\n\nRegards,\nAbhishek Chandra",
+    "tags": ["locale", "multilingual", "referral"]
+  },
+  {
+    "id": "referral_abhishek_24",
+    "title": "Referral for Kotlin/Compose Android Role",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI’m a Kotlin-first Android developer using Jetpack Compose in recent apps. I'd love to contribute to {{company}} and would be grateful for your referral.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["compose", "kotlin", "referral"]
+  },
+  {
+    "id": "referral_abhishek_25",
+    "title": "Referral Request for MVVM Developer Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m a strong proponent of MVVM and Clean Architecture and noticed an Android opening at {{company}}. Would you consider referring me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["mvvm", "clean architecture", "referral"]
+  },
+  {
+    "id": "referral_abhishek_26",
+    "title": "Referral for Project-Driven Android Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nMy latest project, Matall, showcases my ability to deliver e-commerce apps with Room, Retrofit, and FCM. I'd be grateful if you could refer me to {{company}}.\n\nRegards,\nAbhishek Chandra",
+    "tags": ["matall", "project", "referral"]
+  },
+  {
+    "id": "referral_abhishek_27",
+    "title": "Referral for Android App Dev in B2B Sector",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nHaving worked on B2B apps at Gram Unnati, I’m applying to {{company}} for their Android Developer role. A referral would be very helpful.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["b2b", "gram unnati", "referral"]
+  },
+  {
+    "id": "referral_abhishek_28",
+    "title": "Referral Request from Former Colleague",
+    "industry": "Professional",
+    "body": "Hi {{referrer_name}},\n\nIt was great working with you earlier. I’m applying for a new Android Developer role at {{company}} and would be grateful for your referral.\n\nBest,\nAbhishek Chandra",
+    "tags": ["colleague", "referral", "past work"]
+  },
+  {
+    "id": "referral_abhishek_29",
+    "title": "Short Referral Request with Resume",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m applying to {{company}} for an Android Developer position. My resume is attached. Would appreciate your referral.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["short", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_30",
+    "title": "Confident Referral Ask with Project Links",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’d love to apply for the Android role at {{company}}. My projects: Kabutar – AI cold email app, and Matall – e-commerce app, are live on GitHub. Would you refer me?\n\nThanks!\n\nAbhishek Chandra",
+    "tags": ["github", "kabutar", "referral"]
+  },
+  {
+    "id": "referral_abhishek_31",
+    "title": "Referral for Android Developer – Production App Experience",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m currently building production-ready Android apps using Compose, Room, and Firebase at Gram Unnati. I’m applying to {{company}} and would love your referral.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["production", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_32",
+    "title": "Referral for Android Role – Push Notifications Expert",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI've built push notification systems using Firebase Cloud Messaging to increase retention. I’m excited about the Android role at {{company}}. Can you refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["fcm", "referral", "push"]
+  },
+  {
+    "id": "referral_abhishek_33",
+    "title": "Referral for PDF/Camera Feature Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’ve worked on camera features, watermarks, and dynamic PDF creation in Kotlin. I’d love to apply this experience at {{company}} – would you be open to referring me?\n\nRegards,\nAbhishek Chandra",
+    "tags": ["camera", "pdf", "referral"]
+  },
+  {
+    "id": "referral_abhishek_34",
+    "title": "Referral for Android Internship-to-Fulltime Journey",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nFrom intern to full-time Android Developer at Gram Unnati, I’ve grown by delivering real features to real users. I'd be grateful if you could refer me for the role at {{company}}.\n\nWarm regards,\nAbhishek Chandra",
+    "tags": ["intern", "journey", "referral"]
+  },
+  {
+    "id": "referral_abhishek_35",
+    "title": "Referral for Kotlin-MVVM Role at MNC",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI'm applying to {{company}} for an Android role. I specialize in Kotlin, MVVM, and Jetpack Compose. If you're open to it, a referral would be amazing.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["mnc", "kotlin", "referral"]
+  },
+  {
+    "id": "referral_abhishek_36",
+    "title": "Referral for AI-Focused Android Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI developed Kabutar – an AI-based Android app for sending personalized cold emails. I’d love to explore opportunities at {{company}}. Would you refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["ai", "kabutar", "referral"]
+  },
+  {
+    "id": "referral_abhishek_37",
+    "title": "Referral for Android Role – DevOps & CI/CD Focus",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’ve implemented CI/CD pipelines with GitHub Actions and Azure DevOps. If {{company}} values Android automation, I’d love your referral.\n\nBest,\nAbhishek Chandra",
+    "tags": ["ci/cd", "devops", "referral"]
+  },
+  {
+    "id": "referral_abhishek_38",
+    "title": "Referral for App Developer Role – Kabutar + Matall",
+    "industry": "Android",
+    "body": "Hey {{referrer_name}},\n\nMy recent projects Kabutar and Matall showcase practical use of Retrofit, Firebase, and Room. I’d love to bring this experience to {{company}} – would you refer me?\n\nCheers,\nAbhishek Chandra",
+    "tags": ["kabutar", "matall", "referral"]
+  },
+  {
+    "id": "referral_abhishek_39",
+    "title": "Referral for Android Role – Form & Document Automation",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI've automated form submission and PDF workflows in production apps. Can you refer me for the Android opening at {{company}}?\n\nThank you,\nAbhishek Chandra",
+    "tags": ["automation", "documents", "referral"]
+  },
+  {
+    "id": "referral_abhishek_40",
+    "title": "Referral for Android Role – SQLite/Room/Offline",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI'm applying to {{company}}. I’ve implemented robust offline-first systems using Room and SQLite. Would appreciate your referral.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["offline", "room", "referral"]
+  },
+  {
+    "id": "referral_abhishek_41",
+    "title": "Referral Request from Fellow Android Dev",
+    "industry": "Android",
+    "body": "Hey {{referrer_name}},\n\nAs a fellow Android dev, I’m reaching out for a referral to {{company}}. I’ve built scalable features using Compose, Kotlin, and Clean Architecture. Would mean a lot!\n\nBest,\nAbhishek Chandra",
+    "tags": ["peer", "referral", "developer"]
+  },
+  {
+    "id": "referral_abhishek_42",
+    "title": "Referral for Android Team Contributor Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m looking for a collaborative Android team like yours at {{company}}. With my experience in startups and product teams, I’d love to join. Can you refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["team", "startup", "referral"]
+  },
+  {
+    "id": "referral_abhishek_43",
+    "title": "Referral with Emphasis on Multilingual UX",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI implemented full Hindi-English support with the Locale API in one of my apps. Would love to bring that experience to {{company}}. Could you refer me?\n\nRegards,\nAbhishek Chandra",
+    "tags": ["ux", "multilingual", "referral"]
+  },
+  {
+    "id": "referral_abhishek_44",
+    "title": "Referral for Dynamic Android UI Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’ve built dynamic UI flows with Compose, Navigation, and LiveData. I’m applying to {{company}} and would really value your referral.\n\nWarm regards,\nAbhishek Chandra",
+    "tags": ["ui", "compose", "referral"]
+  },
+  {
+    "id": "referral_abhishek_45",
+    "title": "Referral with Experience in Retrofit + API Sync",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI’ve worked on advanced API integrations using Retrofit and handled caching with Room. I’m applying to {{company}} and would love your referral.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["retrofit", "api", "referral"]
+  },
+  {
+    "id": "referral_abhishek_46",
+    "title": "Referral for Android Role in AgriTech",
+    "industry": "AgriTech",
+    "body": "Hi {{referrer_name}},\n\nAt Gram Unnati, I worked on Android solutions for rural/agricultural networks. If {{company}} works in AgriTech, I’d love to join. Would you refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["agritech", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_47",
+    "title": "Referral for Android Developer with AI Interest",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’ve combined AI with Android development in my Kabutar app. I’d love to contribute to {{company}} in a similar role. Please refer me if possible.\n\nRegards,\nAbhishek Chandra",
+    "tags": ["ai", "kabutar", "referral"]
+  },
+  {
+    "id": "referral_abhishek_48",
+    "title": "Referral for Hybrid/Full-Stack Android Project",
+    "industry": "Android",
+    "body": "Hey {{referrer_name}},\n\nI’ve worked across Android (Kotlin), backend (PHP), and database (SQL) in Kabutar. If {{company}} values cross-functional devs, I’d appreciate your referral.\n\nThanks,\nAbhishek Chandra",
+    "tags": ["fullstack", "php", "referral"]
+  },
+  {
+    "id": "referral_abhishek_49",
+    "title": "Referral for Internship-Based Android Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nMy journey from Android intern to developer has been full of learning and ownership. I’d love to bring that to {{company}}. Could you refer me?\n\nThanks,\nAbhishek Chandra",
+    "tags": ["internship", "referral", "android"]
+  },
+  {
+    "id": "referral_abhishek_50",
+    "title": "Referral for Product-Led Android Environment",
+    "industry": "Product",
+    "body": "Hi {{referrer_name}},\n\nI’m passionate about product-driven mobile development. From AI to localization to testing, I’d love to contribute at {{company}}. Would appreciate your referral.\n\nSincerely,\nAbhishek Chandra",
+    "tags": ["product", "referral", "android"]
+  }
+]

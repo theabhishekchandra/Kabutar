@@ -1,0 +1,111 @@
+[
+  {
+    "id": "referral_common_01",
+    "title": "Polite Universal Referral Request",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nI hope you're doing well. I came across a role at {{company}} that aligns with my background and interests. If you're open to it, I’d really appreciate a referral.\n\nI've attached my resume for your reference.\n\nThanks a lot for your time!\n\nBest regards,\n{{your_name}}",
+    "tags": ["referral", "universal", "polite"]
+  },
+  {
+    "body": "Hi {{referrer_name}},\n\nI’m interested in applying for a position at {{company}}. Would you be open to referring me?\n\nThanks in advance!\n\n{{your_name}}",
+    "id": "referral_common_02",
+    "industry": "General",
+    "tags": [
+      "referral",
+      "common",
+      "short"
+    ],
+    "title": "Short and Direct Referral Request"
+  },
+  {
+    "id": "referral_common_03",
+    "title": "Warm Intro Style Referral Request",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nI hope you're doing great! I wanted to ask if you could refer me for a position at {{company}}. I'm excited about the opportunity and think I’d be a good fit.\n\nThank you for considering it!\n\nBest,\n{{your_name}}",
+    "tags": ["referral", "neutral", "friendly"]
+  },
+  {
+    "id": "referral_common_04",
+    "title": "Resume-First Referral Request",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nPlease find my resume attached. I'm planning to apply at {{company}}, and a referral from you would really help strengthen my application.\n\nThank you so much!\n\n{{your_name}}",
+    "tags": ["referral", "resume", "common"]
+  },
+  {
+    "id": "referral_common_05",
+    "title": "Flexible Referral Request with Role Mention",
+    "industry": "General",
+    "body": "Hi {{referrer_name}},\n\nI’m planning to apply for the {{position}} role at {{company}} and thought of reaching out to ask if you’d be comfortable referring me. I’d really appreciate the support.\n\nThanks and regards,\n{{your_name}}",
+    "tags": ["referral", "general", "any-role"]
+  },
+  {
+    "id": "referral_android_01",
+    "title": "Referral Request for Android Developer Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI hope you're doing well. I’m applying for the Android Developer position at {{company}}, and I believe my experience in Kotlin and Jetpack Compose would be a good fit. I’d really appreciate it if you could refer me.\n\nThanks a lot,\n{{your_name}}",
+    "tags": ["android", "referral", "developer"]
+  },
+  {
+    "id": "referral_android_02",
+    "title": "Referral for Android Role with Jetpack Compose",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI came across a role at {{company}} that focuses on Jetpack Compose, which I’ve been working with extensively. I’d be grateful if you could refer me for the position.\n\nThanks for your time!\n\n{{your_name}}",
+    "tags": ["jetpack compose", "android", "referral"]
+  },
+  {
+    "id": "referral_android_03",
+    "title": "Referral for Kotlin-Based Android Job",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI'm applying for a Kotlin-based Android role at {{company}} and would really value a referral from someone like you.\n\nI’ve attached my resume. Thank you!\n\n{{your_name}}",
+    "tags": ["kotlin", "android", "referral"]
+  },
+  {
+    "id": "referral_android_04",
+    "title": "Referral for Android Internship",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m looking for an Android internship and saw that {{company}} has an opening. I’ve worked on several personal projects and would love to gain industry experience. Could you please refer me?\n\nThanks,\n{{your_name}}",
+    "tags": ["internship", "android", "referral"]
+  },
+  {
+    "id": "referral_android_05",
+    "title": "Referral After Contributing to Android Open Source",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nAfter working on open-source Android projects, I’m now seeking a full-time Android Developer role. I saw an opening at {{company}} and would appreciate your referral.\n\nBest regards,\n{{your_name}}",
+    "tags": ["opensource", "android", "referral"]
+  },
+  {
+    "id": "referral_android_06",
+    "title": "Referral for Senior Android Developer",
+    "industry": "Android",
+    "body": "Dear {{referrer_name}},\n\nWith over 4 years of experience building production-ready Android apps, I’m exploring the Senior Android Developer position at {{company}}. If you're open to it, a referral would mean a lot.\n\nThanks in advance,\n{{your_name}}",
+    "tags": ["senior", "android", "referral"]
+  },
+  {
+    "id": "referral_android_07",
+    "title": "Referral Request for Firebase-focused Role",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI noticed {{company}} is hiring for an Android role that heavily uses Firebase. I’ve built multiple apps with Firestore, Auth, and FCM. Could you refer me?\n\nMuch appreciated!\n\n{{your_name}}",
+    "tags": ["firebase", "android", "referral"]
+  },
+  {
+    "id": "referral_android_08",
+    "title": "Referral for Android Freelancer to Full-Time",
+    "industry": "Android",
+    "body": "Hey {{referrer_name}},\n\nI’ve worked as an Android freelancer for over 2 years and am now exploring full-time opportunities. Saw an exciting role at {{company}} — any chance you could refer me?\n\nThanks!\n\n{{your_name}}",
+    "tags": ["freelancer", "android", "referral"]
+  },
+  {
+    "id": "referral_android_09",
+    "title": "Referral with GitHub Android Portfolio",
+    "industry": "Android",
+    "body": "Hi {{referrer_name}},\n\nI’m applying for the Android Developer role at {{company}}. Here’s my GitHub with Jetpack Compose and MVVM apps: {{github_link}}. Would you mind referring me?\n\nThanks a lot,\n{{your_name}}",
+    "tags": ["portfolio", "android", "referral"]
+  },
+  {
+    "id": "referral_android_10",
+    "title": "Referral Request for Remote Android Role",
+    "industry": "Android",
+    "body": "Hello {{referrer_name}},\n\nI saw a remote Android Developer position at {{company}}. I've worked in distributed teams before and would love to apply. If possible, could you refer me?\n\nThanks for your support,\n{{your_name}}",
+    "tags": ["remote", "android", "referral"]
+  }
+]
