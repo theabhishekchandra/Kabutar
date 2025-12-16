@@ -53,7 +53,7 @@ class EmailRepositoryImpl @Inject constructor(
         // Synchronizing local and external sources
         apiEmails.forEach { apiEmail ->
             // Insert new or updated emails from API (if not already in DB)
-            emailDataDao.insertIfNotExists(apiEmail)
+            emailDataDao.insertEmail(apiEmail)
         }
 
         // Remove any emails that are no longer needed (logic can be customized)

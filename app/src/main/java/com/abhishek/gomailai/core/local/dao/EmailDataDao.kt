@@ -18,13 +18,6 @@ interface EmailDataDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)  // Prevents overwriting existing data
     suspend fun insertEmail(email: EmailDataEntity): Long
 
-    suspend fun insertIfNotExists(email: EmailDataEntity) {
-        val existingEmail = getEmail(email.email)  // Check if email exists
-        if (existingEmail == null) {
-            insertEmail(email)  // Insert only if not present
-        }
-    }
-
     @Query("SELECT * FROM ${DatabaseConst.EMAIL_DATA_TABLE}")
     fun getAllEmails(): Flow<List<EmailDataEntity>>
 

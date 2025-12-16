@@ -11,14 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.abhishek.gomailai.core.appsharepref.IAPPSharedPref
-import com.abhishek.gomailai.core.local.DBResponseModel
 import com.abhishek.gomailai.core.nav.INavigation
 import com.abhishek.gomailai.core.utils.DatabaseConst.TAG
 import com.abhishek.gomailai.core.utils.MainConst.EMAIL_SENDING_WORKER_TAG
-import com.abhishek.gomailai.core.utils.MainConst.WM_OUTPUT_DATA_RECIPIENT_EMAIL
 import com.abhishek.gomailai.core.workmanager.WorkManagerViewModel
 import com.abhishek.gomailai.databinding.FragmentSendEmailBinding
 import com.abhishek.gomailai.layout.viewmodel.EmailViewModel
@@ -86,8 +83,9 @@ class SendEmailFragment : Fragment() {
             emailTemplateLiveData.observe(viewLifecycleOwner) { listTemplate ->
                 if (listTemplate.isNotEmpty()) {
                     binding.buttonNextTemplate.setOnClickListener {
-                        binding.editTextSubject.setText(listTemplate.random().subject.toString())
-                        binding.editTextEmailBody.setText(listTemplate.random().body.toString())
+                        val template = listTemplate.random()
+                        binding.editTextSubject.setText(template.subject.toString())
+                        binding.editTextEmailBody.setText(template.body.toString())
                     }
                 }
             }
@@ -119,11 +117,6 @@ class SendEmailFragment : Fragment() {
                 }
             }
         }
-    }
-    private fun checkIfFieldsAreEmpty(){
-
-        val isEmailSubjectEmpty = binding.editTextSubject.text.toString().trim().isEmpty()
-        val isEmailBodyEmpty = binding.editTextEmailBody.text.toString().trim().isEmpty()
     }
 
     private fun listener() {

@@ -47,7 +47,7 @@ class EmailGenerateFragment : Fragment() {
     }
 
     private fun initialize() {
-        binding.toolbarGenerateText.textView.text = ButtonTextFiled.GENERATED_EMAIL.buttonText
+        binding.toolbarGenerateText.textView.text = ButtonTextField.GENERATED_EMAIL.buttonText
         val prompt = binding.editTextPrompt.text.toString().trim()
         updateButtonTexts(prompt.isEmpty())
     }
@@ -87,10 +87,10 @@ class EmailGenerateFragment : Fragment() {
     private fun handleMarkAsReadyButtonClick() {
         val generatedTemplate = binding.textViewGeneratedEmail.text.toString()
         val buttonText = binding.buttonMarkAsReady.text.toString()
-        val buttonAction = ButtonTextFiled.fromString(buttonText)
+        val buttonAction = ButtonTextField.fromString(buttonText)
 
         when (buttonAction) {
-            ButtonTextFiled.GENERATED_EMAIL -> {
+            ButtonTextField.GENERATED_EMAIL -> {
                 if (generatedTemplate.isNotEmpty()) {
                     // TODO: Save this Template
                     Toast.makeText(context, "Email Template is ready for sending.", Toast.LENGTH_SHORT).show()
@@ -98,12 +98,12 @@ class EmailGenerateFragment : Fragment() {
                     Toast.makeText(context, "Generate an email template first", Toast.LENGTH_SHORT).show()
                 }
             }
-            ButtonTextFiled.GENERATE_PROMPT, ButtonTextFiled.NEXT_PROMPTS -> {
+            ButtonTextField.GENERATE_PROMPT, ButtonTextField.NEXT_PROMPTS -> {
                 val profile =  appSharedPref.getUserInfo().designation ?: ""
                 val randomPrompt = MainConst.getRandomPrompt(profile)
                 binding.editTextPrompt.setText(randomPrompt)
             }
-            ButtonTextFiled.MARK_AS_READY -> {
+            ButtonTextField.MARK_AS_READY -> {
                 emailViewModel.insertEmailTemplate(generatedTemplate, requireContext())
                 binding.editTextPrompt.setText("")
                 binding.textViewGeneratedEmail.setText("")
@@ -149,7 +149,7 @@ class EmailGenerateFragment : Fragment() {
         }
     }
 }
-enum class ButtonTextFiled(val buttonText: String) {
+enum class ButtonTextField(val buttonText: String) {
     GENERATED_EMAIL("Generate Email"),
     MARK_AS_READY("Mark As Ready"),
     GENERATE_PROMPT("Generate Prompts"),
@@ -157,7 +157,7 @@ enum class ButtonTextFiled(val buttonText: String) {
 
     companion object {
 
-        fun fromString(buttonText: String): ButtonTextFiled? {
+        fun fromString(buttonText: String): ButtonTextField? {
             return entries.find { it.buttonText == buttonText }
         }
     }

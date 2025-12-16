@@ -4,9 +4,6 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.abhishek.gomailai.core.local.database.AppDatabase
-import com.abhishek.gomailai.core.local.entities.EmailDataEntity
-import com.abhishek.gomailai.core.local.entities.EmailTemplateEntity
-import com.abhishek.gomailai.core.local.entities.UsersEntity
 import com.abhishek.gomailai.core.utils.DatabaseConst
 import com.abhishek.gomailai.core.utils.DatabaseConst.MIGRATION_1_2
 import dagger.Module
@@ -49,18 +46,4 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideEmailTemplateDao(database: AppDatabase) = database.emailTemplateDao()
-
-    // Entity
-    @Provides
-    @Singleton
-    fun provideEmailEntity() = EmailDataEntity()
-
-    @Provides
-    @Singleton
-    fun provideUserEmail() = UsersEntity()
-
-    @Provides
-    @Singleton
-    fun provideEmailTemplateEntity() = EmailTemplateEntity()
-
 }
