@@ -24,6 +24,7 @@ timber = "5.0.1"
 workRuntimeKtx = "2.10.0"
 navigationFragment = "2.8.6"
 gridlayout = "1.0.0"
+securityCrypto = "1.1.0-alpha06"
 
 [libraries]
 android-activation = { module = "com.sun.mail:android-activation", version.ref = "androidMail" }
@@ -61,6 +62,7 @@ secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.se
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
+androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

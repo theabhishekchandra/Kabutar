@@ -33,7 +33,6 @@ class DatabaseModule {
         context,
         AppDatabase::class.java,
         DatabaseConst.DB_NAME)
-        .allowMainThreadQueries()
         .addMigrations(MIGRATION_1_2)
         /*.fallbackToDestructiveMigration() // This will reset the database*/
         .build()

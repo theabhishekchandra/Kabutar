@@ -117,6 +117,7 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     implementation(libs.androidx.gridlayout)
+    implementation(libs.androidx.security.crypto)
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation ("com.google.code.gson:gson:2.11.0")
 

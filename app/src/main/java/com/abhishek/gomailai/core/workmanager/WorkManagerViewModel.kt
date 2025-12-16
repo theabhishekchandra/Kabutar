@@ -1,10 +1,10 @@
 package com.abhishek.gomailai.core.workmanager
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.abhishek.gomailai.core.model.EmailWorkerDM
@@ -25,15 +25,24 @@ class WorkManagerViewModel(application: Application) : AndroidViewModel(applicat
 
     private val _workInfoTag = MutableLiveData<String>()
 
+    // Store references for cleanup
+    private var currentWorkInfosLiveData: LiveData<List<WorkInfo>>? = null
+    private var workInfosObserver: Observer<List<WorkInfo>>? = null
+
     fun clearWorkManagerData() {
         workManager.cancelAllWorkByTag(_workInfoTag.value ?: "")
         workManager.pruneWork()
     }
 
     fun updateTaskStatuses(tag: String) {
+        // Remove previous observer if exists
+        removeCurrentObserver()
+
         _workInfoTag.value = tag
         val workInfosLiveData = workManager.getWorkInfosByTagLiveData(tag)
-        workInfosLiveData.observeForever { workInfos ->
+        currentWorkInfosLiveData = workInfosLiveData
+
+        workInfosObserver = Observer { workInfos ->
             val pendingTasks = workInfos.count { it.state == WorkInfo.State.ENQUEUED || it.state == WorkInfo.State.RUNNING }
             val completedTasks = workInfos.count { it.state == WorkInfo.State.SUCCEEDED }
             val failedTasks = workInfos.count { it.state == WorkInfo.State.FAILED }
@@ -52,19 +61,37 @@ class WorkManagerViewModel(application: Application) : AndroidViewModel(applicat
             val statusList = mutableListOf<EmailWorkerDM>()
             workInfos.forEach { workInfo ->
                 val emailWorkerDM = EmailWorkerDM(
-                    senderEmail = workInfo.outputData.getString(WM_OUTPUT_DATA_SENDER_EMAIL)?: "",
-                    recipientEmail = workInfo.outputData.getString(WM_OUTPUT_DATA_RECIPIENT_EMAIL)?: "",
-                    subject = workInfo.outputData.getString(WM_OUTPUT_DATA_SUBJECT)?: "",
-                    messageBody = workInfo.outputData.getString(WM_OUTPUT_DATA_MESSAGE_BODY)?: "",
-                    isEmailSend = workInfo.outputData.getBoolean(WM_OUTPUT_DATA_IS_EMAIL_SEND,false),
-                    stateName = if(workInfo.state == WorkInfo.State.ENQUEUED || workInfo.state == WorkInfo.State.RUNNING ) "PENDING" else workInfo.state.name,
-                    tags = workInfo.tags.firstOrNull()?: "",
+                    senderEmail = workInfo.outputData.getString(WM_OUTPUT_DATA_SENDER_EMAIL) ?: "",
+                    recipientEmail = workInfo.outputData.getString(WM_OUTPUT_DATA_RECIPIENT_EMAIL) ?: "",
+                    subject = workInfo.outputData.getString(WM_OUTPUT_DATA_SUBJECT) ?: "",
+                    messageBody = workInfo.outputData.getString(WM_OUTPUT_DATA_MESSAGE_BODY) ?: "",
+                    isEmailSend = workInfo.outputData.getBoolean(WM_OUTPUT_DATA_IS_EMAIL_SEND, false),
+                    stateName = if (workInfo.state == WorkInfo.State.ENQUEUED || workInfo.state == WorkInfo.State.RUNNING) "PENDING" else workInfo.state.name,
+                    tags = workInfo.tags.firstOrNull() ?: "",
                 )
                 statusList.add(emailWorkerDM)
             }
             _taskEmailList.postValue(statusList)
             _taskStatuses.postValue(taskStatus)
         }
+
+        workInfosObserver?.let { observer ->
+            workInfosLiveData.observeForever(observer)
+        }
+    }
+
+    private fun removeCurrentObserver() {
+        workInfosObserver?.let { observer ->
+            currentWorkInfosLiveData?.removeObserver(observer)
+        }
+        currentWorkInfosLiveData = null
+        workInfosObserver = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        // Clean up observer to prevent memory leaks
+        removeCurrentObserver()
     }
 }
 

@@ -9,49 +9,48 @@ class EmailTemplateRepo @Inject constructor(
     private val emailTemplateDao: EmailTemplateDao
 ) : IEmailTemplateRepo {
 
-    override fun getEmailTemplates(): DBResponseModel<List<EmailTemplateEntity>> {
+    override suspend fun getEmailTemplates(): DBResponseModel<List<EmailTemplateEntity>> {
         return try {
             val emailTemplates = emailTemplateDao.getAllEmailTemplates()
             DBResponseModel.Success(emailTemplates)
         } catch (e: Exception) {
-            DBResponseModel.Error("Delete failed: ${e.message}", e)
+            DBResponseModel.Error("Failed to get templates: ${e.message}", e)
         }
-
     }
 
-    override fun getEmailTemplateById(id: Int): DBResponseModel<EmailTemplateEntity?> {
+    override suspend fun getEmailTemplateById(id: Int): DBResponseModel<EmailTemplateEntity?> {
         return try {
             val emailTemplate = emailTemplateDao.getEmailTemplateById(id)
             DBResponseModel.Success(emailTemplate)
         } catch (e: Exception) {
-            DBResponseModel.Error("Delete failed: ${e.message}", e)
+            DBResponseModel.Error("Failed to get template: ${e.message}", e)
         }
     }
 
-    override fun insertEmailTemplate(emailTemplate: EmailTemplateEntity): DBResponseModel<Unit> {
-        try {
-            val response = emailTemplateDao.insertEmailTemplate(emailTemplate)
-            return DBResponseModel.Success(Unit)
+    override suspend fun insertEmailTemplate(emailTemplate: EmailTemplateEntity): DBResponseModel<Unit> {
+        return try {
+            emailTemplateDao.insertEmailTemplate(emailTemplate)
+            DBResponseModel.Success(Unit)
         } catch (e: Exception) {
-            return DBResponseModel.Error(e.message ?: "Unknown error occurred")
+            DBResponseModel.Error(e.message ?: "Unknown error occurred")
         }
     }
 
-    override fun deleteEmailTemplateById(id: Int): DBResponseModel<Unit> {
-        try {
+    override suspend fun deleteEmailTemplateById(id: Int): DBResponseModel<Unit> {
+        return try {
             emailTemplateDao.deleteEmailTemplateById(id)
-            return DBResponseModel.Success(Unit)
+            DBResponseModel.Success(Unit)
         } catch (e: Exception) {
-            return DBResponseModel.Error(e.message ?: "Unknown error occurred")
+            DBResponseModel.Error(e.message ?: "Unknown error occurred")
         }
     }
 
-    override fun deleteEmailTemplate(emailTemplate: EmailTemplateEntity): DBResponseModel<Unit> {
-        try {
+    override suspend fun deleteEmailTemplate(emailTemplate: EmailTemplateEntity): DBResponseModel<Unit> {
+        return try {
             emailTemplateDao.deleteEmailTemplate(emailTemplate)
-            return DBResponseModel.Success(Unit)
+            DBResponseModel.Success(Unit)
         } catch (e: Exception) {
-            return DBResponseModel.Error(e.message ?: "Unknown error occurred")
+            DBResponseModel.Error(e.message ?: "Unknown error occurred")
         }
     }
 }

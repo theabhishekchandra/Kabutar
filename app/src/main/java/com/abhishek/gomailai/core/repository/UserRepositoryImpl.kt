@@ -5,10 +5,8 @@ import com.abhishek.gomailai.core.local.dao.UsersDao
 import com.abhishek.gomailai.core.local.entities.UsersEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
@@ -16,12 +14,11 @@ class UserRepositoryImpl @Inject constructor(
 ) : IUserRepository {
 
     override suspend fun insertUser(user: UsersEntity): DBResponseModel<Unit> {
-        try {
+        return try {
             usersDao.insertUser(user)
-            return DBResponseModel.Success(Unit)
+            DBResponseModel.Success(Unit)
         } catch (e: Exception) {
-            return DBResponseModel.Error(e.message ?: "Unknown error occurred")
-
+            DBResponseModel.Error(e.message ?: "Unknown error occurred")
         }
     }
 
@@ -44,12 +41,12 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun updateNumberMailsByEmail(email: String, newMailCount: Int) : DBResponseModel<Unit>   {
-        try {
+    override suspend fun updateNumberMailsByEmail(email: String, newMailCount: Int): DBResponseModel<Unit> {
+        return try {
             usersDao.updateNumberMailsByEmail(email, newMailCount)
-            return DBResponseModel.Success(Unit)
+            DBResponseModel.Success(Unit)
         } catch (e: Exception) {
-            return DBResponseModel.Error(e.message ?: "Unknown error occurred")
+            DBResponseModel.Error(e.message ?: "Unknown error occurred")
         }
     }
 
@@ -57,16 +54,12 @@ class UserRepositoryImpl @Inject constructor(
         return usersDao.getTotalNumberMails() ?: 0
     }
 
-    override fun getUsersDetails(): DBResponseModel<UsersEntity> {
+    override suspend fun getUsersDetails(): DBResponseModel<UsersEntity> {
         return try {
             val user = usersDao.getUsersDetails()
-            if (user != null) {
-                DBResponseModel.Success(user)
-            } else {
-                DBResponseModel.Error("User not found")
-            }
+            DBResponseModel.Success(user)
         } catch (e: Exception) {
-            DBResponseModel.Error(e.message?: "Unknown error occurred")
+            DBResponseModel.Error(e.message ?: "Unknown error occurred")
         }
     }
 }

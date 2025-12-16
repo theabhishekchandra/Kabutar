@@ -25,10 +25,10 @@ interface UsersDao {
     fun getAllUsers(): Flow<List<UsersEntity>>
 
     @Query("SELECT * FROM  ${DatabaseConst.USER_TABLE}")
-    fun getUsersDetails(): UsersEntity
+    suspend fun getUsersDetails(): UsersEntity
 
     @Query("UPDATE ${DatabaseConst.USER_TABLE} SET numberMails = :numberMails WHERE email = :email")
-    fun updateNumberMailsByEmail(email: String, numberMails: Int)
+    suspend fun updateNumberMailsByEmail(email: String, numberMails: Int)
 
     @Query("SELECT SUM(numberMails) FROM ${DatabaseConst.USER_TABLE}")
     suspend fun getTotalNumberMails(): Int?

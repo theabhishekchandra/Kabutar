@@ -63,7 +63,7 @@ class CheckMailStatusFragment : Fragment() {
 
         binding.mailRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            taskAdapter = EmailTaskAdapter(requireContext(), emptyList())
+            taskAdapter = EmailTaskAdapter()
             adapter = taskAdapter
         }
 

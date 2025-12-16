@@ -66,7 +66,7 @@ class FragmentLoadEmail : Fragment() {
     private fun setRecyclerView() {
         binding.industryRecyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(),3, RecyclerView.VERTICAL, false)
-            loadEmailAdapter = LoadEmailAdapter(requireContext(), emptyList(),
+            loadEmailAdapter = LoadEmailAdapter(
                 object : OnIndustryItemClickListener {
                     override fun onItemClick(industry: IndustryCategoryDM) {
                         // Ignore

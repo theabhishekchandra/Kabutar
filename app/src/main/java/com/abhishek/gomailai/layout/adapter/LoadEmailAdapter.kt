@@ -1,48 +1,41 @@
 package com.abhishek.gomailai.layout.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abhishek.gomailai.core.model.IndustryCategoryDM
 import com.abhishek.gomailai.databinding.LoadEmailIndustryItemBinding
 
 class LoadEmailAdapter(
-    private val context: Context,
-    private var industryList: List<IndustryCategoryDM>,
     private val onIndustryItemClickListener: OnIndustryItemClickListener
-): RecyclerView.Adapter<LoadEmailAdapter.LoadEmailViewHolder>(){
+) : ListAdapter<IndustryCategoryDM, LoadEmailAdapter.LoadEmailViewHolder>(IndustryDiffCallback()) {
 
     var checkedPosition = -1
+        private set
 
-    fun setIndustryData(newIndustryList: List<IndustryCategoryDM>) {
-        industryList = newIndustryList
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): LoadEmailAdapter.LoadEmailViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoadEmailViewHolder {
         val binding = LoadEmailIndustryItemBinding.inflate(
             LayoutInflater.from(parent.context),
-            parent, false)
+            parent, false
+        )
         return LoadEmailViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: LoadEmailAdapter.LoadEmailViewHolder, position: Int) {
-        val industry = industryList[position]
-        holder.bind(industry, position)
-
+    override fun onBindViewHolder(holder: LoadEmailViewHolder, position: Int) {
+        holder.bind(getItem(position), position)
     }
 
-    override fun getItemCount(): Int = industryList.size
+    fun setIndustryData(newIndustryList: List<IndustryCategoryDM>) {
+        submitList(newIndustryList)
+    }
 
     inner class LoadEmailViewHolder(private val binding: LoadEmailIndustryItemBinding) :
-        RecyclerView.ViewHolder(binding.root){
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(industry: IndustryCategoryDM,position: Int){
+        fun bind(industry: IndustryCategoryDM, position: Int) {
             binding.tvInduName.text = industry.industryName
             binding.ivInduImage.setImageResource(industry.industryResourceId)
 
@@ -53,7 +46,9 @@ class LoadEmailAdapter(
                 if (checkedPosition != position) {
                     val previousCheckedPosition = checkedPosition
                     checkedPosition = position
-                    notifyItemChanged(previousCheckedPosition)
+                    if (previousCheckedPosition != -1) {
+                        notifyItemChanged(previousCheckedPosition)
+                    }
                     notifyItemChanged(checkedPosition)
                     onIndustryItemClickListener.onItemClick(industry)
                 }
@@ -62,10 +57,19 @@ class LoadEmailAdapter(
     }
 
     val selected: IndustryCategoryDM?
-        get() = if (checkedPosition != -1) industryList[checkedPosition] else null
+        get() = if (checkedPosition != -1 && checkedPosition < itemCount) getItem(checkedPosition) else null
 
+    private class IndustryDiffCallback : DiffUtil.ItemCallback<IndustryCategoryDM>() {
+        override fun areItemsTheSame(oldItem: IndustryCategoryDM, newItem: IndustryCategoryDM): Boolean {
+            return oldItem.industryName == newItem.industryName
+        }
+
+        override fun areContentsTheSame(oldItem: IndustryCategoryDM, newItem: IndustryCategoryDM): Boolean {
+            return oldItem == newItem
+        }
+    }
 }
 
-interface OnIndustryItemClickListener{
+interface OnIndustryItemClickListener {
     fun onItemClick(industry: IndustryCategoryDM)
 }

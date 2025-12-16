@@ -10,17 +10,17 @@ import com.abhishek.gomailai.core.utils.DatabaseConst
 @Dao
 interface EmailTemplateDao {
     @Insert
-    fun insertEmailTemplate(emailTemplate: EmailTemplateEntity)
+    suspend fun insertEmailTemplate(emailTemplate: EmailTemplateEntity)
 
     @Query("SELECT * FROM ${DatabaseConst.EMAIL_TEMPLATE_TABLE} WHERE id = :id")
-    fun getEmailTemplateById(id: Int): EmailTemplateEntity?
+    suspend fun getEmailTemplateById(id: Int): EmailTemplateEntity?
 
     @Query("SELECT * FROM ${DatabaseConst.EMAIL_TEMPLATE_TABLE}")
-    fun getAllEmailTemplates(): List<EmailTemplateEntity>
+    suspend fun getAllEmailTemplates(): List<EmailTemplateEntity>
 
     @Query("DELETE FROM ${DatabaseConst.EMAIL_TEMPLATE_TABLE} WHERE id = :id")
-    fun deleteEmailTemplateById(id: Int)
+    suspend fun deleteEmailTemplateById(id: Int)
 
     @Delete
-    fun deleteEmailTemplate(emailTemplate: EmailTemplateEntity)
+    suspend fun deleteEmailTemplate(emailTemplate: EmailTemplateEntity)
 }

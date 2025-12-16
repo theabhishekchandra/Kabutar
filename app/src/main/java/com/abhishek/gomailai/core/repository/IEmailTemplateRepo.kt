@@ -4,9 +4,9 @@ import com.abhishek.gomailai.core.local.DBResponseModel
 import com.abhishek.gomailai.core.local.entities.EmailTemplateEntity
 
 interface IEmailTemplateRepo {
-    fun getEmailTemplates(): DBResponseModel<List<EmailTemplateEntity>>
-    fun getEmailTemplateById(id: Int): DBResponseModel<EmailTemplateEntity?>
-    fun insertEmailTemplate(emailTemplate: EmailTemplateEntity) : DBResponseModel<Unit>
-    fun deleteEmailTemplateById(id: Int) : DBResponseModel<Unit>
-    fun deleteEmailTemplate(emailTemplate: EmailTemplateEntity): DBResponseModel<Unit>
+    suspend fun getEmailTemplates(): DBResponseModel<List<EmailTemplateEntity>>
+    suspend fun getEmailTemplateById(id: Int): DBResponseModel<EmailTemplateEntity?>
+    suspend fun insertEmailTemplate(emailTemplate: EmailTemplateEntity): DBResponseModel<Unit>
+    suspend fun deleteEmailTemplateById(id: Int): DBResponseModel<Unit>
+    suspend fun deleteEmailTemplate(emailTemplate: EmailTemplateEntity): DBResponseModel<Unit>
 }
