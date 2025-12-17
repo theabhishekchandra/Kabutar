@@ -20,11 +20,16 @@ class UserViewModel @Inject constructor(
 
     private val _users = MutableStateFlow<List<UsersEntity>>(emptyList())
     val users: MutableStateFlow<List<UsersEntity>> = _users
+
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
     private val _responseMessage = MutableLiveData<String?>()
     val responseMessage: LiveData<String?> = _responseMessage
+
+    // Cached LiveData for total number of mails
+    private val _totalNumberMails = MutableLiveData<Int>()
+    val totalNumberMails: LiveData<Int> = _totalNumberMails
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _responseMessage.value = "Exception handled: ${throwable.localizedMessage}"
@@ -38,12 +43,10 @@ class UserViewModel @Inject constructor(
         try {
             _isLoading.value = true
             repository.getAllUsers().collect { result ->
-                result.let {
-                    when (result) {
-                        is DBResponseModel.Success -> _users.value = result.data
-                        is DBResponseModel.Error -> _responseMessage.value = result.message
-                        else -> {}
-                    }
+                when (result) {
+                    is DBResponseModel.Success -> _users.value = result.data
+                    is DBResponseModel.Error -> _responseMessage.value = result.message
+                    else -> {}
                 }
             }
         } catch (e: Exception) {
@@ -66,7 +69,6 @@ class UserViewModel @Inject constructor(
         } finally {
             _isLoading.value = false
         }
-
     }
 
     fun deleteUser(user: UsersEntity) = viewModelScope.launch {
@@ -82,13 +84,17 @@ class UserViewModel @Inject constructor(
         } finally {
             _isLoading.value = false
         }
-
     }
+
     fun updateUserNumberMails(email: String, newMailCount: Int) = viewModelScope.launch {
         try {
             _isLoading.value = true
             when (val result = repository.updateNumberMailsByEmail(email, newMailCount)) {
-                is DBResponseModel.Success -> _responseMessage.value = result.message
+                is DBResponseModel.Success -> {
+                    _responseMessage.value = result.message
+                    // Refresh total mails after update
+                    fetchTotalNumberMails()
+                }
                 is DBResponseModel.Error -> _responseMessage.value = result.message
                 else -> {}
             }
@@ -99,6 +105,22 @@ class UserViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Fetches total number of mails and updates the cached LiveData.
+     * Call this method to refresh the value, then observe [totalNumberMails].
+     */
+    fun fetchTotalNumberMails() {
+        viewModelScope.launch {
+            val total = repository.getTotalNumberMails()
+            _totalNumberMails.postValue(total)
+        }
+    }
+
+    /**
+     * @deprecated Use [totalNumberMails] LiveData with [fetchTotalNumberMails] instead.
+     * This method creates a new LiveData on each call which is inefficient.
+     */
+    @Deprecated("Use totalNumberMails LiveData with fetchTotalNumberMails() instead")
     fun getTotalNumberMails(): LiveData<Int> {
         val totalMails = MutableLiveData<Int>()
         viewModelScope.launch {
