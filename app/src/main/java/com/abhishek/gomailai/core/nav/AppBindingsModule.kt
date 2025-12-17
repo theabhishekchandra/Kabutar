@@ -6,7 +6,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @InstallIn(ActivityComponent::class)
 @Module
@@ -14,15 +15,13 @@ interface AppBindingsModule {
 
     @Binds
     fun provideNavigationBinding(impl: NavManagerImp): INavigation
-
-    @Binds
-    fun provideAPPSharedPref(impl: APPSharedPref): IAPPSharedPref
-
 }
 
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
-interface ViewModelBindings {
+interface SharedPreferencesModule {
+
     @Binds
-    fun provideAPPSharedPref1(impl: APPSharedPref): IAPPSharedPref
+    @Singleton
+    fun provideAPPSharedPref(impl: APPSharedPref): IAPPSharedPref
 }

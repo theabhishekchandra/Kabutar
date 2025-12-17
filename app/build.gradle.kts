@@ -4,15 +4,9 @@ plugins {
     alias(libs.plugins.secrets.gradle.plugin)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-//    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("androidx.room")
     id("com.google.devtools.ksp")
-//    id("com.google.devtools.ksp") // Ensure KSP is included
 }
-
-/*ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
-}*/
 
 android {
     namespace = "com.abhishek.gomailai"
@@ -26,15 +20,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf(
-                    "option_name" to "option_value",
-                    // other options...
-                )
-            }
-        }
     }
+
     packagingOptions {
         exclude("META-INF/NOTICE.md")
         exclude("META-INF/LICENSE.md")
@@ -59,16 +46,17 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
 
+    buildFeatures {
         viewBinding = true
         dataBinding = true
         buildConfig = true
     }
-    // Room schema directory
+
     room {
         schemaDirectory("$projectDir/schemas")
     }
@@ -79,55 +67,62 @@ secrets {
     defaultPropertiesFileName = "local.properties"
 }
 
-
 dependencies {
+    // Google Generative AI
     implementation(libs.generativeai)
+
+    // AndroidX Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.gridlayout)
+
+    // Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.dynamic.features.fragment)
+
+    // WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
 
     // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    // Room dependencies
+    // Room
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler) // Use KSP for Room compiler
     implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.rxjava2) // Optional RxJava2 support for Room
-    implementation(libs.androidx.room.rxjava3) // Optional RxJava3 support for Room
-    implementation(libs.androidx.room.guava) // Optional Guava support for Room
-    testImplementation(libs.androidx.room.testing) // Room test helpers
-    implementation(libs.androidx.room.paging) // Optional Paging 3 Integration
+    implementation(libs.androidx.room.paging)
+    ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
 
-    // JavaMail (for javax.mail)
+    // JavaMail
     implementation(libs.android.mail)
     implementation(libs.android.activation)
 
-    // For LiveData and ViewModel
+    // Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.navigation.fragment)
+
+    // Security
+    implementation(libs.androidx.security.crypto)
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
-    implementation(libs.androidx.gridlayout)
-    implementation(libs.androidx.security.crypto)
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-    implementation ("com.google.code.gson:gson:2.11.0")
 
-    // Testing dependencies
+    // Gson
+    implementation("com.google.code.gson:gson:2.11.0")
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-// Allow references to generated code
+
 kapt {
     correctErrorTypes = true
 }

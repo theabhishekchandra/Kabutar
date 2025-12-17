@@ -85,31 +85,31 @@ class EmailGenerateFragment : Fragment() {
     }
 
     private fun handleMarkAsReadyButtonClick() {
-        val generatedTemplate = binding.textViewGeneratedEmail.text.toString()
+        val generatedTemplate = binding.textViewGeneratedEmail.text.toString().trim()
         val buttonText = binding.buttonMarkAsReady.text.toString()
         val buttonAction = ButtonTextField.fromString(buttonText)
 
         when (buttonAction) {
-            ButtonTextField.GENERATED_EMAIL -> {
-                if (generatedTemplate.isNotEmpty()) {
-                    // TODO: Save this Template
-                    Toast.makeText(context, "Email Template is ready for sending.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Generate an email template first", Toast.LENGTH_SHORT).show()
-                }
-            }
-            ButtonTextField.GENERATE_PROMPT, ButtonTextField.NEXT_PROMPTS -> {
-                val profile =  appSharedPref.getUserInfo().designation ?: ""
+            ButtonTextField.NEXT_PROMPTS -> {
+                // Generate a new random prompt
+                val profile = appSharedPref.getUserInfo().designation ?: ""
                 val randomPrompt = MainConst.getRandomPrompt(profile)
                 binding.editTextPrompt.setText(randomPrompt)
             }
             ButtonTextField.MARK_AS_READY -> {
+                if (generatedTemplate.isEmpty()) {
+                    Toast.makeText(context, "Generate an email template first", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                // Save the template to database
                 emailViewModel.insertEmailTemplate(generatedTemplate, requireContext())
+                Toast.makeText(context, "Template saved successfully!", Toast.LENGTH_SHORT).show()
+                // Clear the fields for next template
                 binding.editTextPrompt.setText("")
                 binding.textViewGeneratedEmail.setText("")
             }
             else -> {
-                // Handle other cases if needed
+                // Fallback for unexpected button states
             }
         }
     }

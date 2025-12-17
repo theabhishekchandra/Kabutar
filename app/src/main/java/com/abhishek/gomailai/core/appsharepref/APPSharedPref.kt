@@ -7,11 +7,13 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.abhishek.gomailai.core.utils.MainConst
 import com.abhishek.gomailai.core.model.UserInfo
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class APPSharedPref @Inject constructor(
-    @ActivityContext val context: Context) :
+    @ApplicationContext val context: Context) :
     IAPPSharedPref {
 
     companion object {

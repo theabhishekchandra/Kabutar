@@ -28,21 +28,22 @@ class SendEmailFragment : Fragment() {
     private lateinit var binding: FragmentSendEmailBinding
     private val emailViewModel: EmailViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
-    private val viewModel: WorkManagerViewModel by viewModels()
+    private val workManagerViewModel: WorkManagerViewModel by viewModels()
 
     @Inject
     lateinit var appSharedPref: IAPPSharedPref
+
     @Inject
     lateinit var navigation: INavigation
 
     private var selectedPdfUri: Uri? = null
     private var totalEmails: Int = 0
 
-    // File picker launcher
     private val pdfPickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.data?.let { uri ->
                 selectedPdfUri = uri
+                updateButtonState()
                 Toast.makeText(requireContext(), "PDF Selected", Toast.LENGTH_SHORT).show()
                 Log.i(TAG, "Selected PDF URI: $uri")
             }
@@ -59,67 +60,73 @@ class SendEmailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        emailViewModel.getAllEmailTemplates()
         initialize()
-        listener()
-        observer()
-        viewModel.updateTaskStatuses(EMAIL_SENDING_WORKER_TAG)
-    }
+        setupObservers()
+        setupListeners()
 
-
-
-    private fun updateButtonState() {
-        binding.buttonConfirmEmail.text = if (selectedPdfUri == null) "Select Resume" else "Send Mail"
+        // Load initial data
+        emailViewModel.getAllEmailTemplates()
+        userViewModel.fetchTotalNumberMails()
+        workManagerViewModel.updateTaskStatuses(EMAIL_SENDING_WORKER_TAG)
     }
 
     override fun onResume() {
         super.onResume()
         emailViewModel.getAllEmails()
+        userViewModel.fetchTotalNumberMails()
         updateButtonState()
     }
 
-    private fun observer() {
-        with(emailViewModel) {
-            emailTemplateLiveData.observe(viewLifecycleOwner) { listTemplate ->
-                if (listTemplate.isNotEmpty()) {
-                    binding.buttonNextTemplate.setOnClickListener {
-                        val template = listTemplate.random()
-                        binding.editTextSubject.setText(template.subject.toString())
-                        binding.editTextEmailBody.setText(template.body.toString())
-                    }
+    private fun initialize() {
+        binding.toolbar.textView.text = "Send Email"
+        updateButtonState()
+    }
+
+    private fun setupObservers() {
+        // Observe email templates
+        emailViewModel.emailTemplateLiveData.observe(viewLifecycleOwner) { listTemplate ->
+            if (listTemplate.isNotEmpty()) {
+                binding.buttonNextTemplate.setOnClickListener {
+                    val template = listTemplate.random()
+                    binding.editTextSubject.setText(template.subject.toString())
+                    binding.editTextEmailBody.setText(template.body.toString())
                 }
-            }
-            errorMessage.observe(viewLifecycleOwner){
-                it.let {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                }
-            }
-            isLoading.observe(viewLifecycleOwner){
-                binding.loader.visibility = if (it) View.VISIBLE else View.GONE
             }
         }
 
-        if (selectedPdfUri == null) binding.buttonConfirmEmail.text = "Select Resume" else binding.buttonConfirmEmail.text = "Send Mail"
+        // Observe error messages
+        emailViewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+            message?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+        }
 
-        userViewModel.getTotalNumberMails().observe(viewLifecycleOwner) { total ->
+        // Observe loading state
+        emailViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.loader.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        // Observe total number of mails (using cached LiveData)
+        userViewModel.totalNumberMails.observe(viewLifecycleOwner) { total ->
             totalEmails = total ?: 0
             appSharedPref.setUserNumberMails(totalEmails)
+        }
 
-            viewModel.taskEmailList.observe(viewLifecycleOwner) { taskList ->
-                taskList.forEach { workData ->
-                    if (workData.isEmailSend) {
-                        emailViewModel.markEmailAsUsed(workData.recipientEmail.toString())
+        // Observe task email list separately (not nested)
+        workManagerViewModel.taskEmailList.observe(viewLifecycleOwner) { taskList ->
+            taskList.forEach { workData ->
+                if (workData.isEmailSend) {
+                    emailViewModel.markEmailAsUsed(workData.recipientEmail.toString())
 
-                        val updatedValue = if (totalEmails <= 0) 0 else totalEmails - 1
-                        appSharedPref.setUserNumberMails(updatedValue)
-                        userViewModel.updateUserNumberMails(workData.senderEmail.toString(), updatedValue)
-                    }
+                    val updatedValue = if (totalEmails <= 0) 0 else totalEmails - 1
+                    appSharedPref.setUserNumberMails(updatedValue)
+                    userViewModel.updateUserNumberMails(workData.senderEmail.toString(), updatedValue)
                 }
             }
         }
     }
 
-    private fun listener() {
+    private fun setupListeners() {
         binding.toolbar.imageView.setOnClickListener {
             navigation.getNavController().popBackStack()
         }
@@ -145,14 +152,13 @@ class SendEmailFragment : Fragment() {
                 }
             }
         }
-
     }
 
-    private fun initialize() {
-        binding.toolbar.textView.text = "Send Email"
+    private fun updateButtonState() {
+        binding.buttonConfirmEmail.text = if (selectedPdfUri == null) "Select Resume" else "Send Mail"
     }
 
-    private fun validate() : Boolean {
+    private fun validate(): Boolean {
         val emailSubject = binding.editTextSubject.text.toString()
         val emailBody = binding.editTextEmailBody.text.toString()
 
@@ -165,7 +171,7 @@ class SendEmailFragment : Fragment() {
             return false
         }
         if (totalEmails <= 0) {
-            Toast.makeText(requireContext(), "Please Buy Email Data, Your have $totalEmails mail", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please Buy Email Data, You have $totalEmails mail", Toast.LENGTH_SHORT).show()
             return false
         }
         if (selectedPdfUri == null) {
