@@ -2,7 +2,7 @@
 agp = "8.8.0"
 androidMail = "1.6.7"
 koinAndroid = "3.2.0"
-kotlin = "2.0.0"
+kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -66,4 +66,3 @@ androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", vers
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
-

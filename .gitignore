@@ -2,7 +2,6 @@
 .gradle
 /local.properties
 /secrets.properties
-/gradle.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -14,7 +13,5 @@
 /captures
 .externalNativeBuild
 .cxx
-gradle.properties
 local.properties
 secrets.properties
-

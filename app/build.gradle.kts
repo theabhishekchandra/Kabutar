@@ -41,16 +41,12 @@ android {
     }
 
     buildTypes {
-        debug {
-            buildConfigField("String", "GEMINI_API_KEY", "\"${project.findProperty("GEMINI_API_KEY") ?: ""}\"")
-        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "GEMINI_API_KEY", "\"${project.findProperty("GEMINI_API_KEY") ?: ""}\"")
         }
     }
 
@@ -75,7 +71,7 @@ android {
 
 secrets {
     propertiesFileName = "secrets.properties"
-    defaultPropertiesFileName = "local.properties"
+    defaultPropertiesFileName = "secrets.defaults.properties"
 }
 
 
